@@ -76,6 +76,11 @@ a{color:inherit}
 .tag{font:700 11px Montserrat;border-radius:5px;padding:2px 6px}
 .tag.free{background:#1d4352;color:#cfe6ee}
 .tag.pro{background:var(--gold);color:var(--goldi)}
+.tag.std{background:#d9ceff;color:#2b2152}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.price .btn{align-self:flex-start}
+.buyNote{margin-top:18px;color:var(--mute);max-width:760px}
+.navcab{white-space:nowrap}
 .price{border:2px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:12px;background:var(--panel)}
 .price.best{border-color:var(--sky);background:var(--skyf)}
 .price .num{font:700 clamp(28px,3vw,36px) Unbounded;white-space:nowrap}
@@ -96,7 +101,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <nav class="nav band">
   <div class="wrap">
     <a class="logo" href="#top"><i></i>Шабыт</a>
-    <div class="links"><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#faq" data-t="navQ">Сұрақтар</a></div>
+    <div class="links"><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#pricing" data-t="navP">Бағасы</a><a href="#faq" data-t="navQ">Сұрақтар</a><a class="navcab" href="http://localhost:3000/cabinet" title="Shabyt.exe қосулы тұрғанда ашылады" data-t="navC">Кабинет ↗</a></div>
     <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-lang="kk" aria-pressed="true">ҚАЗ</button><button type="button" data-lang="ru" aria-pressed="false">РУС</button></div>
   </div>
 </nav>
@@ -160,17 +165,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <section class="band" id="pricing">
   <div class="wrap">
     <div class="sec-h"><h2 data-t="pH">Бағасы</h2></div>
-    <div class="two">
-      <div class="price"><h3 data-t="free">Тегін</h3><div class="num">0 ₸</div><ul data-t="freeL"><li>Kaspi донаттарын автоматты ұстау</li><li>Алерт, дыбыс, дауыспен оқу</li><li>Мақсат, күн және ай топтары, соңғы донаттар, жүгіртпе жол</li><li>Сабатон таймері және рулетка</li><li>3 дизайн</li></ul><a class="btn dlbtn" href="#" data-t="dlShort">Жүктеу</a></div>
-      <div class="price best"><h3>PRO</h3><div class="num" data-t="soon">Жақында</div><ul data-t="proL"><li>Тегіндегінің бәрі</li><li>Тағы 7 PRO дизайн</li><li>Жаңа мүмкіндіктер бірінші болып</li></ul><span class="btn ghost" aria-disabled="true" style="cursor:default" data-t="notify">Жақында ашылады</span></div>
+    <div class="three">
+      <div class="price"><h3 data-t="free">Тегін</h3><div class="num">0 ₸</div><ul data-t="freeL"><li>Kaspi донаттарын автоматты ұстау</li><li>Алерт, дыбыс, дауыспен оқу</li><li>Мақсат, күн және ай топтары, соңғы донаттар, жүгіртпе жол</li><li>Сабатон таймері және рулетка</li><li>3 дизайн, 12 дыбыс, 8 анимация</li></ul><a class="btn dlbtn" href="#" data-t="dlShort">Жүктеу</a></div>
+      <div class="price"><h3>Стандарт</h3><div class="num">2 990 ₸ <small data-t="mo">/ ай</small></div><ul data-t="stdL"><li>Тегіндегінің бәрі</li><li>+3 дизайн: Дала, Шыны, Ретро</li><li>Өз GIF пен дыбыстарыңыз, 300 файлға дейін</li><li>+20 дыбыс және 20 анимация</li></ul><a class="btn ghost" href="https://t.me/shabytkzdon" target="_blank" rel="noopener" data-t="buy">Telegram-да сатып алу</a></div>
+      <div class="price best"><h3>PRO</h3><div class="num">5 990 ₸ <small data-t="mo2">/ ай</small></div><ul data-t="proL"><li>Стандарттағының бәрі</li><li>+4 дизайн: Неон, Металл, Брутализм, Кибер</li><li>+25 дыбыс және 25 анимация: Күй, Шаңқобыз, Сыбызғы, Шаңырақ, Бүркіт</li></ul><a class="btn" href="https://t.me/shabytkzdon" target="_blank" rel="noopener" data-t="buy2">Telegram-да сатып алу</a></div>
     </div>
+    <p class="buyNote" data-t="buyNote">Қалай сатып алуға болады: бағдарламаны жүктеп, кабинеттегі «Тариф» бөлімінен құрылғы кодын көшіріңіз. Оны Telegram-да <a href="https://t.me/shabytkzdon" target="_blank" rel="noopener">@shabytkzdon</a> контактісіне жіберіңіз. Төлегеннен кейін кілт келеді, оны «Тариф» бөліміне қойсаңыз болды.</p>
   </div>
 </section>
 
 <section class="band" id="faq">
   <div class="wrap" style="max-width:860px">
     <h2 style="margin-bottom:12px" data-t="qH">Жиі қойылатын сұрақтар</h2>
-    <details open><summary data-t="q1">Windows «компьютеріңізді қорғады» деп ескертеді. Не істеймін?</summary><p data-t="a1">Бағдарлама әзірге цифрлық қолтаңбасыз, сондықтан Windows оны танымайды. «Подробнее» → «Выполнить в любом случае» басыңыз.</p></details>
+    <details open><summary data-t="q1">Windows «компьютеріңізді қорғады» деп ескертеді. Не істеймін?</summary><p data-t="a1">Бағдарлама әзірге цифрлық қолтаңбасыз, сондықтан Windows оны танымайды. «Подробнее» → «Выполнить в любом случае» басыңыз.</p></details><details open><summary data-t="q6">Кабинетке қалай кіремін?</summary><p data-t="a6">Shabyt.exe-ні іске қосыңыз, кабинет браузерде өзі ашылады. Кейін қайта ашу үшін сайттағы «Кабинет» батырмасын басыңыз немесе браузерде <b>localhost:3000</b> деп жазыңыз. Бағдарлама қосулы тұруы керек.</p></details>
     <details><summary data-t="q2">Ақша қайда түседі? Комиссия бар ма?</summary><p data-t="a2">Көрермен тікелей сіздің Kaspi-іңізге аударады. Шабыт ақшаға тиіспейді, тек хабарламаны оқып, алерт көрсетеді. Комиссия жоқ.</p></details>
     <details><summary data-t="q3">iPhone-мен жұмыс істей ме?</summary><p data-t="a3">Иә. Windows 11-дегі «Связь с телефоном» iPhone-ды Bluetooth арқылы қосады, хабарламалар компьютерге келеді.</p></details>
     <details><summary data-t="q4">Шығыс аударымдар мен сатып алулар алерт болып кетпей ме?</summary><p data-t="a4">Жоқ. Шабыт тек кіріс аударымдарды алады: «Вы перевели», «Списание», «Покупка» сияқтылар өткізіледі. Бір хабарлама екі рет келсе, бір рет саналады.</p></details>
@@ -203,8 +210,8 @@ hH:'Запуск за три шага',s1h:'Скачайте и откройте
 s2h:'Подключите телефон',s2p:'Подключите телефон через «Связь с телефоном» в Windows и включите показ уведомлений. Подходит и Android, и iPhone.',
 s3h:'Добавьте в OBS',s3p:'Вставьте ссылку виджета из кабинета в OBS как Browser Source. Нажмите тестовый алерт, и готово.',
 dH:'10 дизайнов виджетов',dP:'Топ донатеров, шкала цели, последние донаты и алерт в одном стиле. Дизайн меняется в кабинете одной кнопкой.',
-pH:'Цена',free:'Бесплатно',freeL:'<li>Автоматический приём донатов Kaspi</li><li>Алерт, звук, озвучка сообщений</li><li>Цель, топ дня и месяца, последние донаты, бегущая строка</li><li>Таймер сабатона и рулетка</li><li>3 дизайна</li>',dlShort:'Скачать',
-soon:'Скоро',proL:'<li>Всё из бесплатной версии</li><li>Ещё 7 PRO-дизайнов</li><li>Новые функции первыми</li>',notify:'Скоро откроется',
+pH:'Цена',free:'Бесплатно',freeL:'<li>Автоматический приём донатов Kaspi</li><li>Алерт, звук, озвучка сообщений</li><li>Цель, топ дня и месяца, последние донаты, бегущая строка</li><li>Таймер сабатона и рулетка</li><li>3 дизайна, 12 звуков, 8 анимаций</li>',dlShort:'Скачать',
+mo:'/ мес',mo2:'/ мес',stdL:'<li>Всё из бесплатного</li><li>+3 дизайна: Степь, Стекло, Ретро</li><li>Свои GIF и звуки, до 300 файлов</li><li>+20 звуков и 20 анимаций</li>',proL:'<li>Всё из Стандарта</li><li>+4 дизайна: Неон, Металл, Брутализм, Кибер</li><li>+25 звуков и 25 анимаций: Кюй, Варган, Сыбызгы, Шанырак, Беркут</li>',buy:'Купить в Telegram',buy2:'Купить в Telegram',buyNote:'Как купить: скачайте программу и скопируйте код устройства в разделе «Тариф» кабинета. Отправьте его в Telegram <a href="https://t.me/shabytkzdon" target="_blank" rel="noopener">@shabytkzdon</a>. После оплаты придёт ключ, вставьте его в разделе «Тариф».',navP:'Цена',navC:'Кабинет ↗',q6:'Как открыть кабинет?',a6:'Запустите Shabyt.exe, кабинет откроется в браузере сам. Чтобы открыть его позже, нажмите «Кабинет» на сайте или наберите в браузере <b>localhost:3000</b>. Программа должна быть запущена.',
 qH:'Частые вопросы',q1:'Windows пишет, что «защитила компьютер». Что делать?',a1:'У программы пока нет цифровой подписи, поэтому Windows её не узнаёт. Нажмите «Подробнее» → «Выполнить в любом случае».',
 q2:'Куда приходят деньги? Есть комиссия?',a2:'Зритель переводит прямо на ваш Kaspi. Шабыт не касается денег, только читает уведомление и показывает алерт. Комиссии нет.',
 q3:'Работает с iPhone?',a3:'Да. «Связь с телефоном» в Windows 11 подключает iPhone по Bluetooth, и уведомления приходят на компьютер.',
@@ -215,13 +222,13 @@ const KK={};document.querySelectorAll('[data-t]').forEach(e=>KK[e.dataset.t]=e.i
 const FEATS={kk:[['Kaspi автоматты','Kaspi хабарламасын «Связь с телефоном» арқылы өзі ұстайды. Сома, есім және түсініктеме алертке шығады.'],['Алерт және дауыс','Анимация, дыбыс және хабарламаны қазақша не орысша дауыспен оқу.'],['Мақсат және топтар','Мақсат жолағы, бүгінгі және айдың топтары, соңғы донаттар, жүгіртпе жол. Атауларын өзіңіз жазасыз.'],['Сабатон таймері','Әр 100 ₸ таймерге уақыт қосады. Кідіртуге, ұзартуға болады.'],['Рулетка','Белгілі сомадан донат келсе, дөңгелек айналып, тапсырма таңдайды.'],['Модерация','Жаман сөздер жабылады, сілтемелер жасырылады, донатерді бұғаттауға болады.']],
 ru:[['Kaspi автоматически','Сам ловит уведомления Kaspi через «Связь с телефоном». Сумма, имя и комментарий выходят в алерт.'],['Алерт и озвучка','Анимация, звук и озвучка сообщений на казахском или русском.'],['Цель и топы','Шкала цели, топ дня и топ месяца, последние донаты, бегущая строка. Названия задаёте сами.'],['Таймер сабатона','Каждые 100 ₸ добавляют время. Можно ставить на паузу и продлевать.'],['Рулетка','При донате от заданной суммы крутится колесо и выбирает задание.'],['Модерация','Плохие слова закрываются, ссылки скрываются, донатера можно заблокировать.']]};
 const IC=['<circle cx="22" cy="22" r="16" fill="#fec50c"/><path d="M15 23l5 5 9-11" stroke="#3a2a00" stroke-width="4" fill="none" stroke-linecap="round"/>','<rect x="16" y="6" width="12" height="22" rx="6" fill="#0090ad"/><path d="M10 22a12 12 0 0 0 24 0M22 34v6" stroke="#0090ad" stroke-width="3" fill="none"/>','<rect x="4" y="16" width="36" height="12" rx="6" fill="#cfe3ea"/><rect x="4" y="16" width="24" height="12" rx="6" fill="#fec50c"/>','<circle cx="22" cy="24" r="15" fill="none" stroke="#0090ad" stroke-width="3"/><path d="M22 24V14M22 24l7 5M18 5h8" stroke="#fec50c" stroke-width="3" stroke-linecap="round"/>','<circle cx="22" cy="22" r="17" fill="#0090ad"/><path d="M22 22V5A17 17 0 0 1 39 22Z" fill="#fec50c"/><path d="M22 22L7 30A17 17 0 0 1 9 11Z" fill="#ff5c8a"/>','<path d="M22 4l15 6v10c0 9-6 16-15 19C13 36 7 29 7 20V10z" fill="#0090ad"/><path d="M15 21l5 5 9-10" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round"/>'];
-const DS=[['Классика','Классика','free','#06222d'],['Минимал','Минимал','free','linear-gradient(135deg,#fff,#9fbcc6)'],['Қара-алтын','Чёрно-золотой','free','linear-gradient(135deg,#0b0b0b 50%,#fec50c 50%)'],['Неон','Неон','pro','linear-gradient(135deg,#22e3ff,#ff3df0)'],['Металл','Металл','pro','linear-gradient(135deg,#ffe68a,#a7b0b8,#a8652d)'],['Брутализм','Брутализм','pro','linear-gradient(135deg,#fffbe6 50%,#3dff8a 50%)'],['Дала','Степь','pro','linear-gradient(135deg,#0b6f8a,#fec50c)'],['Кибер','Кибер','pro','repeating-linear-gradient(135deg,#f8e71c 0 6px,#0a0a0a 6px 10px)'],['Шыны','Стекло','pro','linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.1))'],['Ретро','Ретро','pro','linear-gradient(#ffd23d,#ff3d9a,#2b0b3f)']];
+const DS=[['Классика','Классика','free','#06222d'],['Минимал','Минимал','free','linear-gradient(135deg,#fff,#9fbcc6)'],['Қара-алтын','Чёрно-золотой','free','linear-gradient(135deg,#0b0b0b 50%,#fec50c 50%)'],['Неон','Неон','pro','linear-gradient(135deg,#22e3ff,#ff3df0)'],['Металл','Металл','pro','linear-gradient(135deg,#ffe68a,#a7b0b8,#a8652d)'],['Брутализм','Брутализм','pro','linear-gradient(135deg,#fffbe6 50%,#3dff8a 50%)'],['Дала','Степь','std','linear-gradient(135deg,#0b6f8a,#fec50c)'],['Кибер','Кибер','pro','repeating-linear-gradient(135deg,#f8e71c 0 6px,#0a0a0a 6px 10px)'],['Шыны','Стекло','std','linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.1))'],['Ретро','Ретро','std','linear-gradient(#ffd23d,#ff3d9a,#2b0b3f)']];
 let lang='kk';try{const s=localStorage.getItem('shabyt-lang');if(s==='ru'||s==='kk')lang=s}catch(e){}
 const apply=l=>{lang=l;document.documentElement.lang=l;
   document.querySelectorAll('[data-t]').forEach(e=>{const k=e.dataset.t;e.innerHTML=l==='ru'?(RU[k]??KK[k]):KK[k]});
   document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
   document.getElementById('featGrid').innerHTML=FEATS[l].map((f,i)=>`<div class="feat"><svg viewBox="0 0 44 44" aria-hidden="true">${IC[i]}</svg><h3>${f[0]}</h3><p>${f[1]}</p></div>`).join('');
-  document.getElementById('designList').innerHTML=DS.map(d=>`<span class="chip"><i style="background:${d[3]}"></i>${l==='ru'?d[1]:d[0]} <span class="tag ${d[2]}">${d[2]==='pro'?'PRO':'FREE'}</span></span>`).join('');
+  document.getElementById('designList').innerHTML=DS.map(d=>`<span class="chip"><i style="background:${d[3]}"></i>${l==='ru'?d[1]:d[0]} <span class="tag ${d[2]}">${d[2]==='pro'?'PRO':d[2]==='std'?'СТАНДАРТ':'FREE'}</span></span>`).join('');
   document.querySelectorAll('.dlbtn').forEach(a=>a.href=DL);
   try{localStorage.setItem('shabyt-lang',l)}catch(e){}
 };
