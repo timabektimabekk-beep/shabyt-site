@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://timabektimabekk-beep.github.io/shabyt-site/sitemap.xml
