@@ -97,6 +97,12 @@ a{color:inherit}
 .price .btn{align-self:flex-start}
 .buyNote{margin-top:18px;color:var(--mute);max-width:760px}
 .navcab{white-space:nowrap}
+.loginb{min-height:40px;padding:0 18px;font-size:15px}
+#loginD{border:0;border-radius:18px;padding:0;max-width:460px;width:calc(100% - 32px);background:var(--panel);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}#loginD::backdrop{background:rgba(6,24,32,.6)}
+#loginD .in{position:relative;padding:24px;display:flex;flex-direction:column;gap:14px}#loginD h2{margin:0;font-size:22px;padding-right:40px}#loginD h3{margin:0;font-size:16px}
+#loginD p,#loginD li{margin:0;color:var(--mute);font-size:14px;line-height:1.5}#loginD ol{margin:0;padding-left:20px;display:grid;gap:4px}#loginD a:not(.btn){color:var(--sky)}
+#loginD .box{border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:10px}#loginD .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border:0;border-radius:10px;background:transparent;color:var(--ink);font-size:26px;line-height:1;cursor:pointer}
+@media(max-width:600px){.loginb{margin-left:auto}#loginD .pc{order:3}}
 .price{border:2px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:12px;background:var(--panel)}
 .price.best{border-color:var(--sky);background:var(--skyf)}
 .price .num{font:700 clamp(28px,3vw,36px) Unbounded;white-space:nowrap}
@@ -118,10 +124,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <nav class="nav band">
   <div class="wrap">
     <a class="logo" href="#top"><i></i>Шабыт</a>
-    <div class="links"><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#pricing" data-t="navP">Бағасы</a><a href="#faq" data-t="navQ">Сұрақтар</a><a class="navcab" href="http://localhost:3000/cabinet" title="Shabyt.exe қосулы тұрғанда ашылады" data-t="navC">Кабинет ↗</a></div>
+    <div class="links"><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#pricing" data-t="navP">Бағасы</a><a href="#faq" data-t="navQ">Сұрақтар</a></div>
+    <button type="button" class="btn loginb" id="loginB" data-t="navLogin" aria-haspopup="dialog">Кіру</button>
     <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-lang="kk" aria-pressed="true">ҚАЗ</button><button type="button" data-lang="ru" aria-pressed="false">РУС</button></div>
   </div>
 </nav>
+<dialog id="loginD" aria-labelledby="loginH"><div class="in">
+<button type="button" class="x" data-close aria-label="Жабу / Закрыть">×</button>
+<h2 id="loginH" data-t="lgH">Кабинетке кіру</h2>
+<p data-t="lgSub">Тіркелудің қажеті жоқ: Шабыттың кабинеті сіздің компьютеріңіздегі бағдарламада тұр.</p>
+<div class="box pc"><h3 data-t="lgPcH">Компьютерде</h3><p data-t="lgPc">Шабыт қосулы болса, кабинет бірден ашылады.</p><a class="btn" href="http://localhost:3000/cabinet" data-t="lgOpen">Кабинетті ашу</a><p data-t="lgNo">Бағдарлама жоқ па? <a href="https://github.com/timabektimabekk-beep/shabyt-site/releases/latest/download/Shabyt-Windows.zip">Тегін жүктеп алыңыз</a> (Windows 10/11).</p></div>
+<div class="box"><h3 data-t="lgPhH">Телефонда</h3><ol><li data-t="lgPh1">Компьютердегі кабинетте «Төлем көпірі» бетін ашыңыз.</li><li data-t="lgPh2">«Телефоннан басқару» бөлімінде «Қосу» батырмасын басыңыз.</li><li data-t="lgPh3">Телефонмен QR-кодты сканерлеп, PIN-кодты енгізіңіз.</li></ol><p data-t="lgPhN">Телефон мен компьютер бір Wi-Fi желісінде болуы керек. Бұл мүмкіндік Шабыттың 1.3 нұсқасынан бастап бар.</p></div>
+</div></dialog>
 
 <header class="hero band" id="top">
   <div class="wrap">
@@ -228,7 +242,7 @@ s2h:'Подключите телефон',s2p:'Подключите телефо
 s3h:'Добавьте в OBS',s3p:'Вставьте ссылку виджета из кабинета в OBS как Browser Source. Нажмите тестовый алерт, и готово.',
 dH:'16 дизайнов виджетов',dP:'Топ донатеров, шкала цели, последние донаты и алерт в одном стиле. Дизайн меняется в кабинете одной кнопкой.',
 pH:'Цена',free:'Бесплатно',freeL:'<li>Автоматический приём донатов Kaspi</li><li>Алерт, звук, озвучка сообщений</li><li>Цель, топ дня и месяца, последние донаты, бегущая строка</li><li>Таймер сабатона и рулетка</li><li>3 дизайна, 12 звуков, 8 анимаций</li>',dlShort:'Скачать',
-mo:'/ мес',mo2:'/ мес',stdL:'<li>Всё из бесплатного</li><li>+6 дизайнов: Степь, Стекло, Ретро, Тактический шутер, Королевская битва, Пиксельная аркада</li><li>Свои GIF и звуки, до 300 файлов</li><li>+20 звуков и 20 анимаций</li>',proL:'<li>Всё из Стандарта</li><li>Заказ музыки по ссылке YouTube</li><li>+7 дизайнов: Неон, Металл, Брутализм, Кибер, Фэнтези, Хоррор, Гонки</li><li>+25 звуков и 25 анимаций: Кюй, Варган, Сыбызгы, Шанырак, Беркут</li>',buy:'Купить в Telegram',buy2:'Купить в Telegram',buyNote:'Как купить: скачайте программу и скопируйте код устройства в разделе «Тариф» кабинета. Отправьте его в Telegram <a href="https://t.me/shabytkzdon" target="_blank" rel="noopener">@shabytkzdon</a>. После оплаты придёт ключ, вставьте его в разделе «Тариф».',navP:'Цена',navC:'Кабинет ↗',q6:'Как открыть кабинет?',a6:'Запустите Shabyt.exe, кабинет откроется в браузере сам. Чтобы открыть его позже, нажмите «Кабинет» на сайте или наберите в браузере <b>localhost:3000</b>. Программа должна быть запущена.',
+mo:'/ мес',mo2:'/ мес',stdL:'<li>Всё из бесплатного</li><li>+6 дизайнов: Степь, Стекло, Ретро, Тактический шутер, Королевская битва, Пиксельная аркада</li><li>Свои GIF и звуки, до 300 файлов</li><li>+20 звуков и 20 анимаций</li>',proL:'<li>Всё из Стандарта</li><li>Заказ музыки по ссылке YouTube</li><li>+7 дизайнов: Неон, Металл, Брутализм, Кибер, Фэнтези, Хоррор, Гонки</li><li>+25 звуков и 25 анимаций: Кюй, Варган, Сыбызгы, Шанырак, Беркут</li>',buy:'Купить в Telegram',buy2:'Купить в Telegram',buyNote:'Как купить: скачайте программу и скопируйте код устройства в разделе «Тариф» кабинета. Отправьте его в Telegram <a href="https://t.me/shabytkzdon" target="_blank" rel="noopener">@shabytkzdon</a>. После оплаты придёт ключ, вставьте его в разделе «Тариф».',navP:'Цена',navLogin:'Войти',lgH:'Вход в кабинет',lgSub:'Регистрация не нужна: кабинет Шабыта находится в программе на вашем компьютере.',lgPcH:'На компьютере',lgPc:'Если Шабыт запущен, кабинет откроется сразу.',lgOpen:'Открыть кабинет',lgNo:'Нет программы? <a href="https://github.com/timabektimabekk-beep/shabyt-site/releases/latest/download/Shabyt-Windows.zip">Скачайте бесплатно</a> (Windows 10/11).',lgPhH:'На телефоне',lgPh1:'В кабинете на компьютере откройте страницу «Платёжный мост».',lgPh2:'В блоке «Управление с телефона» нажмите «Включить».',lgPh3:'Отсканируйте QR-код телефоном и введите PIN-код.',lgPhN:'Телефон и компьютер должны быть в одной сети Wi-Fi. Функция есть начиная с версии Шабыт 1.3.',navC:'Кабинет ↗',q6:'Как открыть кабинет?',a6:'Запустите Shabyt.exe, кабинет откроется в браузере сам. Чтобы открыть его позже, нажмите «Кабинет» на сайте или наберите в браузере <b>localhost:3000</b>. Программа должна быть запущена.',
 qH:'Частые вопросы',q1:'Windows пишет, что «защитила компьютер». Что делать?',a1:'У программы пока нет цифровой подписи, поэтому Windows её не узнаёт. Нажмите «Подробнее» → «Выполнить в любом случае».',
 q2:'Куда приходят деньги? Есть комиссия?',a2:'Зритель переводит прямо на ваш Kaspi. Шабыт не касается денег, только читает уведомление и показывает алерт. Комиссии нет.',
 q3:'Работает с iPhone?',a3:'Да. «Связь с телефоном» в Windows 11 подключает iPhone по Bluetooth, и уведомления приходят на компьютер.',
@@ -253,5 +267,6 @@ document.querySelector('.lang').addEventListener('click',e=>{const b=e.target.cl
 apply(lang);
 }
 </script>
+<script>(()=>{const d=document.getElementById('loginD');document.getElementById('loginB').addEventListener('click',()=>d.showModal());d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-close]'))d.close()});if(location.hash==='#login')d.showModal()})();</script>
 </body>
 </html>
