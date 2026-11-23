@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шабыт — Kaspi донаттары</title>
+<meta name="description" content="Шабыт — Kaspi донаттарын стримде алерт етіп көрсететін тегін Windows бағдарламасы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#061820);--ink:light-dark(#0b1d26,#e8f6fa);--mute:light-dark(#4a5e68,#9fbcc6);--sky:light-dark(#0090ad,#22c3dd);--skyf:light-dark(#e3f6fa,#0b2a35);--gold:#fec50c;--goldi:#3a2a00;--panel:light-dark(#ffffff,#0c2430);--line:light-dark(#cfe3ea,#1d4352);--deep:#06222d}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Montserrat,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Unbounded,Montserrat,sans-serif;line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,4.6vw,52px)}
+h2{font-size:clamp(26px,3.2vw,38px)}
+h3{font-size:18px}
+p{margin:0}
+a{color:inherit}
+.band{padding-block:clamp(28px,4vw,64px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-block:0}
+.nav .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 0}
+.logo{font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo i{width:26px;height:26px;border-radius:50%;background:var(--gold);box-shadow:inset -5px -5px 0 #e0a800}
+.links{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto;font-weight:600;font-size:15px}
+.links a{text-decoration:none;padding:6px 0}
+.links a:hover{color:var(--sky)}
+.lang{display:flex;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.lang button{min-height:40px;min-width:52px;border:0;background:transparent;color:var(--ink);font:700 14px Montserrat,sans-serif;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--sky);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:12px;border:0;font:700 16px Montserrat,sans-serif;cursor:pointer;text-decoration:none;background:var(--gold);color:var(--goldi);white-space:nowrap}
+.btn:hover{filter:brightness(1.05)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn svg{width:20px;height:20px}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.hero{background:linear-gradient(var(--skyf),var(--bg))}
+.top{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:24px}
+.top p{max-width:52ch;color:var(--mute);font-size:17px;margin-top:12px}
+.dl{display:grid;gap:8px;justify-items:start}
+.dl small{color:var(--mute);font-size:13px}
+.screen{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/7;background:#0b2b3a;box-shadow:0 0 0 6px #0b1d26}
+.screen svg.scene{position:absolute;inset:0;width:100%;height:100%}
+.live{position:absolute;left:14px;top:14px;background:#e8251a;color:#fff;font:700 13px Montserrat;padding:3px 9px;border-radius:6px;display:flex;gap:6px;align-items:center}
+.live b{width:8px;height:8px;border-radius:50%;background:#fff}
+.alert{position:absolute;left:38%;top:46%;transform:translate(-50%,-50%);width:min(52%,460px);text-align:center;color:#fff}
+.alert .coin{width:64px;height:64px;margin:0 auto 8px;border-radius:50%;background:var(--gold);box-shadow:inset -8px -8px 0 rgba(0,0,0,.18),0 0 0 6px rgba(255,255,255,.2);display:grid;place-items:center;font:700 26px Unbounded;color:#3a2a00}
+.alert .who{font:700 clamp(15px,2.2vw,24px) Unbounded;text-shadow:0 2px 0 #000}
+.alert .who em{font-style:normal;color:var(--gold)}
+.alert .msg{margin-top:8px;background:rgba(6,24,32,.85);border-radius:10px;padding:8px 12px;font-size:15px}
+.toast{position:absolute;right:16px;bottom:16px;width:min(36%,320px);background:#f3f3f3;color:#1a1a1a;border-radius:10px;padding:12px 14px;box-shadow:0 12px 30px rgba(0,0,0,.35);font-size:13px}
+.toast .app{display:flex;align-items:center;gap:6px;color:#555;font-size:12px;margin-bottom:6px}
+.toast .app i{width:14px;height:14px;border-radius:3px;background:#0078d4}
+.toast b{display:block;font-size:14px;margin-bottom:2px}
+.flow{position:absolute;right:calc(min(36%,320px) + 26px);bottom:44px;color:var(--gold);font:700 28px Unbounded;text-shadow:0 2px 0 #000}
+@media(prefers-reduced-motion:no-preference){.toast{animation:in 6s ease infinite}.alert{animation:al 6s ease infinite}}
+@keyframes in{0%,8%{opacity:0;transform:translateY(20px)}14%,92%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes al{0%,22%{opacity:0;transform:translate(-50%,-50%) scale(.7)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}34%,90%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0}}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.sec-h p{color:var(--mute);max-width:52ch}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.feat{border-radius:16px;padding:20px;background:var(--skyf);display:flex;flex-direction:column;gap:8px}
+.feat svg{width:44px;height:44px}
+.feat p{color:var(--mute);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.step{border-left:4px solid var(--gold);padding:4px 0 4px 16px}
+.step p{color:var(--mute);font-size:15px;margin-top:6px}
+.dark{background:var(--deep);color:#e8f6fa}
+.dark .sec-h p{color:#9fbcc6}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:#0c3240;font-weight:600}
+.chip i{width:28px;height:28px;border-radius:8px;flex:none}
+.tag{font:700 11px Montserrat;border-radius:5px;padding:2px 6px}
+.tag.free{background:#1d4352;color:#cfe6ee}
+.tag.pro{background:var(--gold);color:var(--goldi)}
+.price{border:2px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:12px;background:var(--panel)}
+.price.best{border-color:var(--sky);background:var(--skyf)}
+.price .num{font:700 clamp(28px,3vw,36px) Unbounded;white-space:nowrap}
+.price ul{margin:0;padding-left:20px;display:grid;gap:4px;flex:1}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{font-weight:700;cursor:pointer;font-size:17px}
+details p{margin-top:8px;color:var(--mute);max-width:70ch}
+.cta{background:var(--sky);color:#fff}
+.cta .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer{background:var(--deep);color:#9fbcc6;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:900px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}.screen{aspect-ratio:16/9}}
+@media(max-width:600px){.grid3,.steps,.two{grid-template-columns:minmax(0,1fr)}.links{display:none}.screen{aspect-ratio:4/5}.toast{left:12px;right:12px;width:auto;font-size:12px}.flow{display:none}.alert{left:50%;top:32%;width:86%}}
+</style>
+</head>
+<body>
+<nav class="nav band">
+  <div class="wrap">
+    <a class="logo" href="#top"><i></i>Шабыт</a>
+    <div class="links"><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#faq" data-t="navQ">Сұрақтар</a></div>
+    <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-lang="kk" aria-pressed="true">ҚАЗ</button><button type="button" data-lang="ru" aria-pressed="false">РУС</button></div>
+  </div>
+</nav>
+
+<header class="hero band" id="top">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1 data-t="h1">Kaspi донаты эфирге бірден шығады</h1>
+        <p data-t="lead">Көрермен Kaspi-іңізге ақша аударады. Хабарлама телефоннан компьютерге келеді, Шабыт оны ұстап алып, стримде алерт, дауыс және виджеттер етіп көрсетеді. Донат бетінің, комиссияның қажеті жоқ.</p>
+      </div>
+      <div class="dl">
+        <a class="btn dlbtn" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg><span data-t="dl">Windows үшін жүктеу</span></a>
+        <small data-t="dlNote">Тегін · Windows 10/11 · 33 МБ</small>
+      </div>
+    </div>
+    <div class="screen" aria-label="Стрим экраны: Kaspi хабарламасы алертке айналады">
+      <svg class="scene" viewBox="0 0 800 350" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d3b55"/><stop offset="1" stop-color="#f08a4b"/></linearGradient><linearGradient id="far" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6f9a"/><stop offset="1" stop-color="#8a7aa0"/></linearGradient></defs>
+        <rect width="800" height="350" fill="url(#sky)"/>
+        <circle cx="560" cy="210" r="58" fill="#fec50c"/><circle cx="560" cy="210" r="78" fill="#fec50c" opacity=".18"/>
+        <path d="M0 230 L120 150 L190 200 L300 110 L420 210 L520 160 L640 225 L740 170 L800 205 V350 H0Z" fill="url(#far)"/>
+        <path d="M300 110 L328 135 L310 133 L292 147 L276 133Z" fill="#e8eef7" opacity=".85"/>
+        <path d="M0 270 Q200 225 400 262 T800 248 V350 H0Z" fill="#2c4a5e"/>
+        <path d="M0 310 Q240 280 460 305 T800 295 V350 H0Z" fill="#183244"/>
+        <g transform="translate(150 280)"><path d="M0 28 Q38 -16 76 28Z" fill="#f3efe6"/><path d="M38 6 Q57 17 76 28 H38Z" fill="#d9d2c3"/><rect x="32" y="13" width="11" height="15" rx="2" fill="#7a4a2a"/><path d="M7 20 H69" stroke="#c8371e" stroke-width="3"/></g>
+      </svg>
+      <div class="live"><b></b>LIVE</div>
+      <div class="alert"><div class="coin">₸</div><div class="who">Асқар Б. <em>2 000 ₸</em> <span data-t="sent">жіберді</span></div><div class="msg" data-t="amsg">Сәлем, керемет стрим!</div></div>
+      <div class="flow" aria-hidden="true">←</div>
+      <div class="toast"><div class="app"><i></i><span data-t="phoneLink">Связь с телефоном</span></div><b>Kaspi.kz</b><span data-t="tText">Вы получили перевод: 2 000 ₸ от Асқар Б. Комментарий: Сәлем, керемет стрим!</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="band" id="features">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-t="fH">Стримге керектің бәрі бір бағдарламада</h2><p data-t="fP">Бағдарлама компьютеріңізде жұмыс істейді. Тіркелу, донат беті, серверлер жоқ: ақша тікелей сіздің Kaspi-іңізге түседі.</p></div>
+    <div class="grid3" id="featGrid"></div>
+  </div>
+</section>
+
+<section class="band" id="how" style="background:var(--skyf)">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-t="hH">Үш қадаммен іске қосу</h2></div>
+    <div class="steps">
+      <div class="step"><h3 data-t="s1h">Жүктеп, ашыңыз</h3><p data-t="s1p">Shabyt.exe файлын екі рет басыңыз. Орнатудың қажеті жоқ, кабинет браузерде өздігінен ашылады.</p></div>
+      <div class="step"><h3 data-t="s2h">Телефонды қосыңыз</h3><p data-t="s2p">Windows-тағы «Связь с телефоном» бағдарламасы арқылы телефонды қосып, хабарламаларды көрсетуді іске қосыңыз. Android та, iPhone да болады.</p></div>
+      <div class="step"><h3 data-t="s3h">OBS-ке қосыңыз</h3><p data-t="s3p">Кабинеттегі виджет сілтемесін OBS-те Browser Source етіп қойыңыз. Тест алерт басып тексеріңіз, болды.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band dark" id="designs">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-t="dH">10 виджет дизайны</h2><p data-t="dP">Топ донатерлер, мақсат жолағы, соңғы донаттар және алерт бір стильде. Дизайнды кабинеттен бір батырмамен ауыстырасыз.</p></div>
+    <div class="chips" id="designList"></div>
+  </div>
+</section>
+
+<section class="band" id="pricing">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-t="pH">Бағасы</h2></div>
+    <div class="two">
+      <div class="price"><h3 data-t="free">Тегін</h3><div class="num">0 ₸</div><ul data-t="freeL"><li>Kaspi донаттарын автоматты ұстау</li><li>Алерт, дыбыс, дауыспен оқу</li><li>Мақсат, күн және ай топтары, соңғы донаттар, жүгіртпе жол</li><li>Сабатон таймері және рулетка</li><li>3 дизайн</li></ul><a class="btn dlbtn" href="#" data-t="dlShort">Жүктеу</a></div>
+      <div class="price best"><h3>PRO</h3><div class="num" data-t="soon">Жақында</div><ul data-t="proL"><li>Тегіндегінің бәрі</li><li>Тағы 7 PRO дизайн</li><li>Жаңа мүмкіндіктер бірінші болып</li></ul><span class="btn ghost" aria-disabled="true" style="cursor:default" data-t="notify">Жақында ашылады</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq">
+  <div class="wrap" style="max-width:860px">
+    <h2 style="margin-bottom:12px" data-t="qH">Жиі қойылатын сұрақтар</h2>
+    <details open><summary data-t="q1">Windows «компьютеріңізді қорғады» деп ескертеді. Не істеймін?</summary><p data-t="a1">Бағдарлама әзірге цифрлық қолтаңбасыз, сондықтан Windows оны танымайды. «Подробнее» → «Выполнить в любом случае» басыңыз.</p></details>
+    <details><summary data-t="q2">Ақша қайда түседі? Комиссия бар ма?</summary><p data-t="a2">Көрермен тікелей сіздің Kaspi-іңізге аударады. Шабыт ақшаға тиіспейді, тек хабарламаны оқып, алерт көрсетеді. Комиссия жоқ.</p></details>
+    <details><summary data-t="q3">iPhone-мен жұмыс істей ме?</summary><p data-t="a3">Иә. Windows 11-дегі «Связь с телефоном» iPhone-ды Bluetooth арқылы қосады, хабарламалар компьютерге келеді.</p></details>
+    <details><summary data-t="q4">Шығыс аударымдар мен сатып алулар алерт болып кетпей ме?</summary><p data-t="a4">Жоқ. Шабыт тек кіріс аударымдарды алады: «Вы перевели», «Списание», «Покупка» сияқтылар өткізіледі. Бір хабарлама екі рет келсе, бір рет саналады.</p></details>
+    <details><summary data-t="q5">Компьютерсіз болмай ма?</summary><p data-t="a5">Android-та «Шабыт көпір» қосымшасы бар, ол хабарламаны телефоннан тікелей жібереді. Бірақ виджеттер бәрібір Шабыт бағдарламасы ашық компьютерде жұмыс істейді.</p></details>
+  </div>
+</section>
+
+<section class="band cta">
+  <div class="wrap">
+    <h2 data-t="ctaH">Алғашқы Kaspi донатыңызды эфирде көрсетіңіз</h2>
+    <a class="btn dlbtn" href="#" data-t="dl2">Windows үшін жүктеу</a>
+  </div>
+</section>
+
+<footer class="band" id="contact">
+  <div class="wrap">
+    <div><div class="logo" style="color:#e8f6fa"><i></i>Шабыт</div><p style="margin-top:8px" data-t="footP">Қазақстандағы стримерлерге арналған Kaspi донат бағдарламасы.</p></div>
+    <div><p data-t="footNote">Kaspi Bank-пен байланысы жоқ тәуелсіз жоба.</p></div>
+  </div>
+</footer>
+
+<script>
+{
+const DL='https://github.com/timabektimabekk-beep/shabyt-site/releases/latest/download/Shabyt-Windows.zip';
+const RU={navF:'Возможности',navH:'Как подключить',navD:'Дизайны',navQ:'Вопросы',
+h1:'Донат Kaspi сразу выходит в эфир',lead:'Зритель переводит деньги на ваш Kaspi. Уведомление приходит с телефона на компьютер, Шабыт ловит его и показывает на стриме алертом, озвучкой и виджетами. Страница доната и комиссия не нужны.',
+dl:'Скачать для Windows',dlNote:'Бесплатно · Windows 10/11 · 33 МБ',sent:'отправляет',amsg:'Привет, отличный стрим!',phoneLink:'Связь с телефоном',tText:'Вы получили перевод: 2 000 ₸ от Асқар Б. Комментарий: Привет, отличный стрим!',
+fH:'Всё для стрима в одной программе',fP:'Программа работает на вашем компьютере. Без регистрации, страницы доната и серверов: деньги идут прямо на ваш Kaspi.',
+hH:'Запуск за три шага',s1h:'Скачайте и откройте',s1p:'Дважды нажмите Shabyt.exe. Установка не нужна, кабинет сам откроется в браузере.',
+s2h:'Подключите телефон',s2p:'Подключите телефон через «Связь с телефоном» в Windows и включите показ уведомлений. Подходит и Android, и iPhone.',
+s3h:'Добавьте в OBS',s3p:'Вставьте ссылку виджета из кабинета в OBS как Browser Source. Нажмите тестовый алерт, и готово.',
+dH:'10 дизайнов виджетов',dP:'Топ донатеров, шкала цели, последние донаты и алерт в одном стиле. Дизайн меняется в кабинете одной кнопкой.',
+pH:'Цена',free:'Бесплатно',freeL:'<li>Автоматический приём донатов Kaspi</li><li>Алерт, звук, озвучка сообщений</li><li>Цель, топ дня и месяца, последние донаты, бегущая строка</li><li>Таймер сабатона и рулетка</li><li>3 дизайна</li>',dlShort:'Скачать',
+soon:'Скоро',proL:'<li>Всё из бесплатной версии</li><li>Ещё 7 PRO-дизайнов</li><li>Новые функции первыми</li>',notify:'Скоро откроется',
+qH:'Частые вопросы',q1:'Windows пишет, что «защитила компьютер». Что делать?',a1:'У программы пока нет цифровой подписи, поэтому Windows её не узнаёт. Нажмите «Подробнее» → «Выполнить в любом случае».',
+q2:'Куда приходят деньги? Есть комиссия?',a2:'Зритель переводит прямо на ваш Kaspi. Шабыт не касается денег, только читает уведомление и показывает алерт. Комиссии нет.',
+q3:'Работает с iPhone?',a3:'Да. «Связь с телефоном» в Windows 11 подключает iPhone по Bluetooth, и уведомления приходят на компьютер.',
+q4:'Исходящие переводы и покупки не станут алертами?',a4:'Нет. Шабыт берёт только входящие переводы: «Вы перевели», «Списание», «Покупка» и похожие пропускаются. Одно уведомление, пришедшее дважды, считается один раз.',
+q5:'А без компьютера можно?',a5:'Для Android есть приложение «Шабыт көпір», оно отправляет уведомления прямо с телефона. Но виджеты всё равно работают на компьютере, где открыт Шабыт.',
+ctaH:'Покажите свой первый донат Kaspi в эфире',dl2:'Скачать для Windows',footP:'Программа донатов Kaspi для стримеров Казахстана.',footNote:'Независимый проект, не связан с Kaspi Bank.'};
+const KK={};document.querySelectorAll('[data-t]').forEach(e=>KK[e.dataset.t]=e.innerHTML);
+const FEATS={kk:[['Kaspi автоматты','Kaspi хабарламасын «Связь с телефоном» арқылы өзі ұстайды. Сома, есім және түсініктеме алертке шығады.'],['Алерт және дауыс','Анимация, дыбыс және хабарламаны қазақша не орысша дауыспен оқу.'],['Мақсат және топтар','Мақсат жолағы, бүгінгі және айдың топтары, соңғы донаттар, жүгіртпе жол. Атауларын өзіңіз жазасыз.'],['Сабатон таймері','Әр 100 ₸ таймерге уақыт қосады. Кідіртуге, ұзартуға болады.'],['Рулетка','Белгілі сомадан донат келсе, дөңгелек айналып, тапсырма таңдайды.'],['Модерация','Жаман сөздер жабылады, сілтемелер жасырылады, донатерді бұғаттауға болады.']],
+ru:[['Kaspi автоматически','Сам ловит уведомления Kaspi через «Связь с телефоном». Сумма, имя и комментарий выходят в алерт.'],['Алерт и озвучка','Анимация, звук и озвучка сообщений на казахском или русском.'],['Цель и топы','Шкала цели, топ дня и топ месяца, последние донаты, бегущая строка. Названия задаёте сами.'],['Таймер сабатона','Каждые 100 ₸ добавляют время. Можно ставить на паузу и продлевать.'],['Рулетка','При донате от заданной суммы крутится колесо и выбирает задание.'],['Модерация','Плохие слова закрываются, ссылки скрываются, донатера можно заблокировать.']]};
+const IC=['<circle cx="22" cy="22" r="16" fill="#fec50c"/><path d="M15 23l5 5 9-11" stroke="#3a2a00" stroke-width="4" fill="none" stroke-linecap="round"/>','<rect x="16" y="6" width="12" height="22" rx="6" fill="#0090ad"/><path d="M10 22a12 12 0 0 0 24 0M22 34v6" stroke="#0090ad" stroke-width="3" fill="none"/>','<rect x="4" y="16" width="36" height="12" rx="6" fill="#cfe3ea"/><rect x="4" y="16" width="24" height="12" rx="6" fill="#fec50c"/>','<circle cx="22" cy="24" r="15" fill="none" stroke="#0090ad" stroke-width="3"/><path d="M22 24V14M22 24l7 5M18 5h8" stroke="#fec50c" stroke-width="3" stroke-linecap="round"/>','<circle cx="22" cy="22" r="17" fill="#0090ad"/><path d="M22 22V5A17 17 0 0 1 39 22Z" fill="#fec50c"/><path d="M22 22L7 30A17 17 0 0 1 9 11Z" fill="#ff5c8a"/>','<path d="M22 4l15 6v10c0 9-6 16-15 19C13 36 7 29 7 20V10z" fill="#0090ad"/><path d="M15 21l5 5 9-10" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round"/>'];
+const DS=[['Классика','Классика','free','#06222d'],['Минимал','Минимал','free','linear-gradient(135deg,#fff,#9fbcc6)'],['Қара-алтын','Чёрно-золотой','free','linear-gradient(135deg,#0b0b0b 50%,#fec50c 50%)'],['Неон','Неон','pro','linear-gradient(135deg,#22e3ff,#ff3df0)'],['Металл','Металл','pro','linear-gradient(135deg,#ffe68a,#a7b0b8,#a8652d)'],['Брутализм','Брутализм','pro','linear-gradient(135deg,#fffbe6 50%,#3dff8a 50%)'],['Дала','Степь','pro','linear-gradient(135deg,#0b6f8a,#fec50c)'],['Кибер','Кибер','pro','repeating-linear-gradient(135deg,#f8e71c 0 6px,#0a0a0a 6px 10px)'],['Шыны','Стекло','pro','linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.1))'],['Ретро','Ретро','pro','linear-gradient(#ffd23d,#ff3d9a,#2b0b3f)']];
+let lang='kk';try{const s=localStorage.getItem('shabyt-lang');if(s==='ru'||s==='kk')lang=s}catch(e){}
+const apply=l=>{lang=l;document.documentElement.lang=l;
+  document.querySelectorAll('[data-t]').forEach(e=>{const k=e.dataset.t;e.innerHTML=l==='ru'?(RU[k]??KK[k]):KK[k]});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
+  document.getElementById('featGrid').innerHTML=FEATS[l].map((f,i)=>`<div class="feat"><svg viewBox="0 0 44 44" aria-hidden="true">${IC[i]}</svg><h3>${f[0]}</h3><p>${f[1]}</p></div>`).join('');
+  document.getElementById('designList').innerHTML=DS.map(d=>`<span class="chip"><i style="background:${d[3]}"></i>${l==='ru'?d[1]:d[0]} <span class="tag ${d[2]}">${d[2]==='pro'?'PRO':'FREE'}</span></span>`).join('');
+  document.querySelectorAll('.dlbtn').forEach(a=>a.href=DL);
+  try{localStorage.setItem('shabyt-lang',l)}catch(e){}
+};
+document.querySelector('.lang').addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(b)apply(b.dataset.lang)});
+apply(lang);
+}
+</script>
+</body>
+</html>
