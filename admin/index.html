@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Админ · Шабыт</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/acc.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="/"><i></i>Шабыт</a>
+  <nav class="tnav"><a href="/account/" data-t="cab">Кабинет</a></nav>
+  <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-lang="kk">ҚАЗ</button><button type="button" data-lang="ru">РУС</button></div>
+</div></header>
+<main class="wrap" id="app" aria-live="polite"><p class="muted" style="padding:60px 0">…</p></main>
+<dialog id="dlg"><form method="dialog" id="df"></form></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="/acc.js"></script>
+<script>
+const T = {
+kk: { cab: 'Кабинет', title: 'Админ панель', need: 'Админ панельге кіру үшін алдымен кабинетке кіріңіз.', toCab: 'Кабинетке кіру', notAdmin: 'Бұл бет тек Шабыт иесіне арналған.',
+  users: 'Қолданушылар', newWeek: '7 күнде жаңа', active: '7 күнде белсенді', paying: 'Ақылы тарифте', revMonth: 'Осы айдағы табыс', revAll: 'Барлық табыс', pendingN: 'Тексерілетін төлем',
+  pend: 'Расталмаған төлемдер', approve: 'Растау', reject: 'Қабылдамау', amount: 'Сома, ₸', noPend: 'Жаңа төлем жоқ.',
+  list: 'Қолданушылар', search: 'Логин, email немесе компьютер коды…', login: 'Логин', plan: 'Тариф', app: 'Бағдарлама', don: 'Донаттар', paid: 'Төледі', reg: 'Тіркелді', seen: 'Соңғы кіру', acts: 'Әрекет',
+  grant: 'Тариф беру', revoke: 'Тарифті алу', block: 'Бұғаттау', unblock: 'Бұғатты алу', pass: 'Құпиясөз', more: 'Тағы',
+  free: 'Тегін', std: 'Стандарт', pro: 'PRO', blocked: 'Бұғатталған', until: d => `${d} дейін`,
+  gTitle: n => `${n}: тариф беру`, gTier: 'Тариф', gMonths: 'Неше айға', gAmount: 'Төленген сома, ₸ (тегін болса 0)', gNote: 'Түсініктеме', ok: 'Сақтау', cancel: 'Болдырмау',
+  pTitle: n => `${n}: жаңа құпиясөз`, pHint: 'Стримерге осы уақытша құпиясөзді беріңіз, ол кабинетте өзгерте алады.',
+  sure: { revoke: n => `${n} тарифін алып тастайсыз ба?`, block: n => `${n} аккаунтын бұғаттайсыз ба? Бағдарламасы да тегін тарифке түседі.` },
+  lib: 'Алерттер кітапханасы', libSub: 'Жүктеген GIF, видео және дыбыстарды стримерлер бағдарламадағы «Алерт» бетінен таңдай алады. Тариф кімге қолжетімді екенін анықтайды.', file: 'Файл (GIF, WEBP, PNG, MP4, WEBM, MP3, WAV, OGG; 15 МБ дейін)', aname: 'Атауы', atier: 'Кімге', upload: 'Жүктеу', uploading: 'Жүктелуде…', forAll: 'Барлығына (тегін)', noLib: 'Әзірге алерт жоқ.', del: 'Өшіру', sureDel: n => `«${n}» алертін өшіресіз бе?`, sound: 'Дыбыс', anim: 'Анимация',
+  pays: 'Төлемдер', byMonth: 'Айлар бойынша табыс', st: { paid: 'Төленді', pending: 'Тексерілуде', rejected: 'Қабылданбады' }, done: 'Дайын',
+  err: { bad_type: 'Бұл файл түрі қолдау көрсетілмейді.', too_big: 'Файл 15 МБ-тан үлкен.', not_admin: 'Бұл бет тек Шабыт иесіне арналған.', short_password: 'Құпиясөз кемінде 6 таңба.', net: 'Серверге қосылу мүмкін болмады.', server: 'Сервер қатесі.', self: 'Өзіңізді бұғаттай алмайсыз.' } },
+ru: { cab: 'Кабинет', title: 'Админ-панель', need: 'Чтобы открыть админ-панель, сначала войдите в кабинет.', toCab: 'Войти в кабинет', notAdmin: 'Эта страница только для владельца Шабыта.',
+  users: 'Пользователи', newWeek: 'Новых за 7 дней', active: 'Активных за 7 дней', paying: 'На платном тарифе', revMonth: 'Доход за месяц', revAll: 'Доход всего', pendingN: 'Оплат на проверке',
+  pend: 'Неподтверждённые оплаты', approve: 'Подтвердить', reject: 'Отклонить', amount: 'Сумма, ₸', noPend: 'Новых оплат нет.',
+  list: 'Пользователи', search: 'Логин, email или код компьютера…', login: 'Логин', plan: 'Тариф', app: 'Программа', don: 'Донаты', paid: 'Оплатил', reg: 'Регистрация', seen: 'Последний вход', acts: 'Действия',
+  grant: 'Выдать тариф', revoke: 'Снять тариф', block: 'Заблокировать', unblock: 'Разблокировать', pass: 'Пароль', more: 'Ещё',
+  free: 'Бесплатный', std: 'Стандарт', pro: 'PRO', blocked: 'Заблокирован', until: d => `до ${d}`,
+  gTitle: n => `${n}: выдать тариф`, gTier: 'Тариф', gMonths: 'На сколько месяцев', gAmount: 'Оплаченная сумма, ₸ (0, если бесплатно)', gNote: 'Комментарий', ok: 'Сохранить', cancel: 'Отмена',
+  pTitle: n => `${n}: новый пароль`, pHint: 'Дайте стримеру этот временный пароль, он сможет сменить его в кабинете.',
+  sure: { revoke: n => `Снять тариф у ${n}?`, block: n => `Заблокировать ${n}? Его программа тоже перейдёт на бесплатный тариф.` },
+  lib: 'Библиотека алертов', libSub: 'Загруженные GIF, видео и звуки стримеры выбирают на странице «Алерт» в программе. Тариф определяет, кому они доступны.', file: 'Файл (GIF, WEBP, PNG, MP4, WEBM, MP3, WAV, OGG; до 15 МБ)', aname: 'Название', atier: 'Для кого', upload: 'Загрузить', uploading: 'Загрузка…', forAll: 'Для всех (бесплатно)', noLib: 'Пока алертов нет.', del: 'Удалить', sureDel: n => `Удалить алерт «${n}»?`, sound: 'Звук', anim: 'Анимация',
+  pays: 'Оплаты', byMonth: 'Доход по месяцам', st: { paid: 'Оплачено', pending: 'Проверяется', rejected: 'Отклонено' }, done: 'Готово',
+  err: { bad_type: 'Этот тип файла не поддерживается.', too_big: 'Файл больше 15 МБ.', not_admin: 'Эта страница только для владельца Шабыта.', short_password: 'Пароль — минимум 6 символов.', net: 'Не удалось связаться с сервером.', server: 'Ошибка сервера.', self: 'Нельзя заблокировать себя.' } } };
+let S = null, U = [], TOTAL = 0, PAYS = [], Q = '', ERR = '', LIB = [], UPL = false;
+const PREV = {};
+const planCell = u => u.blocked ? `<span class="pill blocked">${t().blocked}</span>` : `<span class="pill ${u.tier}">${t()[u.tier]}</span>${u.tier !== 'free' ? `<br><small class="muted">${t().until(dstr(u.until))}</small>` : ''}`;
+
+function render() {
+  const x = t(), a = document.getElementById('app');
+  if (!tok()) { a.innerHTML = `<section class="auth card"><h1>${x.title}</h1><p class="muted">${x.need}</p><a class="btn gold full" href="/account/">${x.toCab}</a></section>`; return; }
+  if (ERR) { a.innerHTML = `<section class="auth card"><h1>${x.title}</h1><p class="err">${esc(ERR)}</p><a class="btn full" href="/account/">${x.toCab}</a></section>`; return; }
+  if (!S) { a.innerHTML = '<p class="muted" style="padding:60px 0">…</p>'; return; }
+  const pend = PAYS.filter(p => p.status === 'pending');
+  a.innerHTML = `<div class="head"><h1>${x.title}</h1></div>
+  <div class="tiles" style="margin-bottom:18px">${[[x.users, S.users], [x.newWeek, S.newWeek], [x.active, S.active], [x.paying, S.paying], [x.revMonth, money(S.revenueMonth.s)], [x.revAll, money(S.revenueTotal.s)], [x.pendingN, S.pending]].map(([l, v]) => `<div class="tile"><span>${l}</span><b>${v}</b></div>`).join('')}</div>
+  <section class="card"><h2>${x.pend}</h2>${pend.length ? `<div class="tw"><table><thead><tr><th>${x.login}</th><th>${x.plan}</th><th>${x.amount}</th><th></th></tr></thead><tbody>${pend.map(p => `<tr><td><b>${esc(p.login)}</b><br><small class="muted">${tstr(p.created)}${p.note ? ' · ' + esc(p.note) : ''}</small></td><td>${x[p.tier]} · ${p.months}</td><td><input id="am-${p.id}" type="number" min="0" step="10" value="${p.amount}" style="max-width:130px" aria-label="${x.amount}"></td><td><div class="row"><button class="btn gold sm" data-a="approve" data-id="${p.id}">${x.approve}</button><button class="btn red sm" data-a="reject" data-id="${p.id}">${x.reject}</button></div></td></tr>`).join('')}</tbody></table></div>` : `<p class="muted">${x.noPend}</p>`}</section>
+  <section class="card"><h2>${x.list} · ${TOTAL}</h2><input id="q" type="search" placeholder="${x.search}" value="${esc(Q)}" aria-label="${x.search}" style="margin-bottom:10px">
+  <div class="tw"><table><thead><tr><th>${x.login}</th><th>${x.plan}</th><th>${x.app}</th><th>${x.don}</th><th>${x.paid}</th><th>${x.reg} / ${x.seen}</th><th>${x.acts}</th></tr></thead><tbody>
+  ${U.map(u => `<tr><td><b>${esc(u.login)}</b>${u.admin ? ' ★' : ''}<br><small class="muted">${esc(u.email)}</small></td><td>${planCell(u)}</td><td>${u.device ? `${esc(u.device)}<br><small class="muted">${esc(u.version)}</small>` : '—'}</td><td>${money(u.donations)}</td><td>${money(u.paid)}</td><td><small>${dstr(u.created)}<br>${u.seen ? tstr(u.seen) : '—'}</small></td>
+  <td><div class="row"><button class="btn gold sm" data-a="grant" data-id="${u.id}">${x.grant}</button>${u.tier !== 'free' ? `<button class="btn sm" data-a="revoke" data-id="${u.id}">${x.revoke}</button>` : ''}${u.admin ? '' : `<button class="btn ${u.blocked ? '' : 'red'} sm" data-a="${u.blocked ? 'unblock' : 'block'}" data-id="${u.id}">${u.blocked ? x.unblock : x.block}</button>`}<button class="btn sm" data-a="pass" data-id="${u.id}">${x.pass}</button></div></td></tr>`).join('')}</tbody></table></div></section>
+  <section class="card" id="lib"><h2>${x.lib}</h2><p class="muted">${x.libSub}</p>
+  <form id="uf" class="upl"><div><label for="uff">${x.file}</label><input id="uff" type="file" required accept=".gif,.webp,.png,.apng,.mp4,.webm,.mp3,.wav,.ogg,.m4a"></div>
+  <div><label for="ufn">${x.aname}</label><input id="ufn" maxlength="40" required></div>
+  <div><label for="uft">${x.atier}</label><select id="uft"><option value="free">${x.forAll}</option><option value="std">${x.std}</option><option value="pro">${x.pro}</option></select></div>
+  <button class="btn gold" type="submit" ${UPL ? 'disabled' : ''}>${UPL ? x.uploading : x.upload}</button></form>
+  ${LIB.length ? `<div class="libg">${LIB.map(a => `<div class="li"><div class="pv" data-pv="${a.id}" data-kind="${a.kind}" data-mime="${esc(a.mime)}">${a.kind === 'sound' ? '🔊' : ''}</div>
+    <input value="${esc(a.name)}" maxlength="40" data-an="${a.id}" aria-label="${x.aname}"><small class="muted">${a.kind === 'sound' ? x.sound : x.anim} · ${a.ext.toUpperCase()} · ${a.size >= 1048576 ? (a.size / 1048576).toFixed(1) + ' МБ' : Math.max(1, Math.round(a.size / 1024)) + ' КБ'}</small>
+    <div class="row"><select data-at="${a.id}" aria-label="${x.atier}">${['free', 'std', 'pro'].map(k => `<option value="${k}" ${a.tier === k ? 'selected' : ''}>${k === 'free' ? x.forAll : x[k]}</option>`).join('')}</select><button class="btn red sm" data-a="adel" data-id="${a.id}">${x.del}</button></div></div>`).join('')}</div>` : `<p class="muted">${x.noLib}</p>`}
+  </section>
+  <div class="grid2"><section class="card"><h2>${x.byMonth}</h2><ul class="list">${S.byMonth.map(m => `<li><span>${esc(m.m)} <small class="muted">· ${m.n}</small></span><b>${money(m.s)}</b></li>`).join('') || '<li class="muted">—</li>'}</ul></section>
+  <section class="card"><h2>${x.pays}</h2><ul class="list">${PAYS.filter(p => p.status !== 'pending').slice(0, 30).map(p => `<li><span>${esc(p.login)} · ${x[p.tier]} · ${p.months} <small class="muted">${dstr(p.done || p.created)}${p.note ? ' · ' + esc(p.note) : ''}</small></span><b>${money(p.amount)} <small class="st ${p.status}">${x.st[p.status]}</small></b></li>`).join('') || '<li class="muted">—</li>'}</ul></section></div>`;
+  previews();
+  const q = document.getElementById('q'); q.oninput = () => { Q = q.value; clearTimeout(q._t); q._t = setTimeout(loadUsers, 300); };
+}
+async function loadUsers() { try { const r = await api('GET', '/admin/users?q=' + encodeURIComponent(Q)); U = r.users; TOTAL = r.total; } catch (e) { toast(errText(e)); } const f = document.activeElement && document.activeElement.id; render(); if (f === 'q') { const q = document.getElementById('q'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+async function loadAll() {
+  try { const [s, p, l] = await Promise.all([api('GET', '/admin/summary'), api('GET', '/admin/payments'), api('GET', '/admin/alerts')]); S = s; PAYS = p.payments; LIB = l.alerts; ERR = ''; await loadUsers(); }
+  catch (e) { if (e.status === 401) setTok(''); ERR = errText(e); render(); }
+}
+const user = id => U.find(u => u.id === +id);
+// previews: the files are fetched with the session token, then shown from memory
+async function previews() {
+  for (const el of document.querySelectorAll('[data-pv]')) {
+    const id = el.dataset.pv;
+    if (!PREV[id]) PREV[id] = fetch(`${API}/alerts/${id}/file`, { headers: { Authorization: 'Bearer ' + tok() } }).then(r => r.ok ? r.blob() : null).then(b => b && URL.createObjectURL(b)).catch(() => null);
+    const u = await PREV[id]; if (!u || !el.isConnected) continue;
+    const k = el.dataset.mime.startsWith('video/') ? 'video' : el.dataset.kind === 'sound' ? 'audio' : 'img';
+    el.innerHTML = k === 'img' ? `<img src="${u}" alt="">` : k === 'video' ? `<video src="${u}" muted loop autoplay playsinline></video>` : `<audio src="${u}" controls preload="none"></audio>`;
+  }
+}
+document.addEventListener('change', async e => {
+  const at = e.target.dataset.at, an = e.target.dataset.an; if (!at && !an) return;
+  const id = at || an;
+  try { const r = await api('POST', `/admin/alerts/${id}`, at ? { action: 'update', tier: e.target.value } : { action: 'update', name: e.target.value }); LIB = LIB.map(a => a.id === +id ? r.alert : a); toast(t().done); } catch (er) { toast(errText(er)); }
+});
+document.addEventListener('submit', async e => {
+  if (e.target.id !== 'uf') return; e.preventDefault();
+  const f = document.getElementById('uff').files[0]; if (!f) return;
+  const name = val('ufn') || f.name.replace(/\.[^.]+$/, ''), tier = val('uft');
+  const types = { gif: 'image/gif', webp: 'image/webp', png: 'image/png', apng: 'image/apng', mp4: 'video/mp4', webm: 'video/webm', mp3: 'audio/mpeg', wav: 'audio/wav', ogg: 'audio/ogg', m4a: 'audio/mp4' };
+  const type = types[(f.name.split('.').pop() || '').toLowerCase()] || f.type;
+  if (f.size > 15e6) return toast(t().err.too_big);
+  UPL = true; render();
+  try {
+    const r = await fetch(`${API}/admin/alerts?name=${encodeURIComponent(name)}&tier=${tier}`, { method: 'POST', headers: { 'Content-Type': type, Authorization: 'Bearer ' + tok() }, body: f });
+    const j = await r.json().catch(() => ({})); if (!r.ok) throw { code: j.error || 'server' };
+    LIB = [j.alert, ...LIB]; toast(t().done);
+  } catch (er) { toast(errText(er)); }
+  UPL = false; render(); document.getElementById('lib').scrollIntoView({ block: 'start' });
+});
+function ask(html, onOk) {
+  const d = document.getElementById('dlg'), f = document.getElementById('df'), x = t();
+  f.innerHTML = html + `<div class="row" style="margin-top:16px"><button class="btn gold" value="ok">${x.ok}</button><button class="btn" value="cancel" formnovalidate>${x.cancel}</button></div>`;
+  d.onclose = () => { if (d.returnValue === 'ok') onOk(); };
+  d.returnValue = ''; d.showModal();
+}
+async function act(id, body) { try { await api('POST', `/admin/users/${id}`, body); toast(t().done); await loadAll(); } catch (e) { toast(errText(e)); } }
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-a]'); if (!b) return;
+  const x = t(), a = b.dataset.a, id = b.dataset.id, u = user(id);
+  if (a === 'approve' || a === 'reject') { try { await api('POST', `/admin/payments/${id}`, { action: a, amount: val('am-' + id) }); toast(x.done); await loadAll(); } catch (er) { toast(errText(er)); } }
+  if (a === 'grant') ask(`<h2>${x.gTitle(esc(u.login))}</h2><label for="gt">${x.gTier}</label><select id="gt"><option value="pro">${x.pro}</option><option value="std">${x.std}</option></select>
+    <label for="gm">${x.gMonths}</label><input id="gm" type="number" min="1" max="120" value="1"><label for="ga">${x.gAmount}</label><input id="ga" type="number" min="0" step="10" value="${S.prices.pro}"><label for="gn">${x.gNote}</label><input id="gn" maxlength="200">`,
+    () => act(id, { action: 'grant', tier: val('gt'), months: +val('gm'), amount: +val('ga'), note: val('gn') }));
+  if (a === 'grant') { const gt = document.getElementById('gt'), ga = document.getElementById('ga'), gm = document.getElementById('gm'); const upd = () => ga.value = S.prices[gt.value] * (+gm.value || 1); gt.onchange = upd; gm.oninput = upd; }
+  if (a === 'revoke' && confirm(x.sure.revoke(u.login))) act(id, { action: 'revoke' });
+  if (a === 'block' && confirm(x.sure.block(u.login))) act(id, { action: 'block' });
+  if (a === 'unblock') act(id, { action: 'unblock' });
+  if (a === 'adel') { const al = LIB.find(z => z.id === +id); if (confirm(t().sureDel(al.name))) { try { await api('POST', `/admin/alerts/${id}`, { action: 'delete' }); LIB = LIB.filter(z => z.id !== +id); render(); toast(t().done); } catch (er) { toast(errText(er)); } } }
+  if (a === 'pass') { const pw = Math.random().toString(36).slice(2, 6) + Math.floor(1000 + Math.random() * 9000); ask(`<h2>${x.pTitle(esc(u.login))}</h2><p class="muted">${x.pHint}</p><input id="pw" value="${pw}" minlength="6">`, () => act(id, { action: 'password', password: val('pw') })); }
+});
+onLang(render);
+if (tok()) loadAll(); else render();
+</script>
+</body>
+</html>
