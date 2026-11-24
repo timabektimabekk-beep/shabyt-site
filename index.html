@@ -119,6 +119,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(max-width:600px){.grid3,.steps,.two{grid-template-columns:minmax(0,1fr)}.links{display:none}.screen{aspect-ratio:4/5}.toast{left:12px;right:12px;width:auto;font-size:12px}.flow{display:none}.alert{left:50%;top:32%;width:86%}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Шабыт","alternateName":"Shabyt","operatingSystem":"Windows 10, Windows 11","applicationCategory":"MultimediaApplication","inLanguage":["kk","ru"],"description":"Kaspi донаттарын стримде алерт етіп көрсететін тегін бағдарлама. Донаты Kaspi на стриме: алерты, виджеты для OBS, топ донатеров, заказ музыки.","url":"https://shabytkzdon.com/","downloadUrl":"https://github.com/timabektimabekk-beep/shabyt-site/releases/latest/download/Shabyt-Windows.zip","image":"https://shabytkzdon.com/og.jpg","offers":[{"@type":"Offer","name":"Тегін","price":"0","priceCurrency":"KZT"},{"@type":"Offer","name":"Стандарт","price":"2990","priceCurrency":"KZT"},{"@type":"Offer","name":"PRO","price":"5990","priceCurrency":"KZT"}]}</script>
+<!-- Yandex.Metrika counter -->
+<script>
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();
+for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=114644795','ym');
+ym(114644795,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+// a separate goal for every click on a download link (the ZIP of the program)
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="Shabyt-Windows.zip"]');if(a)ym(114644795,'reachGoal','download')},true);
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/114644795" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 <nav class="nav band">
@@ -226,7 +237,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <footer class="band" id="contact">
   <div class="wrap">
     <div><div class="logo" style="color:#e8f6fa"><i></i>Шабыт</div><p style="margin-top:8px" data-t="footP">Қазақстандағы стримерлерге арналған Kaspi донат бағдарламасы.</p></div>
-    <div><p data-t="footNote">Kaspi Bank-пен байланысы жоқ тәуелсіз жоба.</p></div>
+    <div><p data-t="footNote">Kaspi Bank-пен байланысы жоқ тәуелсіз жоба.</p><p style="margin-top:8px;font-size:13px;opacity:.75" data-t="cookieNote">Сайт келушілерді Яндекс Метрика арқылы санайды және cookie қолданады.</p></div>
   </div>
 </footer>
 
@@ -248,7 +259,7 @@ q2:'Куда приходят деньги? Есть комиссия?',a2:'Зр
 q3:'Работает с iPhone?',a3:'Да. «Связь с телефоном» в Windows 11 подключает iPhone по Bluetooth, и уведомления приходят на компьютер.',
 q4:'Исходящие переводы и покупки не станут алертами?',a4:'Нет. Шабыт берёт только входящие переводы: «Вы перевели», «Списание», «Покупка» и похожие пропускаются. Одно уведомление, пришедшее дважды, считается один раз.',
 q5:'А без компьютера можно?',a5:'Для Android есть приложение «Шабыт көпір», оно отправляет уведомления прямо с телефона. Но виджеты всё равно работают на компьютере, где открыт Шабыт.',
-ctaH:'Покажите свой первый донат Kaspi в эфире',dl2:'Скачать для Windows',footP:'Программа донатов Kaspi для стримеров Казахстана.',footNote:'Независимый проект, не связан с Kaspi Bank.'};
+ctaH:'Покажите свой первый донат Kaspi в эфире',dl2:'Скачать для Windows',footP:'Программа донатов Kaspi для стримеров Казахстана.',footNote:'Независимый проект, не связан с Kaspi Bank.',cookieNote:'Сайт считает посетителей через Яндекс Метрику и использует cookie.'};
 const KK={};document.querySelectorAll('[data-t]').forEach(e=>KK[e.dataset.t]=e.innerHTML);
 const FEATS={kk:[['Kaspi автоматты','Kaspi хабарламасын «Связь с телефоном» арқылы өзі ұстайды. Сома, есім және түсініктеме алертке шығады.'],['Алерт және дауыс','Анимация, дыбыс және хабарламаны қазақша не орысша дауыспен оқу.'],['Мақсат және топтар','Мақсат жолағы, бүгінгі және айдың топтары, соңғы донаттар, жүгіртпе жол. Атауларын өзіңіз жазасыз.'],['Сабатон таймері','Әр 100 ₸ таймерге уақыт қосады. Кідіртуге, ұзартуға болады.'],['Рулетка','Белгілі сомадан донат келсе, дөңгелек айналып, тапсырма таңдайды.'],['Модерация','Жаман сөздер жабылады, сілтемелер жасырылады, донатерді бұғаттауға болады.']],
 ru:[['Kaspi автоматически','Сам ловит уведомления Kaspi через «Связь с телефоном». Сумма, имя и комментарий выходят в алерт.'],['Алерт и озвучка','Анимация, звук и озвучка сообщений на казахском или русском.'],['Цель и топы','Шкала цели, топ дня и топ месяца, последние донаты, бегущая строка. Названия задаёте сами.'],['Таймер сабатона','Каждые 100 ₸ добавляют время. Можно ставить на паузу и продлевать.'],['Рулетка','При донате от заданной суммы крутится колесо и выбирает задание.'],['Модерация','Плохие слова закрываются, ссылки скрываются, донатера можно заблокировать.']]};
