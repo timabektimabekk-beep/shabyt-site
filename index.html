@@ -136,7 +136,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
   <div class="wrap">
     <a class="logo" href="#top"><i></i>Шабыт</a>
     <div class="links"><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#pricing" data-t="navP">Бағасы</a><a href="#faq" data-t="navQ">Сұрақтар</a></div>
-    <button type="button" class="btn loginb" id="loginB" data-t="navLogin" aria-haspopup="dialog">Кіру</button>
+    <a class="btn loginb" id="loginB" data-t="navLogin" href="/account/">Кіру</a>
     <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-lang="kk" aria-pressed="true">ҚАЗ</button><button type="button" data-lang="ru" aria-pressed="false">РУС</button></div>
   </div>
 </nav>
@@ -278,6 +278,6 @@ document.querySelector('.lang').addEventListener('click',e=>{const b=e.target.cl
 apply(lang);
 }
 </script>
-<script>(()=>{const d=document.getElementById('loginD');document.getElementById('loginB').addEventListener('click',()=>d.showModal());d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-close]'))d.close()});if(location.hash==='#login')d.showModal()})();</script>
+<script>(()=>{const d=document.getElementById('loginD');d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-close]'))d.close()});if(location.hash==='#login')d.showModal()})();</script>
 </body>
 </html>
