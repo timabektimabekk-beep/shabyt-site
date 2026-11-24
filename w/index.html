@@ -1,0 +1,19 @@
+<!doctype html><html lang="kk"><head><meta charset="utf-8"><title>Шабыт виджет</title><meta name="robots" content="noindex">
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}iframe{border:0;width:100%;height:100%;display:block;background:transparent}</style></head>
+<body><script>
+// TikTok LIVE Studio wants an https link: this page shows the widget from the Shabyt program running on this computer
+(function(){
+  var q = new URLSearchParams(location.search);
+  var k = (q.get('k') || '').replace(/[^\w-]/g, ''), t = (q.get('t') || 'alert').replace(/[^\w-]/g, ''), p = (q.get('p') || '3000').replace(/\D/g, '') || '3000';
+  if (!k) return;
+  ['k', 't', 'p'].forEach(function (x) { q.delete(x); });
+  var base = 'http://127.0.0.1:' + p, src = base + '/w/' + k + '/' + t + (q.toString() ? '?' + q : '');
+  var tryLoad = function () { // wait until Shabyt is running, so the stream never shows an error page
+    var img = new Image();
+    img.onload = function () { var f = document.createElement('iframe'); f.allow = 'autoplay'; f.src = src; document.body.appendChild(f); };
+    img.onerror = function () { setTimeout(tryLoad, 3000); };
+    img.src = base + '/static/logo.svg?' + Date.now();
+  };
+  tryLoad();
+})();
+</script></body></html>
