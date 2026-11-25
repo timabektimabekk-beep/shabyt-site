@@ -71,3 +71,4 @@ dialog form{padding:22px}
 .pv{height:130px;border-radius:10px;background:repeating-conic-gradient(var(--skyf) 0 25%,var(--panel) 0 50%) 0 0/16px 16px;display:grid;place-items:center;overflow:hidden;font-size:36px}
 .pv img,.pv video{max-width:100%;max-height:130px;object-fit:contain}.pv audio{width:94%}
 @media(max-width:760px){.upl{grid-template-columns:minmax(0,1fr)}}
+.hero{border-color:var(--gold);border-width:2px}.hero h2{margin-bottom:8px}
