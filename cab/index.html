@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Толық кабинет · Шабыт</title>
+<title>Кабинет · Шабыт</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#061820">
 <style>
@@ -26,13 +26,18 @@ a:focus-visible{outline:3px solid #22c3dd;outline-offset:2px}
   if (!tok) return location.replace('/account/');
   if (!('serviceWorker' in navigator) || !window.caches) return show('Бұл браузер қолдамайды · Браузер не поддерживается', 'Chrome, Edge, Safari немесе Yandex браузерінің жаңа нұсқасын қолданыңыз. · Используйте свежий Chrome, Edge, Safari или Яндекс Браузер.', '<a class="g" href="/account/">Кабинет</a>');
   try {
-    const r = await fetch(API + '/relay-status', { headers: { Authorization: 'Bearer ' + tok } });
-    if (r.status === 401) { try { localStorage.removeItem('shabyt-token'); } catch (e) { } return location.replace('/account/'); }
-    const j = await r.json();
-    // program online → its live cabinet; not connected yet → the same cabinet with example data (demo)
+    const r = await fetch(API + '/me', { headers: { Authorization: 'Bearer ' + tok } });
+    if (r.status === 401 || r.status === 403) { try { localStorage.removeItem('shabyt-token'); } catch (e) { } return location.replace('/account/'); }
+    const me = await r.json();
+    // inside the Shabyt Android app: give the app its own key, so it can send Kaspi notifications to this account
+    if (window.ShabytAndroid) try {
+      if (ShabytAndroid.getLogin() !== me.user.login) {
+        const k = await (await fetch(API + '/me/kaspi-token', { method: 'POST', headers: { Authorization: 'Bearer ' + tok } })).json();
+        if (k.token) ShabytAndroid.setToken(k.token, k.login);
+      }
+    } catch (e) { }
     const c = await caches.open('shb-relay');
     await c.put('/cab/__token', new Response(tok));
-    await c.put('/cab/__mode', new Response(j.online ? 'live' : 'demo'));
     const reg = await navigator.serviceWorker.register('/cab/sw.js', { scope: '/cab/', updateViaCache: 'none' });
     try { await reg.update(); } catch (e) { }
     const nw = reg.installing || reg.waiting; // a newer service worker: let it take over before the cabinet opens
