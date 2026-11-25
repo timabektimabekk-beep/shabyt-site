@@ -17,6 +17,7 @@ const target = u => {
   return p + u.search;
 };
 
+const BAR = `<div id="shb-bar" style="display:flex;gap:6px;justify-content:flex-end;align-items:center;flex-wrap:wrap;padding:6px 12px;background:#061820;font:600 13px/1.4 system-ui,sans-serif"><a href="/account/?stay=1" style="color:#e8f6fa;text-decoration:none;padding:6px 10px;border:1px solid #1d4352;border-radius:10px">Тариф · Төлем / Оплата</a><a href="/account/" onclick="try{localStorage.removeItem('shabyt-token');caches.delete('shb-relay')}catch(e){}" style="color:#e8f6fa;text-decoration:none;padding:6px 10px;border:1px solid #1d4352;border-radius:10px">Шығу / Выйти</a></div>`;
 const page = (title, text, status) => new Response(`<!doctype html><html lang="kk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Шабыт</title>
 <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#061820;color:#e8f6fa;font:16px/1.5 system-ui,sans-serif;padding:20px;text-align:center}div{max-width:460px}h1{font-size:22px}a{display:inline-block;margin:6px;padding:12px 18px;border-radius:12px;background:#fec50c;color:#3a2a00;font-weight:700;text-decoration:none}a.g{background:transparent;color:#e8f6fa;border:2px solid #1d4352}</style></head>
 <body><div><h1>${title}</h1><p>${text}</p><a href="/cab/">Қайталау · Повторить</a><a class="g" href="/account/">Кабинет</a></div></body></html>`, { status, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
@@ -35,6 +36,7 @@ async function relay(req) {
   if (/text\/html/.test(ct)) {
     let html = await r.text();
     html = html.replace(/(src|href)="\/w\//g, '$1="/cab/w/'); // widget previews stay inside /cab/
+    if (!u.pathname.startsWith('/cab/w/')) html = html.replace(/<body([^>]*)>/i, '<body$1>' + BAR); // the site's own links above the program's cabinet
     if (u.pathname.startsWith('/cab/w/')) html = html.replace(/<head>/i, '<head><style>#err{display:none!important}</style><script>history.replaceState(null,"",location.pathname.replace(/^\\/cab/,"")+location.search+location.hash)</script>');
     return new Response(html, { status: r.status, headers: { 'Content-Type': ct, 'Cache-Control': 'no-store' } });
   }
