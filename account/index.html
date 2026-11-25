@@ -120,7 +120,7 @@ async function linkProgram(port) {
   location.href = `http://localhost:${port || 3000}/link#c=${r.code}`;
 }
 let watch = null;
-async function load() { try { D = await api('GET', '/me'); D.online = await api('GET', '/relay-status').then(r => r.online, () => false); if (D.online && !STAY) return location.replace('/cab/'); if (!D.online && linkPort()) return linkProgram(linkPort()); } catch (e) { if (e.status === 401 || e.status === 403) { setTok(''); if (e.code === 'blocked') toast(t().err.blocked); } else toast(errText(e)); } render(); }
+async function load() { try { D = await api('GET', '/me'); D.online = await api('GET', '/relay-status').then(r => r.online, () => false); if (!D.online && linkPort()) return linkProgram(linkPort()); if (!STAY) return location.replace('/cab/'); } catch (e) { if (e.status === 401 || e.status === 403) { setTok(''); if (e.code === 'blocked') toast(t().err.blocked); } else toast(errText(e)); } render(); }
 
 document.addEventListener('submit', async e => {
   e.preventDefault(); const x = t();
