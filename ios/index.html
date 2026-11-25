@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шабыт · iPhone</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#061820">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#061820;color:#e8f6fa;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px 16px 40px}
+main{max-width:520px;margin:0 auto}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:18px;margin:0 0 10px}
+p{color:#9fbcc6;margin:0 0 14px}
+.card{background:#0c2630;border:1px solid #1d4352;border-radius:16px;padding:16px;margin:14px 0}
+code{display:block;word-break:break-all;background:#061820;border:1px solid #1d4352;border-radius:10px;padding:10px;font-size:13px;color:#cfeef6}
+button,a.btn{display:block;width:100%;margin-top:10px;padding:14px;border:0;border-radius:12px;background:#fec50c;color:#3a2a00;font:700 16px system-ui,sans-serif;text-align:center;text-decoration:none;cursor:pointer}
+.g{background:transparent;color:#e8f6fa;border:2px solid #1d4352}
+ol{margin:0;padding-left:22px;display:grid;gap:10px}li b{color:#fec50c}
+.ok{color:#5be39a}.bad{color:#ff8a7a}
+.lang{display:flex;gap:6px;justify-content:flex-end}.lang button{width:auto;margin:0;padding:6px 12px;font-size:13px}
+:focus-visible{outline:3px solid #22c3dd;outline-offset:2px}
+</style>
+</head>
+<body>
+<main id="m"></main>
+<script>
+(() => {
+  // the secret part comes after # and never reaches any server except the Shabyt API when you press «Test»
+  const API = 'https://shabyt-api.timabektimabekk.workers.dev';
+  const key = (/[#&]k=([\w-]{20,40})/.exec(location.hash) || [])[1] || '';
+  const url = key ? `${API}/hook/ios/${key}` : '';
+  const T = {
+    kk: { h: 'Шабыт → iPhone', sub: 'Kaspi донаттарын компьютерсіз қабылдау: iPhone-ның «Команды» қосымшасы Kaspi хабарламасын Шабытқа жібереді.',
+      bad: 'Сілтеме толық емес. Панельдегі QR-ды қайта сканерлеңіз.', link: '1. Сілтемені көшіріңіз', copy: 'Көшіру', copied: 'Көшірілді ✓',
+      open: '«Команды» қосымшасын ашу', steps: '2. Автоматизация жасаңыз',
+      s: ['«Команды» → төменде <b>«Автоматизация»</b> → <b>«+»</b> (немесе «Новая автоматизация»).', '<b>«Сообщение»</b> таңдаңыз. «Сообщение содержит»: <b>Kaspi</b>. <b>«Запускать сразу»</b> қосыңыз → «Далее».', '<b>«Новая пустая автоматизация»</b> → «Добавить действие» → <b>«Получить содержимое URL»</b>.', 'URL орнына көшірген сілтемені қойыңыз. «Показать больше» → <b>Метод: POST</b>, <b>Тело запроса: JSON</b> → «Добавить поле» → «Текст»: кілт <b>text</b>, мәні — <b>«Входные данные команды»</b>.', '«Готово». Енді Kaspi хабарламасы келгенде донат пен алерт бірден шығады.'],
+      test: '3. Тексеру', testBtn: 'Сілтемені тексеру', testOk: 'Жұмыс істейді ✓ Панельдегі «Төлем көпірі» бетінде «iPhone» деп көрінеді.', testBad: 'Жіберілмеді. Интернетті тексеріп, қайталаңыз.',
+      warn: 'Сілтемені ешкімге бермеңіз: оны білген адам жалған донат жібере алады. Жоғалса, панельден жаңасын жасаңыз.' },
+    ru: { h: 'Шабыт → iPhone', sub: 'Приём донатов Kaspi без компьютера: приложение «Команды» на iPhone отправляет сообщение Kaspi в Шабыт.',
+      bad: 'Ссылка неполная. Отсканируйте QR в панели ещё раз.', link: '1. Скопируйте ссылку', copy: 'Копировать', copied: 'Скопировано ✓',
+      open: 'Открыть «Команды»', steps: '2. Создайте автоматизацию',
+      s: ['«Команды» → внизу <b>«Автоматизация»</b> → <b>«+»</b> (или «Новая автоматизация»).', 'Выберите <b>«Сообщение»</b>. «Сообщение содержит»: <b>Kaspi</b>. Включите <b>«Запускать сразу»</b> → «Далее».', '<b>«Новая пустая автоматизация»</b> → «Добавить действие» → <b>«Получить содержимое URL»</b>.', 'Вместо URL вставьте скопированную ссылку. «Показать больше» → <b>Метод: POST</b>, <b>Тело запроса: JSON</b> → «Добавить поле» → «Текст»: ключ <b>text</b>, значение — <b>«Входные данные команды»</b>.', '«Готово». Теперь при сообщении Kaspi донат и алерт появятся сразу.'],
+      test: '3. Проверка', testBtn: 'Проверить ссылку', testOk: 'Работает ✓ В панели на странице «Төлем көпірі» появится «iPhone».', testBad: 'Не отправилось. Проверьте интернет и повторите.',
+      warn: 'Никому не давайте ссылку: зная её, можно отправить ложный донат. Если потеряете — создайте новую в панели.' }
+  };
+  let lang = (navigator.language || '').startsWith('ru') ? 'ru' : 'kk';
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const render = () => {
+    const x = T[lang];
+    document.documentElement.lang = lang;
+    document.getElementById('m').innerHTML = `<div class="lang"><button class="${lang === 'kk' ? '' : 'g'}" data-l="kk">ҚАЗ</button><button class="${lang === 'ru' ? '' : 'g'}" data-l="ru">РУС</button></div>
+      <h1>${x.h}</h1><p>${x.sub}</p>
+      ${!key ? `<div class="card"><p class="bad">${x.bad}</p></div>` : `
+      <div class="card"><h2>${x.link}</h2><code id="u">${esc(url)}</code><button id="cp">${x.copy}</button><a class="btn g" href="shortcuts://">${x.open}</a></div>
+      <div class="card"><h2>${x.steps}</h2><ol>${x.s.map(s => `<li>${s}</li>`).join('')}</ol></div>
+      <div class="card"><h2>${x.test}</h2><button class="g" id="ts">${x.testBtn}</button><p id="tr" role="status" style="margin:10px 0 0"></p></div>
+      <p>${x.warn}</p>`}`;
+  };
+  document.addEventListener('click', async e => {
+    const x = T[lang], l = e.target.closest('[data-l]');
+    if (l) { lang = l.dataset.l; return render(); }
+    if (e.target.id === 'cp') {
+      try { await navigator.clipboard.writeText(url); }
+      catch (er) { const r = document.createRange(); r.selectNodeContents(document.getElementById('u')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); try { document.execCommand('copy'); } catch (er2) { } }
+      e.target.textContent = x.copied;
+    }
+    if (e.target.id === 'ts') {
+      const out = document.getElementById('tr');
+      try { const r = await fetch(url + '?test=1', { method: 'POST' }); out.className = r.ok ? 'ok' : 'bad'; out.textContent = r.ok ? x.testOk : x.testBad; }
+      catch (er) { out.className = 'bad'; out.textContent = x.testBad; }
+    }
+  });
+  render();
+})();
+</script>
+</body>
+</html>
