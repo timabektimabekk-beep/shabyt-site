@@ -29,9 +29,14 @@ a:focus-visible{outline:3px solid #22c3dd;outline-offset:2px}
     const r = await fetch(API + '/relay-status', { headers: { Authorization: 'Bearer ' + tok } });
     if (r.status === 401) { try { localStorage.removeItem('shabyt-token'); } catch (e) { } return location.replace('/account/'); }
     const j = await r.json();
-    if (!j.online) return show('Бағдарлама қосулы емес · Программа не на связи', 'Компьютерде Шабытты (v1.5 немесе жаңасын) ашып, «Тариф» бетінде осы аккаунтпен кіріңіз. Компьютер мен бағдарлама қосулы тұруы керек. · Откройте Шабыт (v1.5 или новее) на компьютере и войдите с этим аккаунтом на странице «Тариф». Компьютер и программа должны быть включены.', back);
-    await (await caches.open('shb-relay')).put('/cab/__token', new Response(tok));
-    await navigator.serviceWorker.register('/cab/sw.js', { scope: '/cab/' });
+    // program online → its live cabinet; not connected yet → the same cabinet with example data (demo)
+    const c = await caches.open('shb-relay');
+    await c.put('/cab/__token', new Response(tok));
+    await c.put('/cab/__mode', new Response(j.online ? 'live' : 'demo'));
+    const reg = await navigator.serviceWorker.register('/cab/sw.js', { scope: '/cab/', updateViaCache: 'none' });
+    try { await reg.update(); } catch (e) { }
+    const nw = reg.installing || reg.waiting; // a newer service worker: let it take over before the cabinet opens
+    if (nw) await new Promise(res => { const t = setTimeout(res, 6000); nw.addEventListener('statechange', () => { if (nw.state === 'activated') { clearTimeout(t); res(); } }); });
     await navigator.serviceWorker.ready;
     location.replace('/cab/app/' + location.hash);
   } catch (e) { show('Қосылу мүмкін болмады · Не удалось подключиться', 'Интернетті тексеріп, қайталаңыз. · Проверьте интернет и повторите.', back); }
