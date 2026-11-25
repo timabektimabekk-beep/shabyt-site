@@ -31,7 +31,7 @@ kk: { site: 'Сайт', logout: 'Шығу', inTitle: 'Кабинетке кір�
   tg: 'Telegram-ға жазу', paid: 'Төледім', note: 'Түсініктеме (міндетті емес)', notePh: 'Мысалы: Kaspi, 14:20, Айдос Н.',
   pending: (t, m, a) => `Төлеміңіз тексерілуде: ${t}, ${m} ай, ${a}. Әдетте бірнеше сағат ішінде расталады.`, cancel: 'Бас тарту',
   app: 'Бағдарламаны қосу', appSteps: ['Windows-қа Шабытты жүктеп, ашыңыз.', 'Шабыт кабинетінде «Тариф» бетін ашыңыз.', '«Аккаунтпен кіру» бөліміне осы логин мен құпиясөзді енгізіңіз.'], dl: 'Windows үшін жүктеу',
-  linked: (d, v) => `Қосылған компьютер: ${d}${v ? ' · Шабыт ' + v : ''}`, notLinked: 'Бағдарлама әлі қосылмаған.', full: 'Толық кабинетті ашу', on: 'Бағдарлама қазір қосулы', off: 'Бағдарлама қазір қосулы емес', fullHint: 'Толық кабинетте бағдарламадағының бәрі бар: виджеттер, алерттер, донаттар, музыка. Телефоннан да ашылады. Компьютерде Шабыт (v1.5 немесе жаңасы) ашық тұруы керек.',
+  linked: (d, v) => `Қосылған компьютер: ${d}${v ? ' · Шабыт ' + v : ''}`, notLinked: 'Бағдарлама әлі қосылмаған.', full: 'Панельді ашу', startH: 'Бастау', start: ['Шабытты Windows-қа жүктеп, ашыңыз.', 'Бағдарламаның «Тариф» бетінде осы логин мен құпиясөзбен кіріңіз.', 'Болды: донаттар, алерттер, виджеттер, дизайн, музыка — бәрі осы сайтта ашылады.'], offH: 'Бағдарлама қосулы емес', off2: 'Шабыт тек Kaspi донаттарын ұстайды, бірақ панель жұмыс істеуі үшін ол компьютерде ашық тұруы керек. Ашқанда панель осы жерде өзі ашылады.', on: 'Бағдарлама қазір қосулы', off: 'Бағдарлама қазір қосулы емес', fullHint: 'Толық кабинетте бағдарламадағының бәрі бар: виджеттер, алерттер, донаттар, музыка. Телефоннан да ашылады. Компьютерде Шабыт (v1.5 немесе жаңасы) ашық тұруы керек.',
   guide: 'OBS-те виджетті «Браузер» көзі ретінде, TikTok LIVE Studio-да «Ссылка» көзі ретінде қосасыз. Сілтемелер бағдарламаның «Виджеттер» бетінде тұр.',
   stats: 'Донат статистикасы', today: 'Бүгін', month: 'Осы ай', all: 'Барлығы', cnt: n => `${n} донат`, chart: 'Соңғы 30 күн', top: 'Айдың топ донатерлері', recent: 'Соңғы донаттар', noDon: 'Әзірге донат жоқ. Бағдарлама аккаунтпен қосылған соң донаттар осында көрінеді.',
   history: 'Төлемдер тарихы', st: { paid: 'Төленді', pending: 'Тексерілуде', rejected: 'Қабылданбады' },
@@ -46,7 +46,7 @@ ru: { site: 'Сайт', logout: 'Выйти', inTitle: 'Вход в кабине
   tg: 'Написать в Telegram', paid: 'Я оплатил', note: 'Комментарий (необязательно)', notePh: 'Например: Kaspi, 14:20, Айдос Н.',
   pending: (t, m, a) => `Оплата проверяется: ${t}, ${m} мес., ${a}. Обычно подтверждаем в течение нескольких часов.`, cancel: 'Отменить',
   app: 'Подключить программу', appSteps: ['Скачайте и откройте Шабыт на Windows.', 'В кабинете Шабыта откройте страницу «Тариф».', 'В блоке «Войти с аккаунтом» введите этот логин и пароль.'], dl: 'Скачать для Windows',
-  linked: (d, v) => `Подключённый компьютер: ${d}${v ? ' · Шабыт ' + v : ''}`, notLinked: 'Программа ещё не подключена.', full: 'Открыть полный кабинет', on: 'Программа сейчас на связи', off: 'Программа сейчас не на связи', fullHint: 'В полном кабинете всё, что есть в программе: виджеты, алерты, донаты, музыка. Открывается и с телефона. На компьютере должен быть открыт Шабыт (v1.5 или новее).',
+  linked: (d, v) => `Подключённый компьютер: ${d}${v ? ' · Шабыт ' + v : ''}`, notLinked: 'Программа ещё не подключена.', full: 'Открыть панель', startH: 'Начало', start: ['Скачайте Шабыт для Windows и откройте его.', 'На странице «Тариф» в программе войдите этим логином и паролем.', 'Готово: донаты, алерты, виджеты, дизайн, музыка — всё откроется здесь, на сайте.'], offH: 'Программа не на связи', off2: 'Шабыт только ловит донаты Kaspi, но для работы панели он должен быть открыт на компьютере. Когда откроете его, панель откроется здесь сама.', on: 'Программа сейчас на связи', off: 'Программа сейчас не на связи', fullHint: 'В полном кабинете всё, что есть в программе: виджеты, алерты, донаты, музыка. Открывается и с телефона. На компьютере должен быть открыт Шабыт (v1.5 или новее).',
   guide: 'В OBS виджет добавляется как источник «Браузер», в TikTok LIVE Studio — как «Ссылка». Ссылки на странице «Виджеты» в программе.',
   stats: 'Статистика донатов', today: 'Сегодня', month: 'Этот месяц', all: 'Всего', cnt: n => `${n} донатов`, chart: 'Последние 30 дней', top: 'Топ донатеров месяца', recent: 'Последние донаты', noDon: 'Пока донатов нет. Они появятся здесь, когда программа подключится к аккаунту.',
   history: 'История оплат', st: { paid: 'Оплачено', pending: 'Проверяется', rejected: 'Отклонено' },
@@ -71,8 +71,10 @@ function render() {
   if (!D) { a.innerHTML = '<p class="muted" style="padding:60px 0">…</p>'; return; }
   const u = D.user, s = D.stats, P = D.prices, mx = Math.max(1, ...s.days);
   const amount = P[pick.tier] * pick.months;
+  const top = !u.device ? `<section class="card hero"><h2>${x.startH}</h2><ol>${x.start.map(s => `<li>${s}</li>`).join('')}</ol><a class="btn gold" href="${DL}">⬇ ${x.dl}</a></section>`
+    : !D.online ? `<section class="card hero"><h2>● ${x.offH}</h2><p class="muted">${x.off2}</p></section>` : `<section class="card hero"><a class="btn gold full" href="/cab/">${x.full} →</a></section>`;
   a.innerHTML = `
-  <div class="head"><div><h1>${x.hi(esc(u.login))}</h1><p class="muted">${esc(u.email || '')}</p></div>${u.admin ? `<a class="btn" href="/admin/">${x.admin}</a>` : ''}</div>
+  ${top}<div class="head"><div><h1>${x.hi(esc(u.login))}</h1><p class="muted">${esc(u.email || '')}</p></div>${u.admin ? `<a class="btn" href="/admin/">${x.admin}</a>` : ''}</div>
   <div class="grid2">
     <section class="card"><h2>${x.plan}</h2>
       <div class="plan ${u.tier}"><b>${x[u.tier]}</b><span>${u.tier === 'free' ? x.noUntil : x.until(dstr(u.until))}</span></div>
@@ -106,7 +108,9 @@ function render() {
   </div>`;
 }
 
-async function load() { try { D = await api('GET', '/me'); D.online = await api('GET', '/relay-status').then(r => r.online, () => false); } catch (e) { if (e.status === 401 || e.status === 403) { setTok(''); if (e.code === 'blocked') toast(t().err.blocked); } else toast(errText(e)); } render(); }
+const STAY = new URLSearchParams(location.search).has('stay');
+let watch = null;
+async function load() { try { D = await api('GET', '/me'); D.online = await api('GET', '/relay-status').then(r => r.online, () => false); if (D.online && !STAY) return location.replace('/cab/'); } catch (e) { if (e.status === 401 || e.status === 403) { setTok(''); if (e.code === 'blocked') toast(t().err.blocked); } else toast(errText(e)); } render(); }
 
 document.addEventListener('submit', async e => {
   e.preventDefault(); const x = t();
@@ -136,6 +140,8 @@ document.addEventListener('click', async e => {
 document.getElementById('out').onclick = async () => { try { await api('POST', '/logout'); } catch (e) { } setTok(''); D = null; view = 'login'; render(); };
 onLang(render);
 if (tok()) load(); else render();
+// the panel opens by itself as soon as the program on the computer comes online
+watch = setInterval(async () => { if (!tok() || !D || D.online || !D.user.device || document.hidden) return; try { if ((await api('GET', '/relay-status')).online) { if (STAY) { D.online = true; render(); } else location.replace('/cab/'); } } catch (e) { } }, 6000);
 </script>
 </body>
 </html>
