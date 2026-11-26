@@ -27,7 +27,10 @@ async function handle(req) {
       const r = await fetch(API + '/ui/cabinet.html', { cache: 'no-cache' });
       if (!r.ok) throw new Error('ui');
       let html = await r.text();
-      html = html.replace(/(src|href)="\/w\//g, `$1="${API}/w/`).replace(/<body([^>]*)>/i, '<body$1>' + BAR);
+      // the owner also gets a link to the admin panel (the API says who is the admin)
+      let bar = BAR;
+      try { const m = await (await fetch(API + '/me', { headers: auth, cache: 'no-store' })).json(); if (m && m.user && m.user.admin) bar = BAR.replace('<a href="/account/?stay=1"', `<a href="/admin/" style="${btn};background:#fec50c;color:#3a2a00;border-color:#fec50c">★ Админ панель</a><a href="/account/?stay=1"`); } catch (e) { }
+      html = html.replace(/(src|href)="\/w\//g, `$1="${API}/w/`).replace(/<body([^>]*)>/i, '<body$1>' + bar);
       return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
     }
     if (p.startsWith('/static/')) return fetch(API + p);
