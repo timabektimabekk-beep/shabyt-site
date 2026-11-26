@@ -27,55 +27,53 @@ ol{margin:0;padding-left:22px;display:grid;gap:10px}li b{color:#fec50c}
 <main id="m"></main>
 <script>
 (() => {
-  // the secret part comes after # and never reaches any server except the Shabyt API when you press «Test»
+  // the secret part comes after # and never reaches any server: it is only copied for the Shortcuts app
   const API = 'https://shabyt-api.timabektimabekk.workers.dev';
   const key = (/[#&]k=([\w-]{20,40})/.exec(location.hash) || [])[1] || '';
   const url = key ? `${API}/hook/ios/${key}` : '';
-  const SC = 'https://www.icloud.com/shortcuts/1e6ddfc29b7f4385acff811a808cc43e';
+  const SC = 'https://www.icloud.com/shortcuts/48c4de02d3af4e2883e242ba53b8f32a', NAME = 'shabytkzdon';
   const T = {
-    kk: { h: 'Шабыт → iPhone', sub: 'Kaspi донаттарын компьютерсіз қабылдау: iPhone-ның «Команды» қосымшасы Kaspi хабарламасын Шабытқа жібереді.',
-      bad: 'Сілтеме толық емес. Панельдегі QR-ды қайта сканерлеңіз.', link: '1. Сілтемені көшіріңіз', copy: 'Көшіру', copied: 'Көшірілді ✓',
-      add: '2. «Шабыт» командасын қосыңыз', addBtn: '«Шабыт» командасын қосу',
-      a: ['Жоғарыдағы батырманы басыңыз → <b>«Настроить быструю команду»</b> (немесе «Добавить»).', 'iPhone <b>«Шабыт сілтемесін қойыңыз»</b> деп сұрайды: өрісті басып → <b>«Вставить»</b> → <b>«Добавить быструю команду»</b>.', 'Осы бетке қайтып, <b>«Іске қосу»</b> басыңыз → <b>«Разрешить»</b>. Панельдегі «Төлем көпірі» бетінде «iPhone» пайда болады.'], runBtn: 'Іске қосу',
-      open: '«Команды» қосымшасын ашу', steps: '3. Автоматизация жасаңыз',
-      s: ['«Команды» → төменде <b>«Автоматизация»</b> → <b>«+»</b> (немесе «Новая автоматизация»).', '<b>«Сообщение»</b> таңдаңыз. «Сообщение содержит»: <b>Kaspi</b>. <b>«Запускать сразу»</b> қосыңыз → «Далее».', 'Тізімнен <b>«Шабыт»</b> командасын таңдаңыз → «Готово».', 'Болды. Енді Kaspi хабарламасы келгенде донат пен алерт бірден шығады.'],
-      test: '4. Сілтемені тексеру', testBtn: 'Сілтемені тексеру', testOk: 'Жұмыс істейді ✓ Панельдегі «Төлем көпірі» бетінде «iPhone» деп көрінеді.', testBad: 'Жіберілмеді. Интернетті тексеріп, қайталаңыз.',
+    kk: { h: 'Шабыт → iPhone', sub: 'Kaspi донаттарын компьютерсіз қабылдау. iOS 27 керек: Kaspi хабарламасы келгенде «Команды» оның мәтінін Шабытқа жібереді.',
+      bad: 'Сілтеме толық емес. Панельдегі QR-ды қайта сканерлеңіз.', go: 'Көшіріп, команданы қосу', copy: 'Тек сілтемені көшіру', copied: 'Көшірілді ✓',
+      s1: '1. Команданы қосыңыз', s2: '2. Сілтемені қойыңыз', s3: '3. Автоматизацияны қосыңыз',
+      a1: ['Жоғарыдағы сары батырманы басыңыз: сілтеме көшіріледі де, команда ашылады.', '<b>«Добавить быструю команду»</b> басыңыз.'],
+      a2: ['«Команды» → <b>«shabytkzdon»</b> командасын ашыңыз (немесе іске қосқанда «URL не указан» шықса → <b>«Показать»</b>).', '<b>«URL-адрес»</b> өрісін басып → <b>«Вставить»</b> → «Готово».', 'Осы беттегі <b>«Іске қосу»</b> батырмасын басыңыз → <b>«Разрешить»</b>. Панельдегі «Төлем көпірі» бетінде «iPhone» пайда болады.'],
+      a3: ['«Команды» → <b>«Автоматизация»</b>.', '<b>«Когда я получаю уведомление…»</b> қосқышын <b>жасыл</b> қылыңыз. Болды!'],
+      run: 'Іске қосу', open: '«Команды» қосымшасын ашу',
       warn: 'Сілтемені ешкімге бермеңіз: оны білген адам жалған донат жібере алады. Жоғалса, панельден жаңасын жасаңыз.' },
-    ru: { h: 'Шабыт → iPhone', sub: 'Приём донатов Kaspi без компьютера: приложение «Команды» на iPhone отправляет сообщение Kaspi в Шабыт.',
-      bad: 'Ссылка неполная. Отсканируйте QR в панели ещё раз.', link: '1. Скопируйте ссылку', copy: 'Копировать', copied: 'Скопировано ✓',
-      add: '2. Добавьте команду «Шабыт»', addBtn: 'Добавить команду «Шабыт»',
-      a: ['Нажмите кнопку выше → <b>«Настроить быструю команду»</b> (или «Добавить»).', 'iPhone спросит <b>«Шабыт сілтемесін қойыңыз»</b>: нажмите на поле → <b>«Вставить»</b> → <b>«Добавить быструю команду»</b>.', 'Вернитесь на эту страницу, нажмите <b>«Запустить»</b> → <b>«Разрешить»</b>. В панели на странице «Төлем көпірі» появится «iPhone».'], runBtn: 'Запустить',
-      open: 'Открыть «Команды»', steps: '3. Создайте автоматизацию',
-      s: ['«Команды» → внизу <b>«Автоматизация»</b> → <b>«+»</b> (или «Новая автоматизация»).', 'Выберите <b>«Сообщение»</b>. «Сообщение содержит»: <b>Kaspi</b>. Включите <b>«Запускать сразу»</b> → «Далее».', 'Выберите из списка команду <b>«Шабыт»</b> → «Готово».', 'Готово. Теперь при сообщении Kaspi донат и алерт появятся сразу.'],
-      test: '4. Проверка ссылки', testBtn: 'Проверить ссылку', testOk: 'Работает ✓ В панели на странице «Төлем көпірі» появится «iPhone».', testBad: 'Не отправилось. Проверьте интернет и повторите.',
+    ru: { h: 'Шабыт → iPhone', sub: 'Приём донатов Kaspi без компьютера. Нужен iOS 27: когда приходит уведомление Kaspi, «Команды» отправляют его текст в Шабыт.',
+      bad: 'Ссылка неполная. Отсканируйте QR в панели ещё раз.', go: 'Скопировать и добавить команду', copy: 'Только скопировать ссылку', copied: 'Скопировано ✓',
+      s1: '1. Добавьте команду', s2: '2. Вставьте ссылку', s3: '3. Включите автоматизацию',
+      a1: ['Нажмите жёлтую кнопку выше: ссылка скопируется, и откроется команда.', 'Нажмите <b>«Добавить быструю команду»</b>.'],
+      a2: ['«Команды» → откройте <b>«shabytkzdon»</b> (или при запуске появится «URL не указан» → <b>«Показать»</b>).', 'Нажмите поле <b>«URL-адрес»</b> → <b>«Вставить»</b> → «Готово».', 'Нажмите на этой странице <b>«Запустить»</b> → <b>«Разрешить»</b>. В панели на странице «Төлем көпірі» появится «iPhone».'],
+      a3: ['«Команды» → <b>«Автоматизация»</b>.', 'Сделайте переключатель <b>«Когда я получаю уведомление…»</b> <b>зелёным</b>. Готово!'],
+      run: 'Запустить', open: 'Открыть «Команды»',
       warn: 'Никому не давайте ссылку: зная её, можно отправить ложный донат. Если потеряете — создайте новую в панели.' }
   };
   let lang = (navigator.language || '').startsWith('ru') ? 'ru' : 'kk';
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const ol = a => `<ol>${a.map(s => `<li>${s}</li>`).join('')}</ol>`;
   const render = () => {
     const x = T[lang];
     document.documentElement.lang = lang;
     document.getElementById('m').innerHTML = `<div class="lang"><button class="${lang === 'kk' ? '' : 'g'}" data-l="kk">ҚАЗ</button><button class="${lang === 'ru' ? '' : 'g'}" data-l="ru">РУС</button></div>
       <h1>${x.h}</h1><p>${x.sub}</p>
       ${!key ? `<div class="card"><p class="bad">${x.bad}</p></div>` : `
-      <div class="card"><h2>${x.link}</h2><code id="u">${esc(url)}</code><button id="cp">${x.copy}</button></div>
-      <div class="card"><h2>${x.add}</h2><a class="btn" href="${SC}">${x.addBtn}</a><ol style="margin-top:14px">${x.a.map(s => `<li>${s}</li>`).join('')}</ol><a class="btn g" href="shortcuts://run-shortcut?name=${encodeURIComponent('Шабыт')}">${x.runBtn}</a></div>
-      <div class="card"><h2>${x.steps}</h2><ol>${x.s.map(s => `<li>${s}</li>`).join('')}</ol><a class="btn g" href="shortcuts://">${x.open}</a></div>
+      <div class="card"><h2>${x.s1}</h2><code id="u">${esc(url)}</code><button id="go">${x.go}</button><button class="g" id="cp">${x.copy}</button><div style="margin-top:14px">${ol(x.a1)}</div></div>
+      <div class="card"><h2>${x.s2}</h2>${ol(x.a2)}<a class="btn g" href="shortcuts://run-shortcut?name=${encodeURIComponent(NAME)}">${x.run}</a></div>
+      <div class="card"><h2>${x.s3}</h2>${ol(x.a3)}<a class="btn g" href="shortcuts://">${x.open}</a></div>
       <p>${x.warn}</p>`}`;
+  };
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(url); return true; }
+    catch (er) { const r = document.createRange(); r.selectNodeContents(document.getElementById('u')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); try { return document.execCommand('copy'); } catch (er2) { return false; } }
   };
   document.addEventListener('click', async e => {
     const x = T[lang], l = e.target.closest('[data-l]');
     if (l) { lang = l.dataset.l; return render(); }
-    if (e.target.id === 'cp') {
-      try { await navigator.clipboard.writeText(url); }
-      catch (er) { const r = document.createRange(); r.selectNodeContents(document.getElementById('u')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); try { document.execCommand('copy'); } catch (er2) { } }
-      e.target.textContent = x.copied;
-    }
-    if (e.target.id === 'ts') {
-      const out = document.getElementById('tr');
-      try { const r = await fetch(url + '?test=1', { method: 'POST' }); out.className = r.ok ? 'ok' : 'bad'; out.textContent = r.ok ? x.testOk : x.testBad; }
-      catch (er) { out.className = 'bad'; out.textContent = x.testBad; }
-    }
+    if (e.target.id === 'cp') { await copy(); e.target.textContent = x.copied; }
+    // one tap: copy the personal link, then open the shared shortcut so the user only has to paste it
+    if (e.target.id === 'go') { await copy(); e.target.textContent = x.copied; setTimeout(() => { location.href = SC; }, 350); }
   });
   render();
 })();
