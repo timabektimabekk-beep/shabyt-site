@@ -88,6 +88,17 @@ a{color:inherit}
 .step{border-left:4px solid var(--gold);padding:4px 0 4px 16px}
 .step p{color:var(--mute);font-size:15px;margin-top:6px}
 .dark{background:var(--deep);color:#e8f6fa}
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:880px;margin:0 auto}
+.vcard{background:linear-gradient(180deg,#0e3a4a,#0a2733);border:1px solid #1d4352;border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.vhead{display:flex;gap:14px;align-items:center}
+.vos{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;flex:none;background:var(--gold);color:var(--goldi);box-shadow:0 0 24px rgba(254,197,12,.35)}
+.vos svg{width:28px;height:28px}
+.vlab{display:inline-block;font:700 12px Montserrat;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.vcard h3{font-size:clamp(17px,1.8vw,21px);color:#fff}
+.vcard p{color:#9fbcc6;font-size:14px;margin-top:4px}
+.vbox{border-radius:18px;overflow:hidden;box-shadow:0 0 0 3px rgba(254,197,12,.45);background:#061820}
+.vbox video{display:block;width:100%;aspect-ratio:9/16;background:#061820}
+@media(max-width:600px){.vids{grid-template-columns:minmax(0,1fr);max-width:420px}}
 .dark .sec-h p{color:#9fbcc6}
 .chips{display:flex;flex-wrap:wrap;gap:10px}
 .chip{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:#0c3240;font-weight:600}
@@ -138,7 +149,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 <nav class="nav band">
   <div class="wrap">
     <a class="logo" href="#top"><i></i>Шабыт</a>
-    <div class="links"><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#pricing" data-t="navP">Бағасы</a><a href="#faq" data-t="navQ">Сұрақтар</a><a href="/streamers/" data-t="navS">Стримерлер</a></div>
+    <div class="links"><a href="#video" data-t="navV">Видео</a><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#pricing" data-t="navP">Бағасы</a><a href="#faq" data-t="navQ">Сұрақтар</a><a href="/streamers/" data-t="navS">Стримерлер</a></div>
     <a class="btn loginb" id="loginB" data-t="navLogin" href="/account/">Кіру</a>
     <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-lang="kk" aria-pressed="false">ҚАЗ</button><button type="button" data-lang="ru" aria-pressed="true">РУС</button></div>
   </div>
@@ -181,6 +192,13 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     </div>
   </div>
 </header>
+
+<section class="band dark" id="video">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-t="vdH">Видео-нұсқаулық: 2 минутта қосыңыз</h2><p data-t="vdP">Kaspi тұрған телефонды Шабытқа қалай қосу керегін қадам-қадаммен көрсетеміз.</p></div>
+    <div class="vids"><article class="vcard"><div class="vhead"><span class="vos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></span><div><span class="vlab">Android</span><h3 data-t="vdA">Видео тутор Android</h3><p data-t="vdAs">Қосымшаны орнату · рұқсат беру · тест</p></div></div><div class="vbox"><video controls playsinline preload="metadata" src="/video/Shabyt-android-tutorial.mp4#t=0.1" aria-label="Видео тутор Android"></video></div></article><article class="vcard"><div class="vhead"><span class="vos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></span><div><span class="vlab">iPhone · iOS 27+</span><h3 data-t="vdI">Видео тутор iPhone</h3><p data-t="vdIs">QR-код · «Команды» · автоматизация</p></div></div><div class="vbox"><video controls playsinline preload="metadata" src="/video/Shabyt-iphone-tutorial.mp4#t=0.1" aria-label="Видео тутор iPhone"></video></div></article></div>
+  </div>
+</section>
 
 <section class="band" id="features">
   <div class="wrap">
@@ -250,6 +268,7 @@ const RU={navF:'Возможности',navH:'Как подключить',navD:
 h1:'Донаты Kaspi на стриме — без Bluetooth и программ',lead:'Зритель переводит на ваш Kaspi — через секунду в эфире алерт с его именем, суммой и сообщением. Уведомление ловит телефон, остальное работает в облаке: на компьютер ничего ставить не нужно, комиссии нет.',
 dl:'Начать бесплатно',dlNote:'Бесплатно · Android и iPhone · OBS и TikTok LIVE Studio',sent:'отправляет',amsg:'Привет, отличный стрим!',phoneLink:'Шабыт',tText:'Вы получили перевод: 2 000 ₸ от Асқар Б. Комментарий: Привет, отличный стрим!',
 fH:'Всё для стрима — в одном кабинете',fP:'Работает в облаке: регистрация за минуту, виджеты добавляются по ссылке. Деньги идут прямо на ваш Kaspi, Шабыт их не касается.',
+vdH:'Видео-инструкция: подключение за 2 минуты',vdP:'Покажем по шагам, как подключить телефон с Kaspi к Шабыту.',vdA:'Видео тутор Android',vdAs:'Установка приложения · разрешение · тест',vdI:'Видео тутор iPhone',vdIs:'QR-код · «Команды» · автоматизация',navV:'Видео',
 hH:'Запуск за три шага',s1h:'Зарегистрируйтесь',s1p:'Придумайте логин и пароль — кабинет откроется сразу. Ни карта, ни документы не нужны.',
 s2h:'Подключите телефон с Kaspi',s2p:'Android: установите приложение Шабыт и разрешите чтение уведомлений. iPhone (iOS 27): отсканируйте QR из кабинета — команда настроится сама. Ни Bluetooth, ни программ на компьютере.',
 s3h:'Добавьте в OBS или TikTok LIVE Studio',s3p:'Скопируйте ссылку виджета из кабинета и добавьте как Browser Source. Нажмите «Тест алерт» — готово.',
