@@ -81,7 +81,7 @@ function render() {
       <div class="plan ${u.tier}"><b>${x[u.tier]}</b><span>${u.tier === 'free' ? x.noUntil : x.until(dstr(u.until))}</span></div>
       ${D.pending ? `<div class="note">${x.pending(x[D.pending.tier], D.pending.months, money(D.pending.amount))} <button class="link" data-a="cancel">${x.cancel}</button></div>` : `
       <h3>${x.buy}</h3>
-      <div class="seg" role="group">${['std', 'pro'].map(k => `<button type="button" data-a="tier" data-v="${k}" aria-pressed="${pick.tier === k}">${x[k]} · ${money(P[k])}</button>`).join('')}</div>
+      <div class="seg" role="group">${['pro'].map(k => `<button type="button" data-a="tier" data-v="${k}" aria-pressed="${pick.tier === k}">${x[k]} · ${money(P[k])}</button>`).join('')}</div>
       <label>${x.months}</label><div class="seg" role="group">${[1, 3, 6, 12].map(n => `<button type="button" data-a="months" data-v="${n}" aria-pressed="${pick.months === n}">${x.m(n)}</button>`).join('')}</div>
       <p class="sum">${x.total}: <b>${money(amount)}</b></p>
       <h3>${x.payHow}</h3><ol>${x.paySteps.map(s => `<li>${s}</li>`).join('')}</ol>
