@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="kk">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,7 +64,7 @@ footer{padding:20px 0 40px;color:#9fbcc6;font-size:14px}
       find: 'Поиск по нику…', n: n => `${n} стример${n % 10 === 1 && n % 100 !== 11 ? '' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'а' : 'ов'}`, go: 'Перейти на стрим ↗', dn: '💸 Донат', none: 'Пока никого нет. Будьте первым!', notFound: 'Ничего не найдено.', err: 'Не удалось загрузить список. Обновите страницу.',
       ctaH: 'Ты тоже стример?', ctaP: 'Подключи Шабыт бесплатно: пришли деньги на Kaspi — алерт сразу в эфире. В список добавляешься в кабинете, на странице «Реклама · Бонус».', ctaB: 'Начать бесплатно' }
   };
-  let lang = (() => { try { return localStorage.getItem('shabyt-lang') || ((navigator.language || '').startsWith('ru') ? 'ru' : 'kk'); } catch (e) { return 'kk'; } })();
+  let lang = (() => { try { return localStorage.getItem('shabyt-lang') || ((navigator.language || '').startsWith('kk') ? 'kk' : 'ru'); } catch (e) { return 'kk'; } })();
   let list = null, failed = false, q = '';
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const PAL = [['#c45cff', '#6a1fff'], ['#ff6fd8', '#c45cff'], ['#22c3dd', '#0a6c8a'], ['#fec50c', '#ff7a1a'], ['#3dff8e', '#0a8a4a'], ['#ff7a5c', '#c4153d']];
