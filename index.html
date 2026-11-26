@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -140,7 +140,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <a class="logo" href="#top"><i></i>Шабыт</a>
     <div class="links"><a href="#features" data-t="navF">Мүмкіндіктер</a><a href="#how" data-t="navH">Қалай қосамын</a><a href="#designs" data-t="navD">Дизайндар</a><a href="#pricing" data-t="navP">Бағасы</a><a href="#faq" data-t="navQ">Сұрақтар</a><a href="/streamers/" data-t="navS">Стримерлер</a></div>
     <a class="btn loginb" id="loginB" data-t="navLogin" href="/account/">Кіру</a>
-    <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-lang="kk" aria-pressed="true">ҚАЗ</button><button type="button" data-lang="ru" aria-pressed="false">РУС</button></div>
+    <div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-lang="kk" aria-pressed="false">ҚАЗ</button><button type="button" data-lang="ru" aria-pressed="true">РУС</button></div>
   </div>
 </nav>
 <dialog id="loginD" aria-labelledby="loginH"><div class="in">
@@ -268,7 +268,7 @@ const FEATS={kk:[['Kaspi автоматты','Kaspi хабарламасын «�
 ru:[['Kaspi автоматически','Сам ловит уведомления Kaspi через «Связь с телефоном». Сумма, имя и комментарий выходят в алерт.'],['Алерт и озвучка','Анимация, звук и озвучка сообщений на казахском или русском.'],['Цель и топы','Шкала цели, топ дня и топ месяца, последние донаты, бегущая строка. Названия задаёте сами.'],['Таймер сабатона','Каждые 100 ₸ добавляют время. Можно ставить на паузу и продлевать.'],['Рулетка','При донате от заданной суммы крутится колесо и выбирает задание.'],['Модерация','Плохие слова закрываются, ссылки скрываются, донатера можно заблокировать.']]};
 const IC=['<circle cx="22" cy="22" r="16" fill="#fec50c"/><path d="M15 23l5 5 9-11" stroke="#3a2a00" stroke-width="4" fill="none" stroke-linecap="round"/>','<rect x="16" y="6" width="12" height="22" rx="6" fill="#0090ad"/><path d="M10 22a12 12 0 0 0 24 0M22 34v6" stroke="#0090ad" stroke-width="3" fill="none"/>','<rect x="4" y="16" width="36" height="12" rx="6" fill="#cfe3ea"/><rect x="4" y="16" width="24" height="12" rx="6" fill="#fec50c"/>','<circle cx="22" cy="24" r="15" fill="none" stroke="#0090ad" stroke-width="3"/><path d="M22 24V14M22 24l7 5M18 5h8" stroke="#fec50c" stroke-width="3" stroke-linecap="round"/>','<circle cx="22" cy="22" r="17" fill="#0090ad"/><path d="M22 22V5A17 17 0 0 1 39 22Z" fill="#fec50c"/><path d="M22 22L7 30A17 17 0 0 1 9 11Z" fill="#ff5c8a"/>','<path d="M22 4l15 6v10c0 9-6 16-15 19C13 36 7 29 7 20V10z" fill="#0090ad"/><path d="M15 21l5 5 9-10" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round"/>'];
 const DS=[['Классика','Классика','free','#06222d'],['Минимал','Минимал','free','linear-gradient(135deg,#fff,#9fbcc6)'],['Қара-алтын','Чёрно-золотой','free','linear-gradient(135deg,#0b0b0b 50%,#fec50c 50%)'],['Неон','Неон','pro','linear-gradient(135deg,#22e3ff,#ff3df0)'],['Металл','Металл','pro','linear-gradient(135deg,#ffe68a,#a7b0b8,#a8652d)'],['Брутализм','Брутализм','pro','linear-gradient(135deg,#fffbe6 50%,#3dff8a 50%)'],['Дала','Степь','std','linear-gradient(135deg,#0b6f8a,#fec50c)'],['Кибер','Кибер','pro','repeating-linear-gradient(135deg,#f8e71c 0 6px,#0a0a0a 6px 10px)'],['Шыны','Стекло','std','linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.1))'],['Ретро','Ретро','std','linear-gradient(#ffd23d,#ff3d9a,#2b0b3f)'],['Тактикалық шутер','Тактический шутер','std','linear-gradient(135deg,#1f262b 55%,#ff9a1f 55%)'],['Батл-рояль','Королевская битва','std','repeating-linear-gradient(-45deg,#f2c94c 0 6px,#4a4f2a 6px 12px)'],['Пиксель аркада','Пиксельная аркада','std','linear-gradient(#07070f 60%,#3dff8a 60%)'],['Фэнтези','Фэнтези','pro','radial-gradient(#d4a64a 30%,#3b1d5c 32%)'],['Хоррор','Хоррор','pro','linear-gradient(#000 40%,#a30000)'],['Жарыс','Гонки','pro','repeating-conic-gradient(#fff 0 25%,#111 0 50%) 0 0/8px 8px']];
-let lang='kk';try{const s=localStorage.getItem('shabyt-lang');if(s==='ru'||s==='kk')lang=s}catch(e){}
+let lang='ru';try{const s=localStorage.getItem('shabyt-lang');if(s==='ru'||s==='kk')lang=s}catch(e){}
 const apply=l=>{lang=l;document.documentElement.lang=l;
   document.querySelectorAll('[data-t]').forEach(e=>{const k=e.dataset.t;e.innerHTML=l==='ru'?(RU[k]??KK[k]):KK[k]});
   document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));

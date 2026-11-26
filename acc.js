@@ -2,7 +2,7 @@
 const API = 'https://shabyt-api.timabektimabekk.workers.dev';
 const tok = () => { try { return localStorage.getItem('shabyt-token') || ''; } catch (e) { return ''; } };
 const setTok = v => { try { v ? localStorage.setItem('shabyt-token', v) : localStorage.removeItem('shabyt-token'); } catch (e) { } };
-let LANG = (() => { try { return localStorage.getItem('shabyt-lang') || 'kk'; } catch (e) { return 'kk'; } })();
+let LANG = (() => { try { return localStorage.getItem('shabyt-lang') || 'ru'; } catch (e) { return 'kk'; } })();
 const t = () => T[LANG] || T.kk;
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const money = n => Math.round(+n || 0).toLocaleString('ru-RU').replace(/ /g, ' ') + ' ₸';
