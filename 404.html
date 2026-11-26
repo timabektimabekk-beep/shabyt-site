@@ -54,6 +54,9 @@ h2{margin:0 0 12px;font:700 17px/1.25 Unbounded,sans-serif;letter-spacing:.01em}
 .chip:hover{transform:translateY(-2px);background:rgba(255,255,255,.14)}
 .chip svg{width:18px;height:18px;flex:none}
 .chip.main{background:var(--ink);color:#08131b;border-color:transparent}
+.chip[class*=s-] svg{width:20px;height:20px;padding:3px;border-radius:7px;color:#fff;box-sizing:content-box;margin-left:-6px}
+.s-tiktok svg{background:#000;box-shadow:-1px -1px 0 #25f4ee,1px 1px 0 #fe2c55}.s-youtube svg{background:#ff0000}.s-twitch svg{background:#9146ff}.s-vk svg{background:#0077ff}
+.s-whatsapp svg{background:#25d366}.s-telegram svg{background:#229ed9}.s-instagram svg{background:radial-gradient(circle at 30% 110%,#fdf497 0,#fd5949 45%,#d6249f 60%,#285aeb 90%)}.s-kick svg{background:#53fc18;color:#000!important}
 /* Kaspi */
 .kaspi{background:linear-gradient(160deg,rgba(241,70,53,.22),rgba(14,30,40,.75) 55%);border-color:rgba(241,70,53,.45)}
 .kh{display:flex;align-items:center;gap:10px;margin-bottom:12px}
@@ -168,11 +171,19 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:6px 0}
   const sky = document.querySelector('.sky');
   for (let i = 0; i < 26; i++) { const b = document.createElement('b'); b.style.left = Math.random() * 100 + '%'; b.style.top = 30 + Math.random() * 70 + '%'; b.style.animationDelay = -Math.random() * 5 + 's'; b.style.animationDuration = 4 + Math.random() * 4 + 's'; sky.appendChild(b); }
 
+  // brand marks for the link buttons (simple shapes, brand colours)
   const IC = {
-    tg: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 12.7l-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.5 1.7z"/></svg>',
-    tw: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 2 3 5.4v13.8h4.7V22h2.6l2.6-2.8h3.9l5.2-5.2V2H4.3zm15.6 11.1-3 3h-4.7l-2.6 2.6v-2.6H5.6V3.8h14.3v9.3zM17.3 7v5.4h-1.8V7h1.8zm-4.7 0v5.4h-1.8V7h1.8z"/></svg>',
-    play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+    play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+    tiktok: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.3v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9a6.3 6.3 0 1 0 5.3 6.2V8.6a8 8 0 0 0 4.4 1.4V6.7a4.6 4.6 0 0 1-4.4-4.7z"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15V9l5.8 3-5.8 3z"/></svg>',
+    twitch: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 2 3 5.4v13.8h4.7V22h2.6l2.6-2.8h3.9l5.2-5.2V2H4.3zm15.6 11.1-3 3h-4.7l-2.6 2.6v-2.6H5.6V3.8h14.3v9.3zM17.3 7v5.4h-1.8V7h1.8zm-4.7 0v5.4h-1.8V7h1.8z"/></svg>',
+    vk: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 18.2C6.3 18.2 2.6 13.7 2.4 6.2h3.3c.1 5.5 2.5 7.8 4.4 8.3V6.2h3.1v4.7c1.9-.2 3.8-2.4 4.5-4.7h3.1a9.2 9.2 0 0 1-4.2 6 9.5 9.5 0 0 1 4.9 6h-3.4a6 6 0 0 0-4.9-4.3v4.3h-.4z"/></svg>',
+    whatsapp: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>',
+    telegram: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 12.7l-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.5 1.7z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>',
+    kick: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h6v4.5h2.2V5.2h2.3V3h7.2v6.5h-2.3v2.3h-2.3v.4h2.3v2.3h2.3V21h-7.2v-2.2h-2.3v-2.3H9V21H3z"/></svg>'
   };
+  const SN = { tiktok: 'TikTok', youtube: 'YouTube', twitch: 'Twitch', vk: 'VK', whatsapp: 'WhatsApp', telegram: 'Telegram', instagram: 'Instagram', kick: 'Kick' };
   const tint = c => { const h = (c || '#22c3dd').replace('#', ''), n = parseInt(h, 16); const r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
     // a second colour for the gradients: the same colour turned round the wheel
     const max = Math.max(r, g, b) / 255, min = Math.min(r, g, b) / 255, l = (max + min) / 2, d = max - min; let hh = 0;
@@ -185,11 +196,8 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:6px 0}
 
   const page = x => {
     const d = D, ini = ([...String(d.name).trim()][0] || '?').toUpperCase(), medals = ['🥇', '🥈', '🥉'];
-    const chips = [
-      d.stream ? `<a class="chip main" href="${esc(d.stream.link)}" target="_blank" rel="noopener nofollow ugc">${IC.play}${x.stream} · ${esc(d.stream.platform)}</a>` : '',
-      d.tg ? `<a class="chip" href="https://t.me/${encodeURIComponent(d.tg)}" target="_blank" rel="noopener nofollow ugc">${IC.tg}@${esc(d.tg)}</a>` : '',
-      d.twitch ? `<a class="chip" href="https://www.twitch.tv/${encodeURIComponent(d.twitch)}" target="_blank" rel="noopener nofollow ugc">${IC.tw}${esc(d.twitch)}</a>` : ''
-    ].join('');
+    const chips = (d.stream ? `<a class="chip main" href="${esc(d.stream.link)}" target="_blank" rel="noopener nofollow ugc">${IC.play}${x.stream} · ${esc(d.stream.platform)}</a>` : '')
+      + (d.links || []).filter(l => IC[l.k] && /^https:\/\//.test(l.url)).map(l => `<a class="chip s-${l.k}" href="${esc(l.url)}" target="_blank" rel="noopener nofollow ugc">${IC[l.k]}${SN[l.k]}</a>`).join('');
     const kaspi = d.kaspi ? `<div class="num"><b id="kn">${esc(d.kaspi)}</b><button class="copy" type="button" id="cp">${x.copy}</button></div>
       <ol class="steps">${x.steps(fmt(d.min || 0)).map(s => `<li>${s}</li>`).join('')}</ol>
       ${d.tts != null || d.music ? `<p class="note">${[d.tts != null ? x.tts(fmt(d.tts)) : '', d.music ? x.music(fmt(d.music.min)) : ''].filter(Boolean).join('<br>')}</p>` : ''}`
