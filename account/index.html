@@ -26,7 +26,7 @@ kk: { site: 'Сайт', logout: 'Шығу', inTitle: 'Кабинетке кір�
   login: 'Логин', loginHint: '3–24 әріп, сан, _ . -', pass: 'Құпиясөз', pass2: 'Құпиясөзді қайталаңыз', email: 'Email (міндетті емес)', emailHint: 'Құпиясөзді ұмытсаңыз, байланысу үшін.',
   doLogin: 'Кіру', doReg: 'Тіркелу', toReg: 'Аккаунт жоқ па? Тіркеліңіз', toLogin: 'Аккаунт бар ма? Кіріңіз', forgot: 'Құпиясөзді ұмыттыңыз ба? Telegram-ға жазыңыз: @shabytkzdon',
   hi: n => `Сәлем, ${n}!`, plan: 'Тариф', free: 'Тегін', std: 'Стандарт', pro: 'PRO', until: d => `${d} дейін`, noUntil: 'Мерзімсіз',
-  buy: 'Тарифті сатып алу немесе ұзарту', months: 'Мерзімі', m: n => `${n} ай`, total: 'Барлығы', payHow: 'Төлеу жолы',
+  buy: 'Тарифті сатып алу немесе ұзарту', promo: 'Промокод', promoPh: 'Промокод бар болса', promoGo: 'Қолдану', promoX: 'Алып тастау', promoOk: p => `Промокод қабылданды: −${p}%`, months: 'Мерзімі', m: n => `${n} ай`, total: 'Барлығы', payHow: 'Төлеу жолы',
   paySteps: ['Төмендегі сомаға сай Telegram-да @shabytkzdon-ға жазыңыз, сізге Kaspi арқылы төлеу жолын жібереді.', 'Төлеген соң «Төледім» батырмасын басыңыз.', 'Төлем расталғанда тариф аккаунтыңызға өзі қосылады, бағдарлама бір сағат ішінде өзі жаңарады.'],
   tg: 'Telegram-ға жазу', paid: 'Төледім', note: 'Түсініктеме (міндетті емес)', notePh: 'Мысалы: Kaspi, 14:20, Айдос Н.',
   pending: (t, m, a) => `Төлеміңіз тексерілуде: ${t}, ${m} ай, ${a}. Әдетте бірнеше сағат ішінде расталады.`, cancel: 'Бас тарту',
@@ -36,12 +36,12 @@ kk: { site: 'Сайт', logout: 'Шығу', inTitle: 'Кабинетке кір�
   stats: 'Донат статистикасы', today: 'Бүгін', month: 'Осы ай', all: 'Барлығы', cnt: n => `${n} донат`, chart: 'Соңғы 30 күн', top: 'Айдың топ донатерлері', recent: 'Соңғы донаттар', noDon: 'Әзірге донат жоқ. Бағдарлама аккаунтпен қосылған соң донаттар осында көрінеді.',
   history: 'Төлемдер тарихы', st: { paid: 'Төленді', pending: 'Тексерілуде', rejected: 'Қабылданбады' },
   sec: 'Құпиясөзді өзгерту', oldPass: 'Қазіргі құпиясөз', newPass: 'Жаңа құпиясөз', save: 'Сақтау', saved: 'Сақталды', admin: 'Админ панель →',
-  err: { bad_login: 'Логин 3–24 таңбадан тұруы керек: әріп, сан, _ . -', short_password: 'Құпиясөз кемінде 6 таңба болуы керек.', bad_email: 'Email қате жазылған.', login_taken: 'Бұл логин бос емес.', bad_credentials: 'Логин немесе құпиясөз қате.', blocked: 'Аккаунт бұғатталған. @shabytkzdon-ға жазыңыз.', too_many: 'Тым көп әрекет. Біраз күтіп, қайталаңыз.', mismatch: 'Құпиясөздер сәйкес емес.', net: 'Серверге қосылу мүмкін болмады. Интернетті тексеріңіз.', server: 'Сервер қатесі. Кейінірек қайталаңыз.' } },
+  err: { bad_promo: 'Мұндай промокод жоқ немесе ол өшірілген.', promo_used: 'Сіз бұл промокодты бұрын қолдандыңыз.', promo_over: 'Бұл промокодтың лимиті бітті.', bad_login: 'Логин 3–24 таңбадан тұруы керек: әріп, сан, _ . -', short_password: 'Құпиясөз кемінде 6 таңба болуы керек.', bad_email: 'Email қате жазылған.', login_taken: 'Бұл логин бос емес.', bad_credentials: 'Логин немесе құпиясөз қате.', blocked: 'Аккаунт бұғатталған. @shabytkzdon-ға жазыңыз.', too_many: 'Тым көп әрекет. Біраз күтіп, қайталаңыз.', mismatch: 'Құпиясөздер сәйкес емес.', net: 'Серверге қосылу мүмкін болмады. Интернетті тексеріңіз.', server: 'Сервер қатесі. Кейінірек қайталаңыз.' } },
 ru: { site: 'Сайт', logout: 'Выйти', inTitle: 'Вход в кабинет', inSub: 'Войдите в аккаунт Шабыт.', regTitle: 'Регистрация', regSub: 'Создайте бесплатный аккаунт. Программа подключается к нему.',
   login: 'Логин', loginHint: '3–24 символа: буквы, цифры, _ . -', pass: 'Пароль', pass2: 'Повторите пароль', email: 'Email (необязательно)', emailHint: 'Чтобы связаться, если забудете пароль.',
   doLogin: 'Войти', doReg: 'Зарегистрироваться', toReg: 'Нет аккаунта? Зарегистрируйтесь', toLogin: 'Есть аккаунт? Войдите', forgot: 'Забыли пароль? Напишите в Telegram: @shabytkzdon',
   hi: n => `Привет, ${n}!`, plan: 'Тариф', free: 'Бесплатный', std: 'Стандарт', pro: 'PRO', until: d => `до ${d}`, noUntil: 'Бессрочно',
-  buy: 'Купить или продлить тариф', months: 'Срок', m: n => `${n} мес.`, total: 'Итого', payHow: 'Как оплатить',
+  buy: 'Купить или продлить тариф', promo: 'Промокод', promoPh: 'Если есть промокод', promoGo: 'Применить', promoX: 'Убрать', promoOk: p => `Промокод принят: −${p}%`, months: 'Срок', m: n => `${n} мес.`, total: 'Итого', payHow: 'Как оплатить',
   paySteps: ['Напишите в Telegram @shabytkzdon с суммой ниже, вам пришлют способ оплаты через Kaspi.', 'После оплаты нажмите «Я оплатил».', 'Когда оплату подтвердят, тариф включится в аккаунте сам, программа обновится в течение часа.'],
   tg: 'Написать в Telegram', paid: 'Я оплатил', note: 'Комментарий (необязательно)', notePh: 'Например: Kaspi, 14:20, Айдос Н.',
   pending: (t, m, a) => `Оплата проверяется: ${t}, ${m} мес., ${a}. Обычно подтверждаем в течение нескольких часов.`, cancel: 'Отменить',
@@ -51,9 +51,9 @@ ru: { site: 'Сайт', logout: 'Выйти', inTitle: 'Вход в кабине
   stats: 'Статистика донатов', today: 'Сегодня', month: 'Этот месяц', all: 'Всего', cnt: n => `${n} донатов`, chart: 'Последние 30 дней', top: 'Топ донатеров месяца', recent: 'Последние донаты', noDon: 'Пока донатов нет. Они появятся здесь, когда программа подключится к аккаунту.',
   history: 'История оплат', st: { paid: 'Оплачено', pending: 'Проверяется', rejected: 'Отклонено' },
   sec: 'Сменить пароль', oldPass: 'Текущий пароль', newPass: 'Новый пароль', save: 'Сохранить', saved: 'Сохранено', admin: 'Админ-панель →',
-  err: { bad_login: 'Логин: 3–24 символа, буквы, цифры, _ . -', short_password: 'Пароль — минимум 6 символов.', bad_email: 'Неверный email.', login_taken: 'Этот логин уже занят.', bad_credentials: 'Неверный логин или пароль.', blocked: 'Аккаунт заблокирован. Напишите @shabytkzdon.', too_many: 'Слишком много попыток. Подождите и повторите.', mismatch: 'Пароли не совпадают.', net: 'Не удалось связаться с сервером. Проверьте интернет.', server: 'Ошибка сервера. Повторите позже.' } } };
+  err: { bad_promo: 'Такого промокода нет или он отключён.', promo_used: 'Вы уже использовали этот промокод.', promo_over: 'Лимит этого промокода исчерпан.', bad_login: 'Логин: 3–24 символа, буквы, цифры, _ . -', short_password: 'Пароль — минимум 6 символов.', bad_email: 'Неверный email.', login_taken: 'Этот логин уже занят.', bad_credentials: 'Неверный логин или пароль.', blocked: 'Аккаунт заблокирован. Напишите @shabytkzdon.', too_many: 'Слишком много попыток. Подождите и повторите.', mismatch: 'Пароли не совпадают.', net: 'Не удалось связаться с сервером. Проверьте интернет.', server: 'Ошибка сервера. Повторите позже.' } } };
 const DL = 'https://github.com/timabektimabekk-beep/shabyt-site/releases/latest/download/Shabyt-Windows.zip';
-let view = location.hash === '#register' ? 'register' : 'login', D = null, pick = { tier: 'pro', months: 1 };
+let view = location.hash === '#register' ? 'register' : 'login', D = null, pick = { tier: 'pro', months: 1 }, PROMO = null;
 
 const form = (title, sub, fields, btn, alt) => `<section class="auth card"><h1>${title}</h1><p class="muted">${sub}</p>
   <form id="f" novalidate>${fields}<p class="err" id="ferr" role="alert"></p><button class="btn gold full" type="submit">${btn}</button></form>${alt}</section>`;
@@ -70,7 +70,7 @@ function render() {
   }
   if (!D) { a.innerHTML = '<p class="muted" style="padding:60px 0">…</p>'; return; }
   const u = D.user, s = D.stats, P = D.prices, mx = Math.max(1, ...s.days);
-  const amount = P[pick.tier] * pick.months;
+  const full = P[pick.tier] * pick.months, amount = PROMO ? Math.round(full * (100 - PROMO.pct) / 100) : full;
   const linkBtn = `<div class="row"><button class="btn gold" data-a="link">${x.link}</button><a class="btn" href="${DL}">⬇ ${x.dl}</a></div><p class="muted">${x.linkHint}</p>`;
   const top = !u.device ? `<section class="card hero"><h2>${x.startH}</h2><ol>${x.start.map(s => `<li>${s}</li>`).join('')}</ol>${linkBtn}</section>`
     : !D.online ? `<section class="card hero"><h2>● ${x.offH}</h2><p class="muted">${x.off2}</p>${linkBtn}</section>` : `<section class="card hero"><a class="btn gold full" href="/cab/">${x.full} →</a></section>`;
@@ -83,9 +83,10 @@ function render() {
       <h3>${x.buy}</h3>
       <div class="seg" role="group">${['pro'].map(k => `<button type="button" data-a="tier" data-v="${k}" aria-pressed="${pick.tier === k}">${x[k]} · ${money(P[k])}</button>`).join('')}</div>
       <label>${x.months}</label><div class="seg" role="group">${[1, 3, 6, 12].map(n => `<button type="button" data-a="months" data-v="${n}" aria-pressed="${pick.months === n}">${x.m(n)}</button>`).join('')}</div>
-      <p class="sum">${x.total}: <b>${money(amount)}</b></p>
+      <label for="pc">${x.promo}</label><div class="row" style="flex-wrap:nowrap">${PROMO ? `<p class="okc" style="margin:0;flex:1">🎟 ${esc(PROMO.code)} · −${PROMO.pct}%</p><button class="btn" data-a="promox">${x.promoX}</button>` : `<input id="pc" maxlength="24" placeholder="${x.promoPh}" style="flex:1;text-transform:uppercase" autocomplete="off"><button class="btn" data-a="promo">${x.promoGo}</button>`}</div>
+      <p class="sum">${x.total}: ${PROMO ? `<s class="muted">${money(full)}</s> ` : ''}<b>${money(amount)}</b></p>
       <h3>${x.payHow}</h3><ol>${x.paySteps.map(s => `<li>${s}</li>`).join('')}</ol>
-      <div class="row"><a class="btn" target="_blank" rel="noopener" href="https://t.me/${D.tg}?text=${encodeURIComponent(`Шабыт: ${u.login} — ${x[pick.tier]}, ${pick.months}, ${amount} ₸`)}">${x.tg}</a></div>
+      <div class="row"><a class="btn" target="_blank" rel="noopener" href="https://t.me/${D.tg}?text=${encodeURIComponent(`Шабыт: ${u.login} — ${x[pick.tier]}, ${pick.months}, ${amount} ₸${PROMO ? ', ' + PROMO.code : ''}`)}">${x.tg}</a></div>
       <label for="pn">${x.note}</label><input id="pn" maxlength="200" placeholder="${x.notePh}">
       <button class="btn gold full" data-a="paid">${x.paid}</button>`}
     </section>
@@ -144,7 +145,9 @@ document.addEventListener('click', async e => {
   const a = b.dataset.a;
   if (a === 'tier') { pick.tier = b.dataset.v; render(); }
   if (a === 'months') { pick.months = +b.dataset.v; render(); }
-  if (a === 'paid') { try { await api('POST', '/me/pay', { tier: pick.tier, months: pick.months, note: val('pn') }); await load(); } catch (er) { toast(errText(er)); } }
+  if (a === 'promo') { const c = val('pc').trim(); if (!c) return; try { PROMO = await api('POST', '/me/promo', { code: c }); render(); toast(t().promoOk(PROMO.pct)); } catch (er) { toast(errText(er)); } }
+  if (a === 'promox') { PROMO = null; render(); }
+  if (a === 'paid') { try { await api('POST', '/me/pay', { tier: pick.tier, months: pick.months, note: val('pn'), code: PROMO ? PROMO.code : '' }); PROMO = null; await load(); } catch (er) { if (er && /promo/.test(er.code || '')) PROMO = null; toast(errText(er)); render(); } }
   if (a === 'link') { try { await linkProgram(linkPort()); } catch (er) { toast(errText(er)); } }
   if (a === 'cancel') { try { await api('POST', '/me/pay/cancel'); await load(); } catch (er) { toast(errText(er)); } }
 });
