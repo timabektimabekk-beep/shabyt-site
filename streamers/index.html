@@ -36,6 +36,7 @@ h1{margin:26px 0 8px;font:800 clamp(28px,5vw,50px)/1.1 Unbounded,sans-serif;back
 .ab{margin:0;color:#cfeef6;font-size:15px;min-height:22px;overflow-wrap:anywhere}
 .go{margin-top:auto;display:block;text-align:center;padding:12px;border-radius:12px;background:#22c3dd;color:#061820;font-weight:800;text-decoration:none}
 .go:hover{background:#fec50c}
+.bt{margin-top:auto;display:flex;gap:8px}.bt .go{flex:1;margin:0}.go.dn{flex:0 0 auto;padding:12px 14px;background:#f14635;color:#fff}.go.dn:hover{background:#fec50c;color:#061820}
 .empty{padding:40px 20px;text-align:center;color:#9fbcc6;border:1px dashed #1d4352;border-radius:20px;margin-bottom:34px}
 .cta{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:26px;border-radius:24px;background:linear-gradient(110deg,rgba(254,197,12,.18),rgba(34,195,221,.12));border:1px solid rgba(254,197,12,.5);margin-bottom:40px}
 .cta h2{margin:0 0 6px;font:700 24px/1.2 Unbounded,sans-serif}
@@ -57,10 +58,10 @@ footer{padding:20px 0 40px;color:#9fbcc6;font-size:14px}
   const API = 'https://shabyt-api.timabektimabekk.workers.dev';
   const T = {
     kk: { title: 'Шабытпен стрим жүргізетіндер', lead: 'Бұл стримерлер Kaspi донаттарын Шабыт арқылы қабылдайды: эфирде алерт, топ донатерлер, музыка тапсырысы. Кіріп, қолдау көрсетіңіз!',
-      find: 'Ник бойынша іздеу…', n: n => `${n} стример`, go: 'Стримге өту ↗', none: 'Әзірге ешкім жоқ. Бірінші болыңыз!', notFound: 'Ештеңе табылмады.', err: 'Тізімді жүктеу мүмкін болмады. Бетті жаңартыңыз.',
+      find: 'Ник бойынша іздеу…', n: n => `${n} стример`, go: 'Стримге өту ↗', dn: '💸 Донат', none: 'Әзірге ешкім жоқ. Бірінші болыңыз!', notFound: 'Ештеңе табылмады.', err: 'Тізімді жүктеу мүмкін болмады. Бетті жаңартыңыз.',
       ctaH: 'Сен де стримерсің бе?', ctaP: 'Шабытты тегін қос: Kaspi-ге ақша түссе, эфирде бірден алерт шығады. Тізімге кабинеттегі «Жарнама · Бонус» бетінен қосыласың.', ctaB: 'Тегін бастау' },
     ru: { title: 'Стримеры на Шабыте', lead: 'Эти стримеры принимают донаты Kaspi через Шабыт: алерты в эфире, топ донатеров, заказ музыки. Заходите и поддерживайте!',
-      find: 'Поиск по нику…', n: n => `${n} стример${n % 10 === 1 && n % 100 !== 11 ? '' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'а' : 'ов'}`, go: 'Перейти на стрим ↗', none: 'Пока никого нет. Будьте первым!', notFound: 'Ничего не найдено.', err: 'Не удалось загрузить список. Обновите страницу.',
+      find: 'Поиск по нику…', n: n => `${n} стример${n % 10 === 1 && n % 100 !== 11 ? '' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'а' : 'ов'}`, go: 'Перейти на стрим ↗', dn: '💸 Донат', none: 'Пока никого нет. Будьте первым!', notFound: 'Ничего не найдено.', err: 'Не удалось загрузить список. Обновите страницу.',
       ctaH: 'Ты тоже стример?', ctaP: 'Подключи Шабыт бесплатно: пришли деньги на Kaspi — алерт сразу в эфире. В список добавляешься в кабинете, на странице «Реклама · Бонус».', ctaB: 'Начать бесплатно' }
   };
   let lang = (() => { try { return localStorage.getItem('shabyt-lang') || ((navigator.language || '').startsWith('ru') ? 'ru' : 'kk'); } catch (e) { return 'kk'; } })();
@@ -70,7 +71,7 @@ footer{padding:20px 0 40px;color:#9fbcc6;font-size:14px}
   const col = s => { let h = 0; for (const ch of s) h = (h * 31 + ch.codePointAt(0)) >>> 0; return PAL[h % PAL.length]; };
   const card = s => { const [a, b] = col(s.name), ini = esc(([...s.name.trim()][0] || '?').toUpperCase());
     return `<article class="c">${s.pro ? '<span class="pro">PRO</span>' : ''}<div class="hd"><div class="av" style="--a:${a};--b:${b}" aria-hidden="true">${ini}</div><div class="nm"><b>${esc(s.name)}</b><span class="pl">${esc(s.platform)}</span></div></div>
-      <p class="ab">${esc(s.about)}</p><a class="go" href="${esc(s.link)}" target="_blank" rel="noopener nofollow ugc">${T[lang].go}</a></article>`; };
+      <p class="ab">${esc(s.about)}</p><div class="bt"><a class="go" href="${esc(s.link)}" target="_blank" rel="noopener nofollow ugc">${T[lang].go}</a>${s.nick ? `<a class="go dn" href="/${encodeURIComponent(s.nick)}">${T[lang].dn}</a>` : ''}</div></article>`; };
   const listHtml = () => {
     const x = T[lang]; if (failed) return `<div class="empty">${x.err}</div>`; if (!list) return '';
     const f = q ? list.filter(s => (s.name + ' ' + s.platform + ' ' + s.about).toLowerCase().includes(q)) : list;
