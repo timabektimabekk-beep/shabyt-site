@@ -24,6 +24,7 @@
 const T = {
 kk: { cab: 'Кабинет', title: 'Админ панель', need: 'Админ панельге кіру үшін алдымен кабинетке кіріңіз.', toCab: 'Кабинетке кіру', notAdmin: 'Бұл бет тек Шабыт иесіне арналған.',
   users: 'Қолданушылар', newWeek: '7 күнде жаңа', active: '7 күнде белсенді', paying: 'Ақылы тарифте', revMonth: 'Осы айдағы табыс', revAll: 'Барлық табыс', pendingN: 'Тексерілетін төлем',
+  pc: 'Промокодтар', pcSub: 'Стример төлем кезінде промокодты енгізсе, PRO бағасы жеңілдікпен шығады. Әр стример бір кодты бір рет қолдана алады.', pcCode: 'Код', pcPct: 'Жеңілдік, %', pcMax: 'Лимит (0 — шексіз)', pcAdd: 'Қосу', pcUsed: 'Қолданылды', pcPaid: 'Төленді', pcOn: 'Қосу', pcOff: 'Өшіру', pcDel: 'Жою', pcOffL: 'өшірулі', pcNone: 'Промокод жоқ.', pcSure: c => `${c} промокодын жою керек пе?`,
   pend: 'Расталмаған төлемдер', approve: 'Растау', reject: 'Қабылдамау', amount: 'Сома, ₸', noPend: 'Жаңа төлем жоқ.',
   list: 'Қолданушылар', search: 'Логин, email немесе компьютер коды…', login: 'Логин', plan: 'Тариф', app: 'Бағдарлама', don: 'Донаттар', paid: 'Төледі', reg: 'Тіркелді', seen: 'Соңғы кіру', acts: 'Әрекет',
   sc: 'Стримерлер тізімінде', scHid: '(жасырын)', scHide: 'Тізімнен жасыру', scShow: 'Тізімге қайтару', promo: 'Жарнама осы айда',
@@ -34,9 +35,10 @@ kk: { cab: 'Кабинет', title: 'Админ панель', need: 'Админ
   sure: { revoke: n => `${n} тарифін алып тастайсыз ба?`, block: n => `${n} аккаунтын бұғаттайсыз ба? Бағдарламасы да тегін тарифке түседі.` },
   lib: 'Алерттер кітапханасы', libSub: 'Жүктеген GIF, видео және дыбыстарды стримерлер бағдарламадағы «Алерт» бетінен таңдай алады. Тариф кімге қолжетімді екенін анықтайды.', file: 'Файл (GIF, WEBP, PNG, MP4, WEBM, MP3, WAV, OGG; 15 МБ дейін)', aname: 'Атауы', atier: 'Кімге', upload: 'Жүктеу', uploading: 'Жүктелуде…', forAll: 'Барлығына (тегін)', noLib: 'Әзірге алерт жоқ.', del: 'Өшіру', sureDel: n => `«${n}» алертін өшіресіз бе?`, sound: 'Дыбыс', anim: 'Анимация',
   pays: 'Төлемдер', byMonth: 'Айлар бойынша табыс', st: { paid: 'Төленді', pending: 'Тексерілуде', rejected: 'Қабылданбады' }, done: 'Дайын',
-  err: { bad_type: 'Бұл файл түрі қолдау көрсетілмейді.', too_big: 'Файл 15 МБ-тан үлкен.', not_admin: 'Бұл бет тек Шабыт иесіне арналған.', short_password: 'Құпиясөз кемінде 6 таңба.', net: 'Серверге қосылу мүмкін болмады.', server: 'Сервер қатесі.', self: 'Өзіңізді бұғаттай алмайсыз.' } },
+  err: { bad_promo: 'Код: 3–24 таңба, латын әріп, сан, _ -', bad_type: 'Бұл файл түрі қолдау көрсетілмейді.', too_big: 'Файл 15 МБ-тан үлкен.', not_admin: 'Бұл бет тек Шабыт иесіне арналған.', short_password: 'Құпиясөз кемінде 6 таңба.', net: 'Серверге қосылу мүмкін болмады.', server: 'Сервер қатесі.', self: 'Өзіңізді бұғаттай алмайсыз.' } },
 ru: { cab: 'Кабинет', title: 'Админ-панель', need: 'Чтобы открыть админ-панель, сначала войдите в кабинет.', toCab: 'Войти в кабинет', notAdmin: 'Эта страница только для владельца Шабыта.',
   users: 'Пользователи', newWeek: 'Новых за 7 дней', active: 'Активных за 7 дней', paying: 'На платном тарифе', revMonth: 'Доход за месяц', revAll: 'Доход всего', pendingN: 'Оплат на проверке',
+  pc: 'Промокоды', pcSub: 'Если стример введёт промокод при оплате, цена PRO будет со скидкой. Каждый стример может использовать код один раз.', pcCode: 'Код', pcPct: 'Скидка, %', pcMax: 'Лимит (0 — без лимита)', pcAdd: 'Добавить', pcUsed: 'Использован', pcPaid: 'Оплачено', pcOn: 'Включить', pcOff: 'Выключить', pcDel: 'Удалить', pcOffL: 'выключен', pcNone: 'Промокодов нет.', pcSure: c => `Удалить промокод ${c}?`,
   pend: 'Неподтверждённые оплаты', approve: 'Подтвердить', reject: 'Отклонить', amount: 'Сумма, ₸', noPend: 'Новых оплат нет.',
   list: 'Пользователи', search: 'Логин, email или код компьютера…', login: 'Логин', plan: 'Тариф', app: 'Программа', don: 'Донаты', paid: 'Оплатил', reg: 'Регистрация', seen: 'Последний вход', acts: 'Действия',
   sc: 'В списке стримеров', scHid: '(скрыт)', scHide: 'Скрыть из списка', scShow: 'Вернуть в список', promo: 'Реклама в этом месяце',
@@ -47,8 +49,8 @@ ru: { cab: 'Кабинет', title: 'Админ-панель', need: 'Чтобы
   sure: { revoke: n => `Снять тариф у ${n}?`, block: n => `Заблокировать ${n}? Его программа тоже перейдёт на бесплатный тариф.` },
   lib: 'Библиотека алертов', libSub: 'Загруженные GIF, видео и звуки стримеры выбирают на странице «Алерт» в программе. Тариф определяет, кому они доступны.', file: 'Файл (GIF, WEBP, PNG, MP4, WEBM, MP3, WAV, OGG; до 15 МБ)', aname: 'Название', atier: 'Для кого', upload: 'Загрузить', uploading: 'Загрузка…', forAll: 'Для всех (бесплатно)', noLib: 'Пока алертов нет.', del: 'Удалить', sureDel: n => `Удалить алерт «${n}»?`, sound: 'Звук', anim: 'Анимация',
   pays: 'Оплаты', byMonth: 'Доход по месяцам', st: { paid: 'Оплачено', pending: 'Проверяется', rejected: 'Отклонено' }, done: 'Готово',
-  err: { bad_type: 'Этот тип файла не поддерживается.', too_big: 'Файл больше 15 МБ.', not_admin: 'Эта страница только для владельца Шабыта.', short_password: 'Пароль — минимум 6 символов.', net: 'Не удалось связаться с сервером.', server: 'Ошибка сервера.', self: 'Нельзя заблокировать себя.' } } };
-let S = null, U = [], TOTAL = 0, PAYS = [], Q = '', ERR = '', LIB = [], UPL = false;
+  err: { bad_promo: 'Код: 3–24 символа, латиница, цифры, _ -', bad_type: 'Этот тип файла не поддерживается.', too_big: 'Файл больше 15 МБ.', not_admin: 'Эта страница только для владельца Шабыта.', short_password: 'Пароль — минимум 6 символов.', net: 'Не удалось связаться с сервером.', server: 'Ошибка сервера.', self: 'Нельзя заблокировать себя.' } } };
+let S = null, U = [], TOTAL = 0, PAYS = [], Q = '', ERR = '', LIB = [], UPL = false, PCS = [];
 const PREV = {};
 const planCell = u => u.blocked ? `<span class="pill blocked">${t().blocked}</span>` : `<span class="pill ${u.tier}">${t()[u.tier]}</span>${u.tier !== 'free' ? `<br><small class="muted">${t().until(dstr(u.until))}</small>` : ''}`;
 
@@ -60,6 +62,10 @@ function render() {
   const pend = PAYS.filter(p => p.status === 'pending');
   a.innerHTML = `<div class="head"><h1>${x.title}</h1></div>
   <div class="tiles" style="margin-bottom:18px">${[[x.users, S.users], [x.newWeek, S.newWeek], [x.active, S.active], [x.paying, S.paying], [x.revMonth, money(S.revenueMonth.s)], [x.revAll, money(S.revenueTotal.s)], [x.pendingN, S.pending]].map(([l, v]) => `<div class="tile"><span>${l}</span><b>${v}</b></div>`).join('')}</div>
+  <section class="card" id="pcs"><h2>🎟 ${x.pc}</h2><p class="muted">${x.pcSub}</p>
+    <form id="pcf" class="row" style="align-items:flex-end;flex-wrap:wrap;gap:10px"><div><label for="pcc">${x.pcCode}</label><input id="pcc" required maxlength="24" pattern="[A-Za-z0-9_-]{3,24}" placeholder="SHABYT20" style="text-transform:uppercase"></div><div><label for="pcp">${x.pcPct}</label><input id="pcp" type="number" min="1" max="90" value="20" style="width:110px"></div><div><label for="pcm">${x.pcMax}</label><input id="pcm" type="number" min="0" value="0" style="width:150px"></div><button class="btn gold">${x.pcAdd}</button></form>
+    ${PCS.length ? `<ul class="list">${PCS.map(c => `<li><span><b>${esc(c.code)}</b> · −${c.pct}%${c.active ? '' : ` <small class="muted">(${x.pcOffL})</small>`}<br><small class="muted">${x.pcUsed}: ${c.used}${c.max ? ' / ' + c.max : ''} · ${x.pcPaid}: ${c.paid.n} (${money(c.paid.s)})</small></span><span class="row"><button class="btn sm" data-a="pc${c.active ? 'off' : 'on'}" data-c="${esc(c.code)}">${c.active ? x.pcOff : x.pcOn}</button><button class="btn sm" data-a="pcdel" data-c="${esc(c.code)}">${x.pcDel}</button></span></li>`).join('')}</ul>` : `<p class="muted">${x.pcNone}</p>`}
+  </section>
   <section class="card"><h2>${x.pend}</h2>${pend.length ? `<div class="tw"><table><thead><tr><th>${x.login}</th><th>${x.plan}</th><th>${x.amount}</th><th></th></tr></thead><tbody>${pend.map(p => `<tr><td><b>${esc(p.login)}</b><br><small class="muted">${tstr(p.created)}${p.note ? ' · ' + esc(p.note) : ''}</small></td><td>${x[p.tier]} · ${p.months}</td><td><input id="am-${p.id}" type="number" min="0" step="10" value="${p.amount}" style="max-width:130px" aria-label="${x.amount}"></td><td><div class="row"><button class="btn gold sm" data-a="approve" data-id="${p.id}">${x.approve}</button><button class="btn red sm" data-a="reject" data-id="${p.id}">${x.reject}</button></div></td></tr>`).join('')}</tbody></table></div>` : `<p class="muted">${x.noPend}</p>`}</section>
   <section class="card"><h2>${x.list} · ${TOTAL}</h2><input id="q" type="search" placeholder="${x.search}" value="${esc(Q)}" aria-label="${x.search}" style="margin-bottom:10px">
   <div class="tw"><table><thead><tr><th>${x.login}</th><th>${x.plan}</th><th>${x.app}</th><th>${x.don}</th><th>${x.paid}</th><th>${x.reg} / ${x.seen}</th><th>${x.acts}</th></tr></thead><tbody>
@@ -81,7 +87,7 @@ function render() {
 }
 async function loadUsers() { try { const r = await api('GET', '/admin/users?q=' + encodeURIComponent(Q)); U = r.users; TOTAL = r.total; if (S) S.promoGoal = r.promoGoal || 600; } catch (e) { toast(errText(e)); } const f = document.activeElement && document.activeElement.id; render(); if (f === 'q') { const q = document.getElementById('q'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
 async function loadAll() {
-  try { const [s, p, l] = await Promise.all([api('GET', '/admin/summary'), api('GET', '/admin/payments'), api('GET', '/admin/alerts')]); S = s; PAYS = p.payments; LIB = l.alerts; ERR = ''; await loadUsers(); }
+  try { const [s, p, l] = await Promise.all([api('GET', '/admin/summary'), api('GET', '/admin/payments'), api('GET', '/admin/alerts')]); S = s; PAYS = p.payments; LIB = l.alerts; ERR = ''; try { PCS = (await api('GET', '/admin/promos')).promos; } catch (e) { PCS = []; } await loadUsers(); }
   catch (e) { if (e.status === 401) setTok(''); ERR = errText(e); render(); }
 }
 const user = id => U.find(u => u.id === +id);
@@ -101,6 +107,7 @@ document.addEventListener('change', async e => {
   try { const r = await api('POST', `/admin/alerts/${id}`, at ? { action: 'update', tier: e.target.value } : { action: 'update', name: e.target.value }); LIB = LIB.map(a => a.id === +id ? r.alert : a); toast(t().done); } catch (er) { toast(errText(er)); }
 });
 document.addEventListener('submit', async e => {
+  if (e.target.id === 'pcf') { e.preventDefault(); try { PCS = (await api('POST', '/admin/promos', { action: 'add', code: val('pcc'), pct: +val('pcp'), max: +val('pcm') })).promos; toast(t().done); render(); document.getElementById('pcs').scrollIntoView({ block: 'start' }); } catch (er) { toast(errText(er)); } return; }
   if (e.target.id !== 'uf') return; e.preventDefault();
   const f = document.getElementById('uff').files[0]; if (!f) return;
   const name = val('ufn') || f.name.replace(/\.[^.]+$/, ''), tier = val('uft');
@@ -130,6 +137,7 @@ document.addEventListener('click', async e => {
     <label for="gm">${x.gMonths}</label><input id="gm" type="number" min="1" max="120" value="1"><label for="ga">${x.gAmount}</label><input id="ga" type="number" min="0" step="10" value="${S.prices.pro}"><label for="gn">${x.gNote}</label><input id="gn" maxlength="200">`,
     () => act(id, { action: 'grant', tier: val('gt'), months: +val('gm'), amount: +val('ga'), note: val('gn') }));
   if (a === 'grant') { const gt = document.getElementById('gt'), ga = document.getElementById('ga'), gm = document.getElementById('gm'); const upd = () => ga.value = S.prices[gt.value] * (+gm.value || 1); gt.onchange = upd; gm.oninput = upd; }
+  if (a === 'pcon' || a === 'pcoff' || (a === 'pcdel' && confirm(x.pcSure(b.dataset.c)))) { try { PCS = (await api('POST', '/admin/promos', { action: a.slice(2), code: b.dataset.c })).promos; toast(x.done); render(); } catch (er) { toast(errText(er)); } }
   if (a === 'revoke' && confirm(x.sure.revoke(u.login))) act(id, { action: 'revoke' });
   if (a === 'block' && confirm(x.sure.block(u.login))) act(id, { action: 'block' });
   if (a === 'unblock') act(id, { action: 'unblock' });
