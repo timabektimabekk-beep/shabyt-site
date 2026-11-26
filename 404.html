@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Донат · Шабыт</title>
+<meta name="description" content="Стримерге Kaspi арқылы донат жіберіңіз: атыңыз бен хабарламаңыз эфирде алерт болып шығады.">
+<meta name="theme-color" content="#08131b">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800;900&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--c:#22c3dd;--c2:#8b5cf6;--ink:#eef8fb;--mut:#9fb7c2;--bg:#08131b;--card:rgba(14,30,40,.72);--line:rgba(255,255,255,.1);--kaspi:#f14635}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;color:var(--ink);font:16px/1.5 Montserrat,system-ui,sans-serif;overflow-x:hidden;background:var(--bg)}
+a{color:inherit}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--c);outline-offset:3px}
+/* the background: two slow colour clouds in the streamer's colour, and drifting sparkles */
+.sky{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(120% 80% at 50% 0,color-mix(in srgb,var(--c) 26%,transparent),transparent 60%),var(--bg)}
+.sky i{position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(60px);opacity:.45;animation:drift 18s ease-in-out infinite alternate}
+.sky i:nth-child(1){background:var(--c);left:-30vmax;top:-20vmax}
+.sky i:nth-child(2){background:var(--c2);right:-35vmax;top:30vh;animation-duration:24s;animation-delay:-6s}
+.sky i:nth-child(3){background:#fec50c;left:10vw;bottom:-55vmax;opacity:.18;animation-duration:30s}
+@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+.sky b{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:0;animation:tw 5s linear infinite}
+@keyframes tw{0%{opacity:0;transform:translateY(0)}20%{opacity:.9}100%{opacity:0;transform:translateY(-120px)}}
+.wrap{width:min(560px,100%);margin:0 auto;padding:14px 16px calc(40px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0 14px}
+.logo{display:flex;align-items:center;gap:8px;font:800 17px Unbounded,sans-serif;text-decoration:none;opacity:.92}
+.logo img{width:28px;height:28px}
+.lang{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:rgba(0,0,0,.25)}
+.lang button{border:0;background:transparent;color:var(--mut);font:700 12px Montserrat,sans-serif;padding:8px 11px;min-height:36px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:#08131b}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:20px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,.35);margin-bottom:14px;animation:up .6s cubic-bezier(.2,.8,.2,1) both}
+.card:nth-of-type(2){animation-delay:.08s}.card:nth-of-type(3){animation-delay:.16s}.card:nth-of-type(4){animation-delay:.24s}.card:nth-of-type(5){animation-delay:.32s}
+@keyframes up{from{opacity:0;transform:translateY(18px) scale(.98)}}
+h2{margin:0 0 12px;font:700 17px/1.25 Unbounded,sans-serif;letter-spacing:.01em}
+/* hero */
+.hero{text-align:center;padding:30px 20px 22px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0 0 auto;height:120px;background:linear-gradient(135deg,var(--c),var(--c2));opacity:.55;mask:linear-gradient(#000,transparent);-webkit-mask:linear-gradient(#000,transparent)}
+.ava{position:relative;width:112px;height:112px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center}
+.ava::before{content:"";position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(from 0deg,var(--c),#fec50c,var(--c2),var(--c));animation:spin 6s linear infinite}
+.ava span{position:relative;width:100%;height:100%;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--c) 70%,#fff),var(--c) 45%,color-mix(in srgb,var(--c) 55%,#000));border:5px solid #0b1a23;font:900 46px Unbounded,sans-serif;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.25)}
+.ava span.emo{font-size:54px;text-shadow:none}
+.live{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);padding:3px 10px;border-radius:999px;background:var(--kaspi);color:#fff;font:800 11px Unbounded,sans-serif;letter-spacing:.08em;border:3px solid #0b1a23;white-space:nowrap}
+@keyframes spin{to{transform:rotate(360deg)}}
+.name{position:relative;margin:4px 0 6px;font:900 clamp(30px,9vw,44px)/1.08 Unbounded,sans-serif;overflow-wrap:anywhere;color:#fff;
+  text-shadow:0 1px 0 color-mix(in srgb,var(--c) 60%,#000),0 2px 0 color-mix(in srgb,var(--c) 52%,#000),0 3px 0 color-mix(in srgb,var(--c) 44%,#000),0 4px 0 color-mix(in srgb,var(--c) 36%,#000),0 5px 0 color-mix(in srgb,var(--c) 28%,#000),0 10px 22px rgba(0,0,0,.5)}
+.desc{position:relative;margin:0 auto;max-width:420px;color:#d6e9ef;font-size:15px;overflow-wrap:anywhere}
+.chips{position:relative;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 15px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-weight:700;font-size:14px;text-decoration:none;transition:transform .15s,background .15s}
+.chip:hover{transform:translateY(-2px);background:rgba(255,255,255,.14)}
+.chip svg{width:18px;height:18px;flex:none}
+.chip.main{background:var(--ink);color:#08131b;border-color:transparent}
+/* Kaspi */
+.kaspi{background:linear-gradient(160deg,rgba(241,70,53,.22),rgba(14,30,40,.75) 55%);border-color:rgba(241,70,53,.45)}
+.kh{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.kh .k{flex:none;width:40px;height:40px;border-radius:12px;background:var(--kaspi);display:grid;place-items:center;font:900 20px Unbounded,sans-serif;color:#fff;box-shadow:0 6px 0 #a3241a}
+.kh h2{margin:0}
+.num{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 14px 14px 18px;border-radius:18px;background:rgba(0,0,0,.35);border:1px dashed rgba(255,255,255,.22)}
+.num b{flex:1 1 auto;font:800 clamp(22px,6.6vw,30px) Unbounded,sans-serif;letter-spacing:.03em;white-space:nowrap}
+.copy{flex:none;min-height:46px;padding:0 18px;border:0;border-radius:14px;background:var(--kaspi);color:#fff;font:800 15px Montserrat,sans-serif;cursor:pointer;box-shadow:0 5px 0 #a3241a;transition:transform .1s,box-shadow .1s}
+.copy:active{transform:translateY(4px);box-shadow:0 1px 0 #a3241a}
+.copy.ok{background:#1fb56b;box-shadow:0 5px 0 #0f7a45}
+.steps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px;counter-reset:s}
+.steps li{position:relative;padding-left:44px;min-height:32px;color:#dcecf1;font-size:15px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-2px;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.1);font:800 14px Unbounded,sans-serif;color:#fff}
+.steps b{color:#fff}
+.note{margin:14px 0 0;padding:12px 14px;border-radius:14px;background:rgba(254,197,12,.1);border:1px solid rgba(254,197,12,.3);color:#ffe7a1;font-size:14px}
+.none{color:#ffd0c9;font-weight:600}
+/* goal */
+.gt{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
+.gt h2{margin:0}
+.gt span{font:800 15px Unbounded,sans-serif;color:#fec50c;white-space:nowrap}
+.bar{height:22px;border-radius:999px;background:rgba(0,0,0,.4);overflow:hidden;border:1px solid var(--line)}
+.bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#fec50c,color-mix(in srgb,var(--c) 55%,#fff),#fec50c);background-size:200% 100%;animation:sh 3s linear infinite;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+@keyframes sh{to{background-position:-200% 0}}
+.gs{margin-top:8px;color:var(--mut);font-size:14px;font-weight:600}
+/* top */
+.top{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.top li{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.top li.r1{background:linear-gradient(100deg,rgba(254,197,12,.22),rgba(255,255,255,.04));border-color:rgba(254,197,12,.45)}
+.top .m{flex:none;width:30px;text-align:center;font:800 18px Unbounded,sans-serif;color:var(--mut)}
+.top .n{flex:1;min-width:0;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top .a{flex:none;font:800 15px Unbounded,sans-serif;color:#fec50c}
+.empty{color:var(--mut);font-size:15px;margin:0}
+.last{display:flex;flex-wrap:wrap;gap:8px}
+.last span{display:inline-flex;gap:6px;align-items:baseline;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:14px;font-weight:600;max-width:100%}
+.last span b{color:#fec50c;font-family:Unbounded,sans-serif;font-size:13px;white-space:nowrap}
+.last span em{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat{margin:12px 0 0;color:var(--mut);font-size:14px;font-weight:600}
+/* the Shabyt ad at the bottom of every page */
+.ad{overflow:hidden;padding:22px;border:0;background:linear-gradient(#0b1a23,#0b1a23) padding-box,linear-gradient(120deg,#fec50c,#22c3dd,#c45cff,#fec50c) border-box;border:2px solid transparent;background-size:auto,300% 300%;animation:up .6s .4s both,bd 8s linear infinite}
+@keyframes bd{to{background-position:0 0,300% 0}}
+.ad .row{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.coin{flex:none;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 28%,#fff6c8,#fec50c 40%,#c98a00);box-shadow:0 6px 0 #8a5d00,0 12px 26px rgba(254,197,12,.35);font:900 28px Unbounded,sans-serif;color:#6b4300;animation:flip 4s ease-in-out infinite}
+@keyframes flip{0%,70%,100%{transform:rotateY(0)}85%{transform:rotateY(180deg)}}
+.ad h3{margin:0;font:800 19px/1.2 Unbounded,sans-serif}
+.ad h3 em{font-style:normal;background:linear-gradient(90deg,#fec50c,#ff9d00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ad p{margin:0 0 14px;color:#cfe3ea;font-size:15px}
+.feat{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:0;list-style:none}
+.feat li{padding:5px 11px;border-radius:999px;background:rgba(34,195,221,.12);border:1px solid rgba(34,195,221,.35);font-size:13px;font-weight:700;color:#bff3fb}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.go{flex:1 1 200px;display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 18px;border-radius:16px;background:#fec50c;color:#2a1d00;font:800 15px Unbounded,sans-serif;text-decoration:none;box-shadow:0 5px 0 #a87d00;transition:transform .1s,box-shadow .1s}
+.go:active{transform:translateY(4px);box-shadow:0 1px 0 #a87d00}
+.go.alt{flex:0 1 auto;background:rgba(255,255,255,.1);color:var(--ink);box-shadow:none;font-family:Montserrat,sans-serif}
+.share{display:flex;justify-content:center;margin:6px 0 16px}
+.share button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--ink);font-weight:700;cursor:pointer}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:6px 0}
+.sk{height:16px;border-radius:8px;background:rgba(255,255,255,.08);margin:10px auto;animation:pl 1.2s ease-in-out infinite alternate}
+@keyframes pl{to{opacity:.4}}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translate(-50%,30px);opacity:0;padding:12px 18px;border-radius:14px;background:#1fb56b;color:#fff;font-weight:800;transition:.25s;pointer-events:none;z-index:5}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.still .card:not(.ad){animation:none}.still .ad{animation:bd 8s linear infinite}.still .bar i{transition:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="wrap">
+<header><a class="logo" href="/"><img src="https://shabyt-api.timabektimabekk.workers.dev/static/logo.svg" alt="">Шабыт</a>
+<div class="lang" role="group" aria-label="Тіл / Язык"><button type="button" data-l="kk">ҚАЗ</button><button type="button" data-l="ru">РУС</button></div></header>
+<main id="m"><section class="card hero"><div class="sk" style="width:112px;height:112px;border-radius:50%"></div><div class="sk" style="width:60%;height:34px"></div><div class="sk" style="width:80%"></div></section></main>
+<footer>© Шабыт · <a href="/">shabytkzdon.com</a></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(() => {
+  const API = 'https://shabyt-api.timabektimabekk.workers.dev';
+  const T = {
+    kk: {
+      live: 'KASPI ДОНАТ', stream: 'Стримді көру', kTitle: 'Kaspi арқылы донат', copy: 'Көшіру', copied: 'Көшірілді ✓', copiedT: 'Нөмір көшірілді',
+      steps: (m) => [`<b>Kaspi.kz</b> қосымшасын ашып, <b>Аударымдар → Kaspi клиентіне</b> бөліміне өтіңіз.`, `Жоғарыдағы нөмірді қойып, <b>${m}</b> не одан көп соманы жазыңыз.`, `<b>Түсініктемеге</b> хабарламаңызды жазыңыз да, аударыңыз. Атыңыз бен хабарламаңыз эфирде алерт болып шығады 🎉`],
+      tts: n => `🔊 ${n}-дан бастап хабарламаңызды эфирде дауыстап оқиды.`, music: n => `🎵 Ән тапсырғыңыз келсе, түсініктемеге YouTube сілтемесін жазыңыз (${n}-дан бастап).`,
+      noKaspi: 'Стример Kaspi нөмірін әлі қоспаған. Стрим кезінде сұрап көріңіз.',
+      goal: 'Мақсат', of: (a, b) => `${a} / ${b} жиналды`, top: 'Айдың топ донатерлері 🏆', topNone: 'Осы айда әлі донат жоқ. Бірінші болыңыз!', last: 'Соңғы донаттар',
+      month: (n, s) => `Осы айда: ${n} донат · ${s}`, share: '📤 Бетпен бөлісу', shareT: 'Сілтеме көшірілді',
+      adH: 'Сен де стримерсің бе? <em>Шабыт</em> — тегін', adP: 'Kaspi-ге ақша түскенде эфирде бірден әдемі алерт шығады. Компьютер не телефон жеткілікті.',
+      feat: ['Kaspi алерт', 'Топ донатерлер', 'Мақсат', 'Ән тапсырысы', '3D дизайндар', 'TikTok · Twitch · YouTube'], adGo: 'Тегін бастау →', adAll: 'Стримерлер',
+      nf: 'Мұндай стример табылмады', nfP: 'Сілтемені тексеріңіз немесе Шабыттағы стримерлер тізімінен іздеңіз.', err: 'Жүктеу мүмкін болмады. Интернетті тексеріп, бетті жаңартыңыз.', retry: 'Қайталау',
+      title: n => `${n} · Kaspi донат`
+    },
+    ru: {
+      live: 'KASPI ДОНАТ', stream: 'Смотреть стрим', kTitle: 'Донат через Kaspi', copy: 'Копировать', copied: 'Скопировано ✓', copiedT: 'Номер скопирован',
+      steps: (m) => [`Откройте приложение <b>Kaspi.kz</b> → <b>Переводы → Клиенту Kaspi</b>.`, `Вставьте номер выше и укажите сумму от <b>${m}</b>.`, `В <b>комментарии</b> напишите сообщение и переведите. Ваше имя и сообщение появятся в эфире алертом 🎉`],
+      tts: n => `🔊 От ${n} сообщение озвучивается в эфире.`, music: n => `🎵 Хотите заказать песню — напишите в комментарии ссылку YouTube (от ${n}).`,
+      noKaspi: 'Стример ещё не указал номер Kaspi. Спросите на стриме.',
+      goal: 'Цель', of: (a, b) => `Собрано ${a} из ${b}`, top: 'Топ донатеров месяца 🏆', topNone: 'В этом месяце донатов ещё нет. Будьте первым!', last: 'Последние донаты',
+      month: (n, s) => `В этом месяце: ${n} донат${n % 10 === 1 && n % 100 !== 11 ? '' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'а' : 'ов'} · ${s}`, share: '📤 Поделиться страницей', shareT: 'Ссылка скопирована',
+      adH: 'Ты тоже стример? <em>Шабыт</em> — бесплатно', adP: 'Пришли деньги на Kaspi — в эфире сразу красивый алерт. Хватит компьютера или телефона.',
+      feat: ['Алерт Kaspi', 'Топ донатеров', 'Цель', 'Заказ музыки', '3D-дизайны', 'TikTok · Twitch · YouTube'], adGo: 'Начать бесплатно →', adAll: 'Стримеры',
+      nf: 'Такой стример не найден', nfP: 'Проверьте ссылку или найдите стримера в списке Шабыта.', err: 'Не удалось загрузить. Проверьте интернет и обновите страницу.', retry: 'Повторить',
+      title: n => `${n} · донат Kaspi`
+    }
+  };
+  let lang = (() => { try { return localStorage.getItem('shabyt-lang') || ((navigator.language || '').startsWith('ru') ? 'ru' : 'kk'); } catch (e) { return 'kk'; } })();
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const fmt = n => Math.round(n).toLocaleString('ru-RU').replace(/\u00a0/g, ' ') + ' ₸';
+  const $ = id => document.getElementById(id);
+  // shabytkzdon.com/<nick> (one path segment; @nick works too)
+  let nick = ''; try { const seg = location.pathname.replace(/^\/+|\/+$/g, ''); if (seg && !seg.includes('/')) nick = decodeURIComponent(seg).replace(/^@/, ''); } catch (e) { }
+  const okNick = /^[\p{L}\p{N}_.-]{3,24}$/u.test(nick);
+  let D = null, state = okNick ? 'load' : 'nf', still = false;
+
+  // sparkles in the background
+  const sky = document.querySelector('.sky');
+  for (let i = 0; i < 26; i++) { const b = document.createElement('b'); b.style.left = Math.random() * 100 + '%'; b.style.top = 30 + Math.random() * 70 + '%'; b.style.animationDelay = -Math.random() * 5 + 's'; b.style.animationDuration = 4 + Math.random() * 4 + 's'; sky.appendChild(b); }
+
+  const IC = {
+    tg: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.4 12.7l-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.5 1.7z"/></svg>',
+    tw: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 2 3 5.4v13.8h4.7V22h2.6l2.6-2.8h3.9l5.2-5.2V2H4.3zm15.6 11.1-3 3h-4.7l-2.6 2.6v-2.6H5.6V3.8h14.3v9.3zM17.3 7v5.4h-1.8V7h1.8zm-4.7 0v5.4h-1.8V7h1.8z"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+  };
+  const tint = c => { const h = (c || '#22c3dd').replace('#', ''), n = parseInt(h, 16); const r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
+    // a second colour for the gradients: the same colour turned round the wheel
+    const max = Math.max(r, g, b) / 255, min = Math.min(r, g, b) / 255, l = (max + min) / 2, d = max - min; let hh = 0;
+    if (d) { const R = r / 255, G = g / 255, B = b / 255; hh = max === R ? ((G - B) / d) % 6 : max === G ? (B - R) / d + 2 : (R - G) / d + 4; hh *= 60; }
+    const s = d ? d / (1 - Math.abs(2 * l - 1)) : .6; return `hsl(${(hh + 60 + 360) % 360} ${Math.round(Math.max(.5, s) * 100)}% ${Math.round(Math.min(.6, Math.max(.45, l)) * 100)}%)`; };
+
+  const ad = x => `<section class="card ad"><div class="row"><div class="coin" aria-hidden="true">₸</div><h3>${x.adH}</h3></div><p>${x.adP}</p>
+    <ul class="feat">${x.feat.map(f => `<li>${f}</li>`).join('')}</ul>
+    <div class="btns"><a class="go" href="/account/">${x.adGo}</a><a class="go alt" href="/streamers/">${x.adAll}</a></div></section>`;
+
+  const page = x => {
+    const d = D, ini = ([...String(d.name).trim()][0] || '?').toUpperCase(), medals = ['🥇', '🥈', '🥉'];
+    const chips = [
+      d.stream ? `<a class="chip main" href="${esc(d.stream.link)}" target="_blank" rel="noopener nofollow ugc">${IC.play}${x.stream} · ${esc(d.stream.platform)}</a>` : '',
+      d.tg ? `<a class="chip" href="https://t.me/${encodeURIComponent(d.tg)}" target="_blank" rel="noopener nofollow ugc">${IC.tg}@${esc(d.tg)}</a>` : '',
+      d.twitch ? `<a class="chip" href="https://www.twitch.tv/${encodeURIComponent(d.twitch)}" target="_blank" rel="noopener nofollow ugc">${IC.tw}${esc(d.twitch)}</a>` : ''
+    ].join('');
+    const kaspi = d.kaspi ? `<div class="num"><b id="kn">${esc(d.kaspi)}</b><button class="copy" type="button" id="cp">${x.copy}</button></div>
+      <ol class="steps">${x.steps(fmt(d.min || 0)).map(s => `<li>${s}</li>`).join('')}</ol>
+      ${d.tts != null || d.music ? `<p class="note">${[d.tts != null ? x.tts(fmt(d.tts)) : '', d.music ? x.music(fmt(d.music.min)) : ''].filter(Boolean).join('<br>')}</p>` : ''}`
+      : `<p class="none">${x.noKaspi}</p>`;
+    const goal = d.goal ? (() => { const p = Math.min(100, d.goal.raised / Math.max(1, d.goal.target) * 100);
+      return `<section class="card"><div class="gt"><h2>🎯 ${esc(d.goal.title)}</h2><span>${Math.floor(p)}%</span></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.floor(p)}" aria-label="${x.goal}"><i data-w="${p}"${still ? ` style="width:${p}%"` : ''}></i></div><div class="gs">${x.of(fmt(d.goal.raised), fmt(d.goal.target))}</div></section>`; })() : '';
+    const top = d.top ? `<section class="card"><h2>${x.top}</h2>${d.top.length ? `<ol class="top">${d.top.map(([n, a], i) => `<li class="${i ? '' : 'r1'}"><span class="m">${medals[i] || i + 1}</span><span class="n">${esc(n)}</span><span class="a">${fmt(a)}</span></li>`).join('')}</ol>` : `<p class="empty">${x.topNone}</p>`}
+      ${d.month && d.month.n ? `<p class="stat">${x.month(d.month.n, fmt(d.month.sum))}</p>` : ''}</section>` : '';
+    const last = d.last && d.last.length ? `<section class="card"><h2>${x.last}</h2><div class="last">${d.last.map(l => `<span><em>${esc(l.d)}</em><b>${fmt(l.a)}</b></span>`).join('')}</div></section>` : '';
+    return `<section class="card hero"><div class="ava"><span class="${d.ava ? 'emo' : ''}">${esc(d.ava || ini)}</span><em class="live">${x.live}</em></div>
+      <h1 class="name">${esc(d.name)}</h1>${d.desc ? `<p class="desc">${esc(d.desc)}</p>` : ''}${chips ? `<div class="chips">${chips}</div>` : ''}</section>
+      <section class="card kaspi"><div class="kh"><span class="k" aria-hidden="true">K</span><h2>${x.kTitle}</h2></div>${kaspi}</section>
+      ${goal}${top}${last}<div class="share"><button type="button" id="sh">${x.share}</button></div>${ad(x)}`;
+  };
+
+  const render = () => {
+    const x = T[lang]; document.documentElement.lang = lang;
+    document.querySelectorAll('[data-l]').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === lang));
+    const m = $('m');
+    if (state === 'ok') {
+      document.title = x.title(D.name) + ' · Шабыт';
+      document.documentElement.style.setProperty('--c', /^#[0-9a-f]{6}$/i.test(D.color) ? D.color : '#22c3dd');
+      document.documentElement.style.setProperty('--c2', tint(D.color));
+      m.innerHTML = page(x);
+      requestAnimationFrame(() => setTimeout(() => document.querySelectorAll('.bar i').forEach(i => i.style.width = i.dataset.w + '%'), 250));
+    } else if (state === 'nf') {
+      document.title = x.nf + ' · Шабыт';
+      m.innerHTML = `<section class="card hero"><div class="ava"><span class="emo">🔎</span></div><h1 class="name" style="font-size:26px">${x.nf}</h1><p class="desc">${x.nfP}</p>
+        <div class="chips"><a class="chip main" href="/streamers/">${x.adAll} →</a></div></section>${ad(x)}`;
+    } else if (state === 'err') {
+      m.innerHTML = `<section class="card hero"><div class="ava"><span class="emo">📡</span></div><p class="desc">${x.err}</p><div class="chips"><button class="chip main" type="button" id="rt">${x.retry}</button></div></section>${ad(x)}`;
+    }
+  };
+
+  const toast = t => { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 1800); };
+  const copyText = async s => { try { await navigator.clipboard.writeText(s); return true; } catch (e) {
+    // in-app browsers (TikTok, Instagram) often block the clipboard API: fall back to a hidden field
+    const ta = document.createElement('textarea'); ta.value = s; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, s.length);
+    let ok = false; try { ok = document.execCommand('copy'); } catch (er) { } ta.remove(); return ok; } };
+
+  document.addEventListener('click', async e => {
+    const lb = e.target.closest('[data-l]'); if (lb) { lang = lb.dataset.l; try { localStorage.setItem('shabyt-lang', lang); } catch (er) { } render(); return; }
+    if (e.target.id === 'cp') { const b = e.target, x = T[lang]; const ok = await copyText(D.kaspi.replace(/[^\d+]/g, ''));
+      if (ok) { b.textContent = x.copied; b.classList.add('ok'); toast(x.copiedT); setTimeout(() => { b.textContent = T[lang].copy; b.classList.remove('ok'); }, 2200); }
+      else { const r = document.createRange(); r.selectNodeContents($('kn')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+      return; }
+    if (e.target.id === 'sh') { const url = location.origin + '/' + encodeURIComponent(nick);
+      if (navigator.share) { try { await navigator.share({ title: D.name, url }); } catch (er) { } return; }
+      if (await copyText(url)) toast(T[lang].shareT); return; }
+    if (e.target.id === 'rt') { state = 'load'; load(); }
+  });
+
+  const load = () => fetch(API + '/pub/' + encodeURIComponent(nick)).then(r => r.status === 404 ? 'nf' : r.ok ? r.json() : Promise.reject())
+    .then(j => { if (j === 'nf') { if (!D) { state = 'nf'; render(); } return; } const first = !D; D = j; state = 'ok';
+      // keep the page as it is between refreshes, except the numbers
+      if (first) render(); else { const y = window.scrollY; still = true; $('m').classList.add('still'); render(); window.scrollTo(0, y); } })
+    .catch(() => { if (!D) { state = 'err'; render(); } });
+  render();
+  if (okNick) { load(); setInterval(() => { if (!document.hidden && state === 'ok') load(); }, 45000); }
+})();
+</script>
+</body>
+</html>
