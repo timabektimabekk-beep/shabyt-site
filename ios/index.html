@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="kk">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +50,7 @@ ol{margin:0;padding-left:22px;display:grid;gap:10px}li b{color:#fec50c}
       run: 'Запустить', open: 'Открыть «Команды»',
       warn: 'Никому не давайте ссылку: зная её, можно отправить ложный донат. Если потеряете — создайте новую в панели.' }
   };
-  let lang = (navigator.language || '').startsWith('ru') ? 'ru' : 'kk';
+  let lang = (() => { try { const s = localStorage.getItem('shabyt-lang'); if (s === 'kk' || s === 'ru') return s; } catch (e) { } return (navigator.language || '').startsWith('kk') ? 'kk' : 'ru'; })();
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const ol = a => `<ol>${a.map(s => `<li>${s}</li>`).join('')}</ol>`;
   const render = () => {
