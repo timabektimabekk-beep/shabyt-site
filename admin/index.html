@@ -26,6 +26,7 @@ kk: { cab: 'Кабинет', title: 'Админ панель', need: 'Админ
   users: 'Қолданушылар', newWeek: '7 күнде жаңа', active: '7 күнде белсенді', paying: 'Ақылы тарифте', revMonth: 'Осы айдағы табыс', revAll: 'Барлық табыс', pendingN: 'Тексерілетін төлем',
   pend: 'Расталмаған төлемдер', approve: 'Растау', reject: 'Қабылдамау', amount: 'Сома, ₸', noPend: 'Жаңа төлем жоқ.',
   list: 'Қолданушылар', search: 'Логин, email немесе компьютер коды…', login: 'Логин', plan: 'Тариф', app: 'Бағдарлама', don: 'Донаттар', paid: 'Төледі', reg: 'Тіркелді', seen: 'Соңғы кіру', acts: 'Әрекет',
+  sc: 'Стримерлер тізімінде', scHid: '(жасырын)', scHide: 'Тізімнен жасыру', scShow: 'Тізімге қайтару', promo: 'Жарнама осы айда',
   grant: 'Тариф беру', revoke: 'Тарифті алу', block: 'Бұғаттау', unblock: 'Бұғатты алу', pass: 'Құпиясөз', more: 'Тағы',
   free: 'Тегін', std: 'Стандарт', pro: 'PRO', blocked: 'Бұғатталған', until: d => `${d} дейін`,
   gTitle: n => `${n}: тариф беру`, gTier: 'Тариф', gMonths: 'Неше айға', gAmount: 'Төленген сома, ₸ (тегін болса 0)', gNote: 'Түсініктеме', ok: 'Сақтау', cancel: 'Болдырмау',
@@ -38,6 +39,7 @@ ru: { cab: 'Кабинет', title: 'Админ-панель', need: 'Чтобы
   users: 'Пользователи', newWeek: 'Новых за 7 дней', active: 'Активных за 7 дней', paying: 'На платном тарифе', revMonth: 'Доход за месяц', revAll: 'Доход всего', pendingN: 'Оплат на проверке',
   pend: 'Неподтверждённые оплаты', approve: 'Подтвердить', reject: 'Отклонить', amount: 'Сумма, ₸', noPend: 'Новых оплат нет.',
   list: 'Пользователи', search: 'Логин, email или код компьютера…', login: 'Логин', plan: 'Тариф', app: 'Программа', don: 'Донаты', paid: 'Оплатил', reg: 'Регистрация', seen: 'Последний вход', acts: 'Действия',
+  sc: 'В списке стримеров', scHid: '(скрыт)', scHide: 'Скрыть из списка', scShow: 'Вернуть в список', promo: 'Реклама в этом месяце',
   grant: 'Выдать тариф', revoke: 'Снять тариф', block: 'Заблокировать', unblock: 'Разблокировать', pass: 'Пароль', more: 'Ещё',
   free: 'Бесплатный', std: 'Стандарт', pro: 'PRO', blocked: 'Заблокирован', until: d => `до ${d}`,
   gTitle: n => `${n}: выдать тариф`, gTier: 'Тариф', gMonths: 'На сколько месяцев', gAmount: 'Оплаченная сумма, ₸ (0, если бесплатно)', gNote: 'Комментарий', ok: 'Сохранить', cancel: 'Отмена',
@@ -61,8 +63,8 @@ function render() {
   <section class="card"><h2>${x.pend}</h2>${pend.length ? `<div class="tw"><table><thead><tr><th>${x.login}</th><th>${x.plan}</th><th>${x.amount}</th><th></th></tr></thead><tbody>${pend.map(p => `<tr><td><b>${esc(p.login)}</b><br><small class="muted">${tstr(p.created)}${p.note ? ' · ' + esc(p.note) : ''}</small></td><td>${x[p.tier]} · ${p.months}</td><td><input id="am-${p.id}" type="number" min="0" step="10" value="${p.amount}" style="max-width:130px" aria-label="${x.amount}"></td><td><div class="row"><button class="btn gold sm" data-a="approve" data-id="${p.id}">${x.approve}</button><button class="btn red sm" data-a="reject" data-id="${p.id}">${x.reject}</button></div></td></tr>`).join('')}</tbody></table></div>` : `<p class="muted">${x.noPend}</p>`}</section>
   <section class="card"><h2>${x.list} · ${TOTAL}</h2><input id="q" type="search" placeholder="${x.search}" value="${esc(Q)}" aria-label="${x.search}" style="margin-bottom:10px">
   <div class="tw"><table><thead><tr><th>${x.login}</th><th>${x.plan}</th><th>${x.app}</th><th>${x.don}</th><th>${x.paid}</th><th>${x.reg} / ${x.seen}</th><th>${x.acts}</th></tr></thead><tbody>
-  ${U.map(u => `<tr><td><b>${esc(u.login)}</b>${u.admin ? ' ★' : ''}<br><small class="muted">${esc(u.email)}</small></td><td>${planCell(u)}</td><td>${u.device ? `${esc(u.device)}<br><small class="muted">${esc(u.version)}</small>` : '—'}</td><td>${money(u.donations)}</td><td>${money(u.paid)}</td><td><small>${dstr(u.created)}<br>${u.seen ? tstr(u.seen) : '—'}</small></td>
-  <td><div class="row"><button class="btn gold sm" data-a="grant" data-id="${u.id}">${x.grant}</button>${u.tier !== 'free' ? `<button class="btn sm" data-a="revoke" data-id="${u.id}">${x.revoke}</button>` : ''}${u.admin ? '' : `<button class="btn ${u.blocked ? '' : 'red'} sm" data-a="${u.blocked ? 'unblock' : 'block'}" data-id="${u.id}">${u.blocked ? x.unblock : x.block}</button>`}<button class="btn sm" data-a="pass" data-id="${u.id}">${x.pass}</button></div></td></tr>`).join('')}</tbody></table></div></section>
+  ${U.map(u => `<tr><td><b>${esc(u.login)}</b>${u.admin ? ' ★' : ''}<br><small class="muted">${esc(u.email)}</small>${u.promoMin ? `<br><small title="${x.promo}">📣 ${Math.floor(u.promoMin / 60)}:${String(u.promoMin % 60).padStart(2, '0')}${u.promoMin >= ((S && S.promoGoal) || 600) ? ' ✓' : ''}</small>` : ''}${u.showcase ? `<br><small><a class="link" href="${esc(u.showcase.link)}" target="_blank" rel="noopener nofollow">${x.sc}</a> ${u.showcase.hidden ? x.scHid : ''}</small>` : ''}</td><td>${planCell(u)}</td><td>${u.device ? `${esc(u.device)}<br><small class="muted">${esc(u.version)}</small>` : '—'}</td><td>${money(u.donations)}</td><td>${money(u.paid)}</td><td><small>${dstr(u.created)}<br>${u.seen ? tstr(u.seen) : '—'}</small></td>
+  <td><div class="row"><button class="btn gold sm" data-a="grant" data-id="${u.id}">${x.grant}</button>${u.tier !== 'free' ? `<button class="btn sm" data-a="revoke" data-id="${u.id}">${x.revoke}</button>` : ''}${u.admin ? '' : `<button class="btn ${u.blocked ? '' : 'red'} sm" data-a="${u.blocked ? 'unblock' : 'block'}" data-id="${u.id}">${u.blocked ? x.unblock : x.block}</button>`}<button class="btn sm" data-a="pass" data-id="${u.id}">${x.pass}</button>${u.showcase ? `<button class="btn sm" data-a="${u.showcase.hidden ? 'scShow' : 'scHide'}" data-id="${u.id}">${u.showcase.hidden ? x.scShow : x.scHide}</button>` : ''}</div></td></tr>`).join('')}</tbody></table></div></section>
   <section class="card" id="lib"><h2>${x.lib}</h2><p class="muted">${x.libSub}</p>
   <form id="uf" class="upl"><div><label for="uff">${x.file}</label><input id="uff" type="file" required accept=".gif,.webp,.png,.apng,.mp4,.webm,.mp3,.wav,.ogg,.m4a"></div>
   <div><label for="ufn">${x.aname}</label><input id="ufn" maxlength="40" required></div>
@@ -77,7 +79,7 @@ function render() {
   previews();
   const q = document.getElementById('q'); q.oninput = () => { Q = q.value; clearTimeout(q._t); q._t = setTimeout(loadUsers, 300); };
 }
-async function loadUsers() { try { const r = await api('GET', '/admin/users?q=' + encodeURIComponent(Q)); U = r.users; TOTAL = r.total; } catch (e) { toast(errText(e)); } const f = document.activeElement && document.activeElement.id; render(); if (f === 'q') { const q = document.getElementById('q'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+async function loadUsers() { try { const r = await api('GET', '/admin/users?q=' + encodeURIComponent(Q)); U = r.users; TOTAL = r.total; if (S) S.promoGoal = r.promoGoal || 600; } catch (e) { toast(errText(e)); } const f = document.activeElement && document.activeElement.id; render(); if (f === 'q') { const q = document.getElementById('q'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
 async function loadAll() {
   try { const [s, p, l] = await Promise.all([api('GET', '/admin/summary'), api('GET', '/admin/payments'), api('GET', '/admin/alerts')]); S = s; PAYS = p.payments; LIB = l.alerts; ERR = ''; await loadUsers(); }
   catch (e) { if (e.status === 401) setTok(''); ERR = errText(e); render(); }
@@ -131,6 +133,7 @@ document.addEventListener('click', async e => {
   if (a === 'revoke' && confirm(x.sure.revoke(u.login))) act(id, { action: 'revoke' });
   if (a === 'block' && confirm(x.sure.block(u.login))) act(id, { action: 'block' });
   if (a === 'unblock') act(id, { action: 'unblock' });
+  if (a === 'scHide' || a === 'scShow') act(id, { action: a });
   if (a === 'adel') { const al = LIB.find(z => z.id === +id); if (confirm(t().sureDel(al.name))) { try { await api('POST', `/admin/alerts/${id}`, { action: 'delete' }); LIB = LIB.filter(z => z.id !== +id); render(); toast(t().done); } catch (er) { toast(errText(er)); } } }
   if (a === 'pass') { const pw = Math.random().toString(36).slice(2, 6) + Math.floor(1000 + Math.random() * 9000); ask(`<h2>${x.pTitle(esc(u.login))}</h2><p class="muted">${x.pHint}</p><input id="pw" value="${pw}" minlength="6">`, () => act(id, { action: 'password', password: val('pw') })); }
 });
