@@ -196,7 +196,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 <section class="band dark" id="video">
   <div class="wrap">
     <div class="sec-h"><h2 data-t="vdH">Видео-нұсқаулық: 2 минутта қосыңыз</h2><p data-t="vdP">Kaspi тұрған телефонды Шабытқа қалай қосу керегін қадам-қадаммен көрсетеміз.</p></div>
-    <div class="vids"><article class="vcard"><div class="vhead"><span class="vos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></span><div><span class="vlab">Android</span><h3 data-t="vdA">Видео тутор Android</h3><p data-t="vdAs">Қосымшаны орнату · рұқсат беру · тест</p></div></div><div class="vbox"><video controls playsinline preload="metadata" src="/video/Shabyt-android-tutorial.mp4#t=0.1" aria-label="Видео тутор Android"></video></div></article><article class="vcard"><div class="vhead"><span class="vos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></span><div><span class="vlab">iPhone · iOS 27+</span><h3 data-t="vdI">Видео тутор iPhone</h3><p data-t="vdIs">QR-код · «Команды» · автоматизация</p></div></div><div class="vbox"><video controls playsinline preload="metadata" src="/video/Shabyt-iphone-tutorial.mp4#t=0.1" aria-label="Видео тутор iPhone"></video></div></article></div>
+    <div class="vids"><article class="vcard"><div class="vhead"><span class="vos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></span><div><span class="vlab">Android</span><h3 data-t="vdA">Видео тутор Android</h3><p data-t="vdAs">Қосымшаны орнату · рұқсат беру · тест</p></div></div><div class="vbox"><video controls playsinline preload="metadata" src="/video/Shabyt-android-tutorial.mp4#t=2.2" aria-label="Видео тутор Android"></video></div></article><article class="vcard"><div class="vhead"><span class="vos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></span><div><span class="vlab">iPhone · iOS 27+</span><h3 data-t="vdI">Видео тутор iPhone</h3><p data-t="vdIs">QR-код · «Команды» · автоматизация</p></div></div><div class="vbox"><video controls playsinline preload="metadata" src="/video/Shabyt-iphone-tutorial.mp4#t=2.2" aria-label="Видео тутор iPhone"></video></div></article></div>
   </div>
 </section>
 
@@ -300,5 +300,7 @@ apply(lang);
 }
 </script>
 <script>(()=>{const d=document.getElementById('loginD');d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-close]'))d.close()});if(location.hash==='#login')d.showModal()})();</script>
+<script>// the cards show a bright frame; playing starts from the very beginning
+document.querySelectorAll('#video video').forEach(v=>v.addEventListener('play',()=>{if(!v.dataset.s){v.dataset.s=1;v.currentTime=0}}));</script>
 </body>
 </html>
